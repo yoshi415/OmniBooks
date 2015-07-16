@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="omnibooks">
+  <head>
+    <script src="lib/angular/angular.js"></script>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src="lib/angular-ui-router.js"></script>
+
+    <title>OmniBooks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body ng-controller="indexController">
+  <div id='title'>OmniBooks</div>
+  <button ng-click="goHome()">Home</button>
+  <button ng-click="goItem()">item</button>
+  <button ng-click="goMarket()">market</button>
+  <button ng-click="goProfile()">profile</button>
+  <div ui-view></div>
+
+
+  <script src="js/home.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/market.js"></script>
+  <script src="js/item.js"></script>
+  <script src="app.js"></script>
+  </body>
+</html>

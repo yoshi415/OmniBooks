@@ -1,5 +1,5 @@
 angular.module('omnibooks.market', [])
-.controller('marketController', function ($scope) {
+.controller('marketController',['$scope',function ($scope) {
 
 
-})
+}])

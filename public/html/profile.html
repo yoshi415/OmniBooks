@@ -1,6 +1,30 @@
+<div>
+    <button id='sellButton' class="md-trigger" data-modal="modal-5" >Sell</button>
+</div>
+
+<div class="md-modal md-effect-5" id="modal-5">
+<div class="md-content">
+<h3>Login</h3>
+<div>
+  <p>Welcome!</p>
+  <input type='text' name='user' placeholder = 'username' ng-model = 'username'>
+  <input type="password" placeholder = 'password' ng-model= 'password'>
+  <button class="md-close">Login</button>
+</div>
+</div>
+</div>
+
 <form>
   <input type="text" placeholder = 'Book Image Url' ng-model= 'bookimgurl'>
   <input type='text'  placeholder = 'Book Title' ng-model = 'booktitle'>
   <input type="text" placeholder = 'Author' ng-model= 'author'>
-  <button ng-click="enterBook(booktitle, bookimgurl, author)">Enter</button>
+  <input type="text" placeholder = 'Subject' ng-model= 'booksubject'>
+  <button class="md-close" ng-click="enterBook(booktitle, bookimgurl, author, booksubject)">Enter</button>
 </form>
+<!-- 
+<div id="userBooks">
+  <div ng-repeat="user in userDetail">
+    <p>    {{ user.name }} </p>
+    <p>  {{ book.author}} </p>
+  </div>
+</div> -->

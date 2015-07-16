@@ -1,1 +1,6 @@
-<h1>profile page</h1>
+<form>
+  <input type="text" placeholder = 'Book Image Url' ng-model= 'bookimgurl'>
+  <input type='text'  placeholder = 'Book Title' ng-model = 'booktitle'>
+  <input type="text" placeholder = 'Author' ng-model= 'author'>
+  <button ng-click="enterBook(booktitle, bookimgurl, author)">Enter</button>
+</form>

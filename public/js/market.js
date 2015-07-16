@@ -16,4 +16,4 @@ angular.module('omnibooks.market', [])
 
   $scope.books = fireBase.allbooks;
 
-}])
+}]);

@@ -28,21 +28,20 @@ angular.module('omnibooks', [
       url:'/market',
       templateUrl: 'html/market.html',
       controller: 'marketController'
-    })
+    });
 })
 .controller('indexController', ['$scope','$location',function($scope,$location){
   $scope.goHome = function(){
     $location.path('/home');
-  }
+  };
   $scope.goProfile = function(){
     $location.path('/profile');
-  }
+  };
 
   $scope.goMarket = function(){
     $location.path('/market');
-  }
+  };
   $scope.goItem = function(){
     $location.path('/item');
-  }
-
-}])
+  };
+}]);

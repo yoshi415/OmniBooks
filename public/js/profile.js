@@ -1,5 +1,5 @@
 angular.module('omnibooks.profile', [])
-.controller('profileController', function ($scope) {
+.controller('profileController',['$scope', function ($scope) {
 
 
-})
+}])

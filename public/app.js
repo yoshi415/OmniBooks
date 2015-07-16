@@ -29,7 +29,7 @@ angular.module('omnibooks', [
       controller: 'marketController'
     })
 })
-.controller('indexController', function($scope,$location){
+.controller('indexController', ['$scope','$location',function($scope,$location){
   $scope.goHome = function(){
     $location.path('/home');
   }
@@ -44,5 +44,4 @@ angular.module('omnibooks', [
     $location.path('/item');
   }
 
-
-})
+}])

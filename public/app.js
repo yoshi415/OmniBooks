@@ -19,15 +19,15 @@ angular.module('omnibooks', [
       templateUrl: 'html/profile.html',
       controller: 'profileController'
     })
-    .state('item', {
-      url:'/item',
-      templateUrl: 'html/item.html',
-      controller: 'itemController'
-    })
     .state('market', {
       url:'/market',
       templateUrl: 'html/market.html',
       controller: 'marketController'
+    })
+    .state('books', {
+       url: '/item/:itemId',
+       templateUrl: 'html/item.html',
+       controller: 'itemController',
     });
 })
 .controller('indexController', ['$scope','$location',function($scope,$location){

@@ -3,7 +3,8 @@ angular.module('omnibooks', [
   'omnibooks.home',
   'omnibooks.profile',
   'omnibooks.item',
-  'omnibooks.market'
+  'omnibooks.market',
+  'firebase'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/home');
@@ -11,7 +12,7 @@ angular.module('omnibooks', [
     .state('home', {
       url:'/home',
       templateUrl: 'html/home.html',
-      controller: 'homeController',
+      controller: 'homeController'
     })
     .state('profile', {
       url:'/profile',

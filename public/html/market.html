@@ -1,1 +1,9 @@
-<h1>This is market page</h1>
+<div id='bookshelf'>
+
+  <div ng-repeat="book in books">
+    <img src=" {{book.url}} ">
+    <p>    {{ book.title }} </p>
+    <p>  {{ book.author}} </p>
+  </div>
+
+</div>

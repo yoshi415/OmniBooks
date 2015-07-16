@@ -2,18 +2,16 @@
 <html ng-app="omnibooks">
   <head>
 <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet"> -->
-<script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular.js"></script>
     <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="css/reset.css" >
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="lib/modal/default.css" type="text/css">
     <link rel="stylesheet" href="lib/modal/component.css" type="text/css">
     <link rel="stylesheet" href="css/style.css">
 
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
-
 
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
@@ -50,7 +48,10 @@
 
 
 
-  <div ui-view id='uiview'></div>
+  <div id='uiview'>
+     <ui-view autoscroll='false'/>
+  </div>
+
 
 
 

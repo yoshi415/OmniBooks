@@ -29,6 +29,13 @@ angular.module('omnibooks', [
       templateUrl: 'html/market.html',
       controller: 'marketController'
     })
+    .state('book', {
+        params: [
+            'toStateName',
+            'toParamsJson'
+        ],
+        templateUrl: 'html/item.html'
+    })
 })
 .controller('indexController', ['$scope','$location',function($scope,$location){
   $scope.goHome = function(){

@@ -19,37 +19,29 @@ angular.module('omnibooks', [
       templateUrl: 'html/profile.html',
       controller: 'profileController'
     })
-    .state('item', {
-      url:'/item',
-      templateUrl: 'html/item.html',
-      controller: 'itemController'
-    })
     .state('market', {
       url:'/market',
       templateUrl: 'html/market.html',
       controller: 'marketController'
     })
-    .state('book', {
-        params: [
-            'toStateName',
-            'toParamsJson'
-        ],
-        templateUrl: 'html/item.html'
+    .state('books', {
+       url: '/item/:itemId',
+       templateUrl: 'html/item.html',
+       controller: 'itemController',
     })
 })
 .controller('indexController', ['$scope','$location',function($scope,$location){
   $scope.goHome = function(){
     $location.path('/home');
-  }
+  };
   $scope.goProfile = function(){
     $location.path('/profile');
-  }
+  };
 
   $scope.goMarket = function(){
     $location.path('/market');
-  }
+  };
   $scope.goItem = function(){
     $location.path('/item');
-  }
-
-}])
+  };
+}]);

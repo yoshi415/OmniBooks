@@ -9,7 +9,7 @@ angular.module('omnibooks.profile', ['firebase'])
   }
 
 }])
-.factory('fireBase', function($firebaseArray){
+.factory('fireBase', function($firebaseArray,$firebaseObject){
   var myDataRef = new Firebase('https://brilliant-heat-9814.firebaseio.com');
   var enterBook = function(title,url,author){
     var str = randomString();
@@ -17,22 +17,18 @@ angular.module('omnibooks.profile', ['firebase'])
       title:title,
       url:url,
       author:author,
-      id:str
     });
-}
+  }
 
-  var randomString = function () {
-    var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
-    var str = '';
-    for (var i = 0; i < 5; i++) {
-      str += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return str;
+  var getBook = function(id){
+    var temp = myDataRef.child(id);
+    return $firebaseObject(temp);
   }
 
   return {
     allbooks:$firebaseArray(myDataRef),
-    enterBook:enterBook
+    enterBook:enterBook,
+    getBook:getBook
   }
 
 })

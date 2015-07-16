@@ -1,10 +1,10 @@
 <ul id='bookshelf'>
 
   <li ng-repeat="book in books">
-  <a ng-click="findDetail(book)" href="/books/ {{book.id}} ">
-    <img src=" {{book.url}} ">
-    <p>    {{ book.title }} </p>
-    <p>  {{ book.author}} </p>
+    <a ng-click="findDetail(book)">
+      <img src=" {{book.url}} ">
+      <p>    {{ book.title }} </p>
+      <p>  {{ book.author}} </p>
     </a>
   </li>
 

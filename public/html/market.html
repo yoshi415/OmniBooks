@@ -1,9 +1,11 @@
-<div id='bookshelf'>
+<ul id='bookshelf'>
+<input type="text" ng-model="search" placeholder="search">
 
-  <div ng-repeat="book in books">
-    <img src=" {{book.url}} ">
-    <p>    {{ book.title }} </p>
-    <p>  {{ book.author}} </p>
-  </div>
-
-</div>
+  <li class='bookitem' ng-repeat="book in books | filter:search">
+    <a ng-click="findDetail(book)">
+      <img src=" {{book.url}} ">
+      <p>    {{ book.title }} </p>
+    </a>
+          <p>  {{ book.author}} </p>
+  </li>
+</ul>

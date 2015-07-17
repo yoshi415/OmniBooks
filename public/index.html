@@ -6,9 +6,10 @@
     <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <link rel="stylesheet" href="lib/modal/default.css" type="text/css">
+    <link rel="stylesheet" href="lib/modal/component.css" type="text/css">
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js.map"></script>
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js.map"></script-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
@@ -58,8 +59,8 @@
   <a href="#x" class="overlay" id="signup_form"></a>
   <div class="signup_box box">
     <h2>SIGN UP</h2>
-      <input type="text" class="text-field" placeholder="email" ng-model=newUser.userDetail.email />
-      <input type="email" class="text-field" placeholder="user name" ng-model=newUser.userDetail.name />
+      <input type="email" class="text-field" placeholder="email" ng-model=newUser.userDetail.email />
+      <input type="text" class="text-field" placeholder="user name" ng-model=newUser.userDetail.name />
       <input type="password" class="text-field" placeholder="Password" ng-model=newUser.userDetail.password />
       <p><input type="checkbox"><label>I agree <a href="#">terms and conditions</a></label></p></br></br>
       <input type="button" value="signup" class="blue-round" ng-click=signup(newUser.userDetail) /></br>

@@ -30,7 +30,7 @@ angular.module('omnibooks', [
        controller: 'itemController',
     });
 })
-.controller('indexController', ['$scope','$location', '$firebaseObject', function($scope,$location,$firebaseObject){
+.controller('indexController', ['$scope','$location', '$state', '$firebaseObject', function($scope,$location,$state,$firebaseObject){
   $scope.goHome = function(){
     $location.path('/home');
   };
@@ -99,6 +99,7 @@ angular.module('omnibooks', [
         return;
       }
       closeAuthForm();
+      // TODO set User info in firebase service
       // firebase.setUserInfo(existingUser.$id);
       $state.go("market");
     });

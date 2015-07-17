@@ -49,16 +49,20 @@ angular.module('omnibooks', [
     return !!$scope.loggedInUser;
   }
 
-  var ref = new Firebase('https://shutorial.firebaseio.com');
-  $scope.newUser = {userDetail: {}};
-  $scope.loginUser = {userDetail: {}};
-  var root = $firebaseObject(ref);
-  root.$bindTo($scope, "root");
+var ref = new Firebase('https://shutorial.firebaseio.com');
+$scope.newUser = {
+  userDetail: {}
+};
+$scope.loginUser = {
+  userDetail: {}
+};
+var root = $firebaseObject(ref);
+root.$bindTo($scope, "root");
 
-  // FIXME in case users is not exits on the DB. This is not smart.
-  // if(!$scope.root.org.users){
-  //   $scope.root.org.users = {username: "dammy"};
-  // }
+// FIXME in case users is not exits on the DB. This is not smart.
+// if(!$scope.root.org.users){
+//   $scope.root.org.users = {username: "dammy"};
+// }
 
   $scope.clickLogin = function () {
     if(isLoggedIn()){
@@ -83,24 +87,23 @@ angular.module('omnibooks', [
       console.log('Already exists');
       return;
     }
-    console.log('before create');
-    ref.createUser(user, function (err, userData) {
-      if(err){
-        showError('The email address is already registered.');
-        console.error(err);
-        return;
+    console.log('SIGNUP!');
+    var password = $scope.newUser.userDetail.password;
+    console.log('password: ', password);
+    $scope.newUser.userDetail.password = null;
+    $scope.root.org.users[$scope.newUser.userDetail.name] = $scope.newUser;
+    ref.set({
+      org: {
+        users: $scope.root.org.users
       }
-      console.log('SIGNUP!');
-      var password = $scope.newUser.userDetail.password;
-      console.log('password: ', password);
-      $scope.newUser.userDetail.password = null;
-      $scope.root.org.users[$scope.newUser.userDetail.name] = $scope.newUser;
-      ref.set({org:{users: $scope.root.org.users}});
-
-      $scope.login({name: $scope.newUser.userDetail.name,
-                    password: password});
     });
-  };
+
+    $scope.login({
+      name: $scope.newUser.userDetail.name,
+      password: password
+    });
+  });
+};
 
   $scope.login = function (user) {
     hideError();

@@ -1,14 +1,11 @@
 <!doctype html>
 <html ng-app="omnibooks">
   <head>
-<!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet"> -->
     <script src="lib/angular/angular.js"></script>
-
-    <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="css/reset.css" >
+    <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+
     <link rel="stylesheet" href="lib/modal/default.css" type="text/css">
-    <link rel="stylesheet" href="lib/modal/component.css" type="text/css">
     <link rel="stylesheet" href="css/style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js.map"></script>
@@ -18,28 +15,13 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 
     <title>OmniBooks</title>
-
   </head>
   <body ng-controller="indexController">
-  <div id='header'>
-    <div id='title'>OmniBooks</div>
-    <button id='loginButton' class="md-trigger" data-modal="modal-5">Login</button>
-  </div>
+    <div id='header'>
+      <div id='title'>OmniBooks</div>
+    </div>
 
 
-
-    <div class="md-modal md-effect-5" id="modal-5">
-      <div class="md-content">
-        <h3>Login</h3>
-        <div>
-          <p>Welcome!</p>
-          <input type='text' name='user' placeholder = 'username' ng-model = 'username'>
-          <input type="password" placeholder = 'password' ng-model= 'password'>
-          <button class="md-close">Login</button>
-        </div>
-      </div>
-
-      </div>
   <button ng-click="goHome()">Home</button>
   <button ng-click="goMarket()">market</button>
   <button ng-click="goProfile()">profile</button>
@@ -53,25 +35,19 @@
 
 
 
-    <div class="md-overlay"></div><!-- the overlay element -->
     <footer>
-      <div class="footer-background">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-left col-xs-6">
-              <p>Find us on
-               <a target="_blank" href="https://github.com/OmniAstronauts/OmniBooks">Github</a>
-               <i class="fa fa-github"></i>
-              </p>
-            </div>
-          </div><!-- end row -->
-        </div><!-- end container -->
+      <div class="footer-background container-fluid row">
+          <p>Find us on
+           <a target="_blank" href="https://github.com/OmniAstronauts/OmniBooks">Github</a>
+           <i class="fa fa-github"></i>
+          </p>
       </div>
     </footer>
 
 
-    <script src="lib/modal/classie.js"></script>
-    <script src="lib/modal/modalEffects.js"></script>
+  <script src="lib/modal/classie.js"></script>
+  <script src="lib/modal/modalEffects.js"></script>
+
   <script src="js/home.js"></script>
   <script src="js/profile.js"></script>
   <script src="js/market.js"></script>

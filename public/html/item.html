@@ -1,6 +1,15 @@
 
-<img src=" {{book.url}} " >
 
-<h2> {{book.title}} </h2>
+<div class=".container" id="itemContainer">
+  <div class="row">
+    <div class=".col-md-9 .col-md-push-3">
 
-<h3> {{book.author}} </h3>
+      <img src=" {{book.url}} " >
+    </div>
+
+   <div class=".col-md-3 .col-md-pull-9">
+      <div> {{book.title}} </div>
+      <div> {{book.author}} </div>
+    </div>
+  </div>
+</div>

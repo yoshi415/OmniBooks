@@ -6,8 +6,10 @@
 
   <div ng-repeat="book in books">
     <ul>
-      <li>
-        
+      <li class='bookitem' ng-repeat="book in books | filter:search">
+        <img src=" {{book.url}} ">
+        <p>    {{ book.title }} </p>
+        <p>  {{ book.author}} </p>
       </li>
     </ul>
   </div>
@@ -25,7 +27,7 @@
         <input type="text" placeholder = 'ISBN number' ng-model= 'isbn'>
       </div>
     </form>
-    <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="enterBook()">Sell</button>
+    <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="enterBook(booktitle, bookimgurl, author, booksubject, isbn); toggleModal()">Submit</button>
   </modal>
   </div>
 </div>

@@ -1,12 +1,12 @@
 angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
 
 .controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', function($scope, fireBase, $stateParams, $modal) {
-  $scope.enterBook = function(title, url, author, subject) {
-      if (title !== "" && url !== "" && author !== "" && subject !== "" && ibsn !== "") {
-        console.log('enter!');
-        fireBase.enterBook(title, url, author, subject, isbn);
-      }
-    };
+  $scope.enterBook = function(title, url, author, subject, isbn) {
+    if (title !== "" && url !== "" && author !== "" && subject !== "" && isbn !== "") {
+      console.log('enter!');
+      fireBase.enterBook(title, url, author, subject, isbn);
+    }
+  };
   $scope.userId = $stateParams.userId;
   $scope.profile = fireBase.loggedInUser; // sets user details for view
   $scope.books = fireBase.bookshelf;

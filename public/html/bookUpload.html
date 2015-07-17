@@ -1,0 +1,18 @@
+<div ng-controller="profileController" class="container">
+  <h1>Modal example</h1>
+  <button ng-click="toggleModal()" class="btn btn-default">Sell</button>
+    
+  <modal title="bookUpload" visible="showModal">
+    <form role="form">
+      <div class="form-group">
+	<input type="text" placeholder = 'Book Image Url' ng-model= 'bookimgurl'>
+    <input type='text'  placeholder = 'Book Title' ng-model = 'booktitle'>
+    <input type="text" placeholder = 'Author' ng-model= 'author'>
+    <input type="text" placeholder = 'Subject' ng-model= 'booksubject'>
+      </div>
+      </form>
+      <div>
+      <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="open()">Sell</button>
+  </div>
+  </modal>
+</div>

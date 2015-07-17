@@ -30,7 +30,7 @@ angular.module('omnibooks', [
        controller: 'itemController',
     });
 })
-.controller('indexController', ['$scope','$location', '$state', '$firebaseObject', function($scope,$location,$state,$firebaseObject){
+.controller('indexController', ['$scope','$location', '$state', '$firebaseObject', 'firebase', function($scope, $location, $state, $firebaseObject, firebase){
 
   $scope.goHome = function(){
     $location.path('/home');
@@ -46,18 +46,18 @@ angular.module('omnibooks', [
     $location.path('/item');
   };
   function isLoggedIn() {
-    return !!$scope.loggedInUser;
+    return !!firebase.loggedInUser;
   }
 
-var ref = new Firebase('https://shutorial.firebaseio.com');
-$scope.newUser = {
-  userDetail: {}
-};
-$scope.loginUser = {
-  userDetail: {}
-};
-var root = $firebaseObject(ref);
-root.$bindTo($scope, "root");
+  var ref = new Firebase('https://shutorial.firebaseio.com');
+  $scope.newUser = {
+    userDetail: {}
+  };
+  $scope.loginUser = {
+    userDetail: {}
+  };
+  var root = $firebaseObject(ref);
+  root.$bindTo($scope, "root");
 
 // FIXME in case users is not exits on the DB. This is not smart.
 // if(!$scope.root.org.users){
@@ -102,8 +102,7 @@ root.$bindTo($scope, "root");
       name: $scope.newUser.userDetail.name,
       password: password
     });
-  });
-};
+  };
 
   $scope.login = function (user) {
     hideError();
@@ -123,10 +122,10 @@ root.$bindTo($scope, "root");
         return;
       }
       $scope.closeAuthForm();
-      $scope.loggedInUser = existingUser;
+      // $scope.loggedInUser = existingUser;
       $('.red').val('Log out');
       // TODO set User info in firebase service
-      // firebase.setUserInfo(existingUser.$id);
+      firebase.setUserInfo(existingUser.$id);
       $state.go("market");
       // $scope.goMarket();  this doesn't work I don't know why...
     });
@@ -158,9 +157,9 @@ root.$bindTo($scope, "root");
 
 }])
 
-.run(['$rootScope', '$state', function ($rootScope, $state) {
+.run(['$rootScope', '$state', 'firebase', function ($rootScope, $state, firebase) {
   $rootScope.$on('$stateChangeStart', function (event, toState) {
-    if(!isLoggedIn()){
+    if(!firebase.loggedInUser){
       event.preventDefault();
       $state.go("home");
     }

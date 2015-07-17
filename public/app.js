@@ -4,7 +4,8 @@ angular.module('omnibooks', [
   'omnibooks.profile',
   'omnibooks.item',
   'omnibooks.market',
-  'firebase'
+  'firebase',
+  'ui.bootstrap'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/home');
@@ -15,7 +16,7 @@ angular.module('omnibooks', [
       controller: 'homeController'
     })
     .state('profile', {
-      url:'/profile',
+      url:'/profile:userId',
       templateUrl: 'html/profile.html',
       controller: 'profileController'
     })

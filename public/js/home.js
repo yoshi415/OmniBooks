@@ -1,5 +1,5 @@
 angular.module('omnibooks.home', [])
-.controller('homeController', ['$scope', function ($scope) {
-
-
-}]);
+.controller('homeController', ['$scope', '$stateParams', 'fireBase', 
+	function ($scope, $stateParams, fireBase) {
+	}
+]);

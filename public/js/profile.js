@@ -52,7 +52,6 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
     loggedInUser: loggedInUser
   };
 })
-
 .directive('modal', function() {
   return {
     templateUrl: "../html/bookUpload.html",

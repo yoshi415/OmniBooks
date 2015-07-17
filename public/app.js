@@ -85,17 +85,17 @@ angular.module('omnibooks', [
       console.log('User not exists');
       return;
     }
-    ref.authWithPassword({   email: existingUser.userDetail.email,
-                          password: $scope.loginUser.password},
-                          function (err, authData) {
-                            if(err){
-                              console.error(err);
-                            } else {
-                              console.log('Authenticated!', authData);
-                              // TODO: close modal
-                              $('.md-modal').niftyModal("hide");
-                            }
-                          });
+    ref.authWithPassword({email: existingUser.userDetail.email,
+      password: user.password},
+      function (err, authData) {
+      if(err){
+        console.error(err);
+      } else {
+        console.log('Authenticated!', authData);
+        // TODO: close modal
+        $('.md-modal').niftyModal("hide");
+      }
+    });
   };
 
 }]);

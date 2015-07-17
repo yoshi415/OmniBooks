@@ -36,25 +36,13 @@ angular.module('omnibooks', [
     $location.path('/home');
   };
   $scope.goProfile = function(){
-    if(!isLoggedIn()){
-      $scope.goHome();
-      return;
-    }
     $location.path('/profile');
   };
 
   $scope.goMarket = function(){
-    if(!isLoggedIn()){
-      $scope.goHome();
-      return;
-    }
     $location.path('/market');
   };
   $scope.goItem = function(){
-    if(!isLoggedIn()){
-      $scope.goHome();
-      return;
-    }
     $location.path('/item');
   };
   function isLoggedIn() {
@@ -133,7 +121,7 @@ angular.module('omnibooks', [
       }
       $scope.closeAuthForm();
       $scope.loggedInUser = existingUser;
-      $('.blue').val('Log out');
+      $('.red').val('Log out');
       // TODO set User info in firebase service
       // firebase.setUserInfo(existingUser.$id);
       $state.go("market");
@@ -143,7 +131,7 @@ angular.module('omnibooks', [
 
   var logOut = function () {
     $scope.loggedInUser = null;
-    $('.blue').val('Login');
+    $('.red').val('Login');
     $state.go("home");
   }
 
@@ -165,4 +153,13 @@ angular.module('omnibooks', [
     $('.signup_box').css({visibility : 'visible'});
   }
 
+}])
+
+.run(['$rootScope', '$state', function ($rootScope, $state) {
+  $rootScope.$on('$stateChangeStart', function (event, toState) {
+    if(!isLoggedIn()){
+      event.preventDefault();
+      $state.go("home");
+    }
+  })
 }]);

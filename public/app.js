@@ -31,18 +31,34 @@ angular.module('omnibooks', [
     });
 })
 .controller('indexController', ['$scope','$location', '$state', '$firebaseObject', function($scope,$location,$state,$firebaseObject){
+
   $scope.goHome = function(){
     $location.path('/home');
   };
   $scope.goProfile = function(){
+    if(!isLoggedIn()){
+      $scope.goHome();
+      return;
+    }
     $location.path('/profile');
   };
 
-  $scope.goMarket = function(id){
+  $scope.goMarket = function(){
+    if(!isLoggedIn()){
+      $scope.goHome();
+      return;
+    }
     $location.path('/market');
   };
   $scope.goItem = function(){
+    if(!isLoggedIn()){
+      $scope.goHome();
+      return;
+    }
     $location.path('/item');
+  };
+  function isLoggedIn() {
+    return !!$scope.loggedInUser;
   }
 
   var ref = new Firebase('https://shutorial.firebaseio.com');
@@ -56,6 +72,22 @@ angular.module('omnibooks', [
   //   $scope.root.org.users = {username: "dammy"};
   // }
 
+  $scope.clickLogin = function () {
+    if(isLoggedIn()){
+      logOut();
+      return;
+    }
+    showLoginForm();
+  };
+  $scope.clickSignin = function () {
+    showSigninForm();
+  };
+  $scope.closeAuthForm = function () {
+    $('#login_form').css({visibility: 'hidden'});
+    $('.login_box').css({visibility : 'hidden'});
+    $('#signup_form').css({visibility: 'hidden'});
+    $('.signup_box').css({visibility : 'hidden'});
+  };
   $scope.signup = function (user) {
     hideError();
     if($scope.root.org.users[$scope.newUser.userDetail.name]){
@@ -84,6 +116,7 @@ angular.module('omnibooks', [
 
   $scope.login = function (user) {
     hideError();
+
     var existingUser = $scope.root.org.users[user.name];
     if(!existingUser) {
       showError('incorrect user name');
@@ -98,21 +131,38 @@ angular.module('omnibooks', [
         console.error(err);
         return;
       }
-      closeAuthForm();
+      $scope.closeAuthForm();
+      $scope.loggedInUser = existingUser;
+      $('.blue').val('Log out');
       // TODO set User info in firebase service
       // firebase.setUserInfo(existingUser.$id);
       $state.go("market");
+      // $scope.goMarket();  this doesn't work I don't know why...
     });
   };
+
+  var logOut = function () {
+    $scope.loggedInUser = null;
+    $('.blue').val('Login');
+    $state.go("home");
+  }
 
   function showError(message) {
     $('.error').css({visibility: 'visible'});
     $scope.erroMessage = message;
   }
-
   function hideError() {
     $scope.erroMessage = '';
     $('.error').css({visibility: 'hidden'});
+  }
+
+  function showLoginForm() {
+    $('#login_form').css({visibility: 'visible'});
+    $('.login_box').css({visibility : 'visible'});
+  }
+  function showSigninForm() {
+    $('#signup_form').css({visibility: 'visible'});
+    $('.signup_box').css({visibility : 'visible'});
   }
 
 }]);

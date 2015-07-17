@@ -306,3 +306,13 @@ background: #9ae0e9;
   display:block;
   padding-bottom:15px;
 }
+
+.title, #jointop, #logintop
+{
+  display: inline-block;
+}
+
+#jointop, #logintop
+{
+  width: 150px;
+}

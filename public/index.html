@@ -20,12 +20,13 @@
   <body ng-controller="indexController">
   <div id='header'>
     <div id='title'>OmniBooks</div>
+    <a href="#" id="jointop" ng-click=clickSignin()><input type="button" value="Sign up" class="blue"/></a>
+    <a href="#" id="logintop" ng-click=clickLogin()> <input type="button" value="Login" class="red"/></a>
   </div>
 
   <div class="main">
       <div class="panel">
-          <a href="#" id="jointop"><input type="button" value="Sign up" class="blue"/></a>
-          <a href="#" id="logintop"> <input type="button" value="Login" class="red"/></a>
+
       </div>
   </div>
 
@@ -46,7 +47,7 @@
     </div>
     <p><a id="forg" href="#recover">Forgot Your Password?</a></p>
     </br>
-    <a class="close" href="#close"></a>
+    <a class="close" href="#close" ng-click=closeAuthForm()></a>
     <div class="error">
       <div class="errortext">{{erroMessage}}</div>
     </div>
@@ -65,7 +66,7 @@
       <p><input type="checkbox"><label>I agree <a href="#">terms and conditions</a></label></p></br></br>
       <input type="button" value="signup" class="blue-round" ng-click=signup(newUser.userDetail) /></br>
       <p>Already have account? <a href="#login_form">Log In</a></p>
-      <a class="close" href="#"></a>
+      <a class="close" href="#" ng-click=closeAuthForm()></a>
   </div>
 
 
@@ -77,7 +78,7 @@
       <br><br>
         <input type="text" class="text-field" placeholder="email" />
         <input type="button" value="Send" class="blue-round"/>
-        <a class="close" href="#close"></a>
+        <a class="close" href="#close" ng-click=closeAuthForm()></a>
   </div>
       </div>
 

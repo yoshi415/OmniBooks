@@ -18,13 +18,6 @@ div#title {
   width: 50px;
 }
 
-button#loginButton {
-  position: absolute;
-  right: 40px;
-  top: 20px;
-}
-
-
 input{
   height: 25px;
   font-size: 18px;

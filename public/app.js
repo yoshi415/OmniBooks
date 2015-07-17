@@ -15,7 +15,7 @@ angular.module('omnibooks', [
       controller: 'homeController'
     })
     .state('profile', {
-      url:'/profile',
+      url:'/profile:userId',
       templateUrl: 'html/profile.html',
       controller: 'profileController'
     })

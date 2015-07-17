@@ -8,7 +8,8 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
       }
     };
   $scope.userId = $stateParams.userId;
-
+  $scope.profile = fireBase.loggedInUser; // sets user details for view
+  $scope.books = fireBase.bookshelf;
   $scope.modalShown = false;
   $scope.toggleModal = function() {
     $scope.modalShown = !$scope.modalShown;
@@ -16,7 +17,8 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
 }])
 
 .factory('fireBase', function($firebaseArray, $firebaseObject) {
-  var loggedInUser = {}; // updated when user logs in
+  var loggedInUser = {name: 'Suzanne', org: 'mks'}; // updated when user logs in
+  var bookshelf = [];
   var myDataRef = new Firebase('https://brilliant-heat-9814.firebaseio.com');
   var enterBook = function(title, url, author, subject, isbn) {
     myDataRef.push({
@@ -31,6 +33,12 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
     var temp = myDataRef.child(id);
     return $firebaseObject(temp);
   };
+
+  var getUserBookshelf = function(user) {
+    bookshelf = $firebaseArray(myDataRef.child(user));
+    return bookshelf;
+  };
+
   var setUserInfo = function(id) {
     loggedInUser = $firebaseObject(myDataRef.child(id)); //returns object with user details
     return loggedInUser;
@@ -47,13 +55,7 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
 
 .directive('modal', function() {
   return {
-    template: "<div class='ng-modal' ng-show='show'>" +
-      "<div class='ng-modal-overlay' ng-click='hideModal()'></div>" +
-      "<div class='ng-modal-dialog' ng-style='dialogStyle'>" +
-      "<div class='ng-modal-close' ng-click='hideModal()'>X</div>" +
-      "<div class='ng-modal-dialog-content' ng-transclude></div>" +
-      "</div>" +
-      "</div>",
+    templateUrl: "../html/bookUpload.html",
     restrict: 'E',
     scope: {
       show: '='

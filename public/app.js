@@ -43,7 +43,6 @@ angular.module('omnibooks', [
     $scope.goItem = function() {
       $location.path('/item');
     };
-  }]);
 
 var ref = new Firebase('https://shutorial.firebaseio.com');
 $scope.newUser = {
@@ -131,3 +130,4 @@ function hideError() {
 });
 }
 
+  }]);

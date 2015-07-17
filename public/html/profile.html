@@ -1,4 +1,16 @@
 <div ng-controller="profileController" class="container">
+
+  <h1>Welcome, {{profile.name}}!</h1>
+
+  <h2>Your bookshelf</h2>
+
+  <div ng-repeat="book in books">
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+  </div>
   <button ng-click="toggleModal()" class="btn btn-default">Sell</button>
   <div modal-show="showDialog" class="modal fade">
 
@@ -13,7 +25,7 @@
         <input type="text" placeholder = 'ISBN number' ng-model= 'isbn'>
       </div>
     </form>
-    <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="open()">Sell</button>
+    <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="enterBook()">Sell</button>
   </modal>
   </div>
 </div>

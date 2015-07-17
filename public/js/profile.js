@@ -44,7 +44,6 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
     loggedInUser: loggedInUser
   };
 })
-
 .directive('modal', function() {
   return {
     template: "<div class='ng-modal' ng-show='show'>" +

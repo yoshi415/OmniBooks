@@ -1,21 +1,10 @@
 angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
 
-  // .controller('uploadBookCtrl', function($scope, fireBase, $stateParams) {
-  //   $scope.enterBook = function(title, url, author, subject, isbn) {
-  //     if (title !== "" && url !== "" && author !== "" && subject !== "" && isbn !== "") {
-  //       console.log('enter!');
-  //       fireBase.enterBook(title, url, author, subject, isbn);
-  //     }
-  //   };
-  //   $scope.userId = $stateParams.userId;
-
-  // })
-
 .controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', function($scope, fireBase, $stateParams, $modal) {
   $scope.enterBook = function(title, url, author, subject) {
-      if (title !== "" && url !== "" && author !== "" && subject !== "") {
+      if (title !== "" && url !== "" && author !== "" && subject !== "" && ibsn !== "") {
         console.log('enter!');
-        fireBase.enterBook(title, url, author, subject);
+        fireBase.enterBook(title, url, author, subject, isbn);
       }
     };
   $scope.userId = $stateParams.userId;
@@ -27,15 +16,15 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
 }])
 
 .factory('fireBase', function($firebaseArray, $firebaseObject) {
-    // var myDataRef = new Firebase('https://blazing-inferno-7614.firebaseio.com/');
   var loggedInUser = {};
   var myDataRef = new Firebase('https://brilliant-heat-9814.firebaseio.com');
-  var enterBook = function(title, url, author, subject) {
+  var enterBook = function(title, url, author, subject, isbn) {
     myDataRef.push({
       title: title,
       url: url,
       author: author,
-      subject: subject
+      subject: subject,
+      isbn: isbn
     });
   };
   var getBook = function(id) {
@@ -46,11 +35,7 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
     loggedInUser = $firebaseObject(myDataRef.child(id)); //returns object with user details
     return loggedInUser;
   }
-  // var setUserInfo = function(userObj) {
-  //   var userDb = myDataRef.child('users');
-  //   myDataRef.push(obj);
-  // }
-
+  
   return {
     allbooks: $firebaseArray(myDataRef),
     enterBook: enterBook,

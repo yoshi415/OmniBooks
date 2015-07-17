@@ -44,6 +44,10 @@ angular.module('omnibooks', [
   };
   $scope.goItem = function(){
     $location.path('/item');
+<<<<<<< HEAD
+  };
+}]);
+=======
   }
 
   var ref = new Firebase('https://shutorial.firebaseio.com');
@@ -117,3 +121,4 @@ angular.module('omnibooks', [
   }
 
 }]);
+>>>>>>> dev

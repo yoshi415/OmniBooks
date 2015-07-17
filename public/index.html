@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="lib/modal/component.css" type="text/css">
     <link rel="stylesheet" href="css/style.css">
 
-    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js.map"></script-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js.map"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
@@ -30,9 +30,6 @@
           <a href="#" id="logintop"> <input type="button" value="Login" class="red"/></a>
       </div>
   </div>
-
-
-
 
   <a href="#x" class="overlay" id="login_form"></a>
 
@@ -55,9 +52,6 @@
 
   </div>
 
-
-
-
   <a href="#x" class="overlay" id="signup_form"></a>
   <div class="signup_box box">
     <h2>SIGN UP</h2>
@@ -71,8 +65,6 @@
       {{root.org.users[$scope.newUser.userDetail.name]}}
       {{$scope.newUser.userDetail.name}}
   </div>
-
-
 
   <a href="#x" class="overlay" id="recover"></a>
   <div class="box">
@@ -89,14 +81,9 @@
   <button ng-click="goMarket()">market</button>
   <button ng-click="goProfile()">profile</button>
 
-
-
   <div id='uiview'>
      <ui-view autoscroll='false'/>
   </div>
-
-
-
 
     <footer>
       <div class="footer-background container-fluid row">
@@ -106,7 +93,6 @@
           </p>
       </div>
     </footer>
-
 
   <script src="lib/modal/classie.js"></script>
   <script src="lib/modal/modalEffects.js"></script>

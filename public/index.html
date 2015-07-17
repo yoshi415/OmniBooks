@@ -36,9 +36,9 @@
         <h3>Login</h3>
         <div>
           <p>Welcome!</p>
-          <input type='text' name='user' placeholder = 'username' ng-model = 'username'>
-          <input type="password" placeholder = 'password' ng-model= 'password'>
-          <button class="md-close">Login</button>
+          <input type='text' name='user' placeholder = 'username' ng-model = 'loginUser.username'>
+          <input type="password" placeholder = 'password' ng-model= 'loginUser.password'>
+          <button class="md-close" ng-click=login(loginUser)>Login</button>
         </div>
       </div>
 
@@ -73,7 +73,8 @@
 
     <script src="lib/modal/classie.js"></script>
     <script src="lib/modal/modalEffects.js"></script>
-  <script src="js/home.js"></script>
+    <script src="js/home.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/profile.js"></script>
   <script src="js/market.js"></script>
   <script src="js/item.js"></script>

@@ -1,2 +1,7 @@
 
 <h1>This is home page</h1>
+<input type="email" name="email" ng-model=newUser.userDetail.email> <span>{{existingEmail}}</span>
+<input type="text" name="username" ng-model=newUser.userDetail.name> <span>{{existingName}}</span>
+<input type="password" name="password" ng-model=newUser.userDetail.password>
+<button type="button" name="signup" ng-click=signup(newUser.userDetail)>Signup</button>
+{{newUser}}

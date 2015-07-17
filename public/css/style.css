@@ -5,8 +5,9 @@ div#header {
 }
 
 #uiview {
-  min-height: 500px;
+  min-height: 600px;
 }
+
 
 div#title {
   margin: 0;
@@ -52,6 +53,18 @@ a:active  {
 .link { text-decoration: none; }
 
 
+/*========  Item =======*/
+#itemContainer div{
+  display: inline;
+}
+
+#itemContainer img{
+  width: 300px;
+  height: 400px;
+}
+
+
+
 /*========  Market =======*/
 
 #bookshelf img{
@@ -64,9 +77,30 @@ a:active  {
   font-size: 20px;
 }
 
-li.ng-scope {
-  display: inline;
+.bookitem{
+  width: 200px;
+  height: 280px;
+  font-size: 10px;
+  text-align: center;
+  border-color: rgba(47, 7, 19, 0.28);
+  border-style: solid;
+  border-width: 1px;
+  margin: 0px 0px 0px 10px;
+  padding: 0px 0px 0px 0px;
 }
+
+li {
+  display: inline;
+  float: left;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
 
 
 

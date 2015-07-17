@@ -7,12 +7,10 @@ angular.module('omnibooks.profile', ['firebase'])
       fireBase.enterBook(title,url,author);
     }
   }
-
 }])
 .factory('fireBase', function($firebaseArray,$firebaseObject){
   var myDataRef = new Firebase('https://brilliant-heat-9814.firebaseio.com');
   var enterBook = function(title,url,author){
-    var str = randomString();
     myDataRef.push({
       title:title,
       url:url,

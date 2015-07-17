@@ -28,4 +28,4 @@ app.post('/login', function(req,res){
 
 });
 
-app.listen(PORT_num || 8000);
+app.listen(PORT_num || 1230);

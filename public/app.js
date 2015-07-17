@@ -37,11 +37,7 @@ angular.module('omnibooks', [
   $scope.goProfile = function(){
     $location.path('/profile');
   };
-
   $scope.goMarket = function(){
     $location.path('/market');
-  };
-  $scope.goItem = function(){
-    $location.path('/item');
   };
 }]);

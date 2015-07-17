@@ -1,15 +1,18 @@
-// angular.module.('login.auth', [])
-// .controller('authController', ['$scope', '$firebaseAuth', function ($scope, $firebaseAuth) {
-//   $scope.user = {};
-//   var ref = new FireBase('https://shutorial.firebaseio.com');
-//   // var authObj = $firebaseAuth(ref);
-//   $scope.signup = function (user) {
-//     ref.createUser(user, function (err userData) {
-//       if(error){
-//         console.error(user);
-//       } else {
-//         $scope.login(user);
-//       }
-//     });
-//   }
-// }])
+$(document).ready(function() {
+  // handle the login and sign up form
+  $('#jointop').on('click', function () {
+    $('#signup_form').css({visibility: 'visible'});
+    $('.signup_box').css({visibility : 'visible'});
+  });
+  $('#logintop').on('click', function () {
+    $('#login_form').css({visibility: 'visible'});
+    $('.login_box').css({visibility : 'visible'});
+  });
+  $('.close').on('click', closeAuthForm);
+});
+function closeAuthForm() {
+  $('#login_form').css({visibility: 'hidden'});
+  $('.login_box').css({visibility : 'hidden'});
+  $('#signup_form').css({visibility: 'hidden'});
+  $('.signup_box').css({visibility : 'hidden'});
+}

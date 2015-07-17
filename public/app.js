@@ -30,7 +30,7 @@ angular.module('omnibooks', [
       controller: 'marketController'
     })
 })
-.controller('indexController', ['$scope','$location', '$firebaseObject',function($scope,$location,$firebaseObject){
+.controller('indexController', ['$scope','$location', '$firebaseObject', function($scope,$location,$firebaseObject){
   $scope.goHome = function(){
     $location.path('/home');
   }
@@ -38,7 +38,7 @@ angular.module('omnibooks', [
     $location.path('/profile');
   }
 
-  $scope.goMarket = function(){
+  $scope.goMarket = function(id){
     $location.path('/market');
   }
   $scope.goItem = function(){
@@ -51,19 +51,22 @@ angular.module('omnibooks', [
   var root = $firebaseObject(ref);
   root.$bindTo($scope, "root");
 
+  // FIXME in case users is not exits on the DB. This is not smart.
+  // if(!$scope.root.org.users){
+  //   $scope.root.org.users = {username: "dammy"};
+  // }
+
   $scope.signup = function (user) {
-    console.log('singup!!');
-    $scope.existingName = '';
-    $scope.existingEmail = '';
+    hideError();
     if($scope.root.org.users[$scope.newUser.userDetail.name]){
-      $scope.existingName = 'The username is already registered. Try another name.'
+      showError('The username is already registered. Try another name.');
       console.log('Already exists');
       return;
     }
     console.log('before create');
     ref.createUser(user, function (err, userData) {
       if(err){
-        $scope.existingEmail = 'The email address is already registered.';
+        showError('The email address is already registered.');
         console.error(err);
         return;
       }
@@ -80,22 +83,35 @@ angular.module('omnibooks', [
   };
 
   $scope.login = function (user) {
+    hideError();
     var existingUser = $scope.root.org.users[user.name];
     if(!existingUser) {
+      showError('incorrect user name');
       console.log('User not exists');
       return;
     }
-    ref.authWithPassword({email: existingUser.userDetail.email,
-      password: user.password},
-      function (err, authData) {
+    var authInfo = {email   : existingUser.userDetail.email,
+                    password: user.password}
+    ref.authWithPassword(authInfo, function (err, authData) {
       if(err){
+        showError('incorrect password');
         console.error(err);
-      } else {
-        console.log('Authenticated!', authData);
-        // TODO: close modal
-        $('.md-modal').niftyModal("hide");
+        return;
       }
+      closeAuthForm();
+      // firebase.setUserInfo(existingUser.$id);
+      $state.go("market");
     });
   };
+
+  function showError(message) {
+    $('.error').css({visibility: 'visible'});
+    $scope.erroMessage = message;
+  }
+
+  function hideError() {
+    $scope.erroMessage = '';
+    $('.error').css({visibility: 'hidden'});
+  }
 
 }]);

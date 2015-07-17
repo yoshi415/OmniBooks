@@ -2,7 +2,7 @@
 <html ng-app="omnibooks">
   <head>
 <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet"> -->
-<script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular.js"></script>
     <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="css/reset.css" >
@@ -19,6 +19,7 @@
     <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     <script src="lib/angular-ui-router.js"></script>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
 
     <title>OmniBooks</title>
 
@@ -26,22 +27,68 @@
   <body ng-controller="indexController">
   <div id='header'>
     <div id='title'>OmniBooks</div>
-    <button id='loginButton' class="md-trigger" data-modal="modal-5">Login</button>
+
+  </div>
+
+  <div class="main">
+      <div class="panel">
+          <a href="#" id="jointop"><input type="button" value="Sign up" class="blue"/></a>
+          <a href="#" id="logintop"> <input type="button" value="Login" class="red"/></a>
+      </div>
   </div>
 
 
 
-    <div class="md-modal md-effect-5" id="modal-5">
-      <div class="md-content">
-        <h3>Login</h3>
-        <div>
-          <p>Welcome!</p>
-          <input type='text' name='user' placeholder = 'username' ng-model = 'loginUser.username'>
-          <input type="password" placeholder = 'password' ng-model= 'loginUser.password'>
-          <button class="md-close" ng-click=login(loginUser)>Login</button>
-        </div>
-      </div>
 
+  <a href="#x" class="overlay" id="login_form"></a>
+
+  <div class="login_box box">
+    <h2>LOG IN</h2>
+    <input type="text" class="text-field" placeholder="Username" ng-model=loginUser.name />
+    <input type="password" class="text-field" placeholder="Password" ng-model=loginUser.password />
+    <div id="buttons">
+      <input type="button" value="Login" class="red" ng-click=login(loginUser) />
+      <a href="#signup_form">
+      <input type="button" value="Sign up" class="blue"/>
+      </a>
+    </div>
+    <p><a id="forg" href="#recover">Forgot Your Password?</a></p>
+    </br>
+    <a class="close" href="#close"></a>
+    <div class="error">
+      <div class="errortext">{{erroMessage}}</div>
+    </div>
+
+  </div>
+
+
+
+
+  <a href="#x" class="overlay" id="signup_form"></a>
+  <div class="signup_box box">
+    <h2>SIGN UP</h2>
+      <input type="text" class="text-field" placeholder="email" ng-model=newUser.userDetail.email />
+      <input type="email" class="text-field" placeholder="user name" ng-model=newUser.userDetail.name />
+      <input type="password" class="text-field" placeholder="Password" ng-model=newUser.userDetail.password />
+      <p><input type="checkbox"><label>I agree <a href="#">terms and conditions</a></label></p></br></br>
+      <input type="button" value="signup" class="blue-round" ng-click=signup(newUser.userDetail) /></br>
+      <p>Already have account? <a href="#login_form">Log In</a></p>
+      <a class="close" href="#"></a>
+      {{root.org.users[$scope.newUser.userDetail.name]}}
+      {{$scope.newUser.userDetail.name}}
+  </div>
+
+
+
+  <a href="#x" class="overlay" id="recover"></a>
+  <div class="box">
+    <h2>Forgot your password?</h2>
+      <p>We’ll email a code to this address.</p>
+      <br><br>
+        <input type="text" class="text-field" placeholder="email" />
+        <input type="button" value="Send" class="blue-round"/>
+        <a class="close" href="#close"></a>
+  </div>
       </div>
   <button ng-click="goHome()">Home</button>
   <button ng-click="goItem()">item</button>

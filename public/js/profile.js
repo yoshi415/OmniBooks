@@ -4,7 +4,7 @@ angular.module('omnibooks.profile', ['firebase'])
       if (title !== "" && url !== "" && author !== "") {
         console.log('enter!');
         fireBase.enterBook(title, url, author);
-      };
+      }
     };
   }])
   .factory('fireBase', function($firebaseArray, $firebaseObject) {

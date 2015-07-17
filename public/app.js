@@ -46,6 +46,7 @@ angular.module('omnibooks', [
     $location.path('/item');
   };
   function isLoggedIn() {
+    // TODO move isLoggedIn function to firebase service
     return !!firebase.loggedInUser;
   }
 
@@ -59,10 +60,10 @@ angular.module('omnibooks', [
   var root = $firebaseObject(ref);
   root.$bindTo($scope, "root");
 
-// FIXME in case users is not exits on the DB. This is not smart.
-// if(!$scope.root.org.users){
-//   $scope.root.org.users = {username: "dammy"};
-// }
+    // FIXME in case users is not exits on the DB. This is not smart.
+    // if(!$scope.root.org.users){
+    //   $scope.root.org.users = {username: "dammy"};
+    // }
 
   $scope.clickLogin = function () {
     if(isLoggedIn()){
@@ -160,6 +161,7 @@ angular.module('omnibooks', [
 .run(['$rootScope', '$state', 'firebase', function ($rootScope, $state, firebase) {
   $rootScope.$on('$stateChangeStart', function (event, toState) {
     if(!firebase.loggedInUser){
+      // TODO move isLoggedIn function to firebase service
       event.preventDefault();
       $state.go("home");
     }

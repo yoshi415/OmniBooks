@@ -9,7 +9,9 @@
     <div class="b-title"> {{book.title}} </div>
     <div class="m-title">by {{book.author}} (Author)</div>
 
-    <h1> {{ detail }} </h1>
+    <div ng-repeat="price in prices">
+      {{price.store_id}}  {{price.price}} USD
+    </div>
 
   </div>
 

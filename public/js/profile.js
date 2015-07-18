@@ -16,7 +16,7 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
 }])
 
 .factory('fireBase', function($firebaseArray, $firebaseObject) {
-  var loggedInUser = {}; // updated when user logs in
+  var loggedInUser = null; // updated when user logs in
   var myDataRef = new Firebase('https://shutorial.firebaseio.com');
   var enterBook = function(title, url, author, subject, isbn) {
     myDataRef.push({
@@ -31,9 +31,12 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
     var temp = myDataRef.child(id);
     return $firebaseObject(temp);
   };
-  var setUserInfo = function(id) {
-    loggedInUser = $firebaseObject(myDataRef.child(id)); //returns object with user details
+  var setUserInfo = function(user) {
+    loggedInUser = user; //returns object with user details
     return loggedInUser;
+  }
+  var isLoggedIn = function () {
+    return !!loggedInUser;
   }
 
   return {
@@ -41,7 +44,8 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
     enterBook: enterBook,
     getBook: getBook,
     setUserInfo: setUserInfo,
-    loggedInUser: loggedInUser
+    loggedInUser: loggedInUser,
+    isLoggedIn: isLoggedIn
   };
 })
 

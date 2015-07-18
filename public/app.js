@@ -30,7 +30,7 @@ angular.module('omnibooks', [
        controller: 'itemController',
     });
 })
-.controller('indexController', ['$scope','$location', '$state', '$firebaseObject', 'firebase', function($scope, $location, $state, $firebaseObject, firebase){
+.controller('indexController', ['$scope','$location', '$state', '$firebaseObject', 'fireBase', function($scope, $location, $state, $firebaseObject, fireBase){
 
   $scope.goHome = function(){
     $location.path('/home');
@@ -47,16 +47,11 @@ angular.module('omnibooks', [
   };
   function isLoggedIn() {
     // TODO move isLoggedIn function to firebase service
-    return !!firebase.loggedInUser;
+    return fireBase.isLoggedIn();
   }
 
   var ref = new Firebase('https://shutorial.firebaseio.com');
-  $scope.newUser = {
-    userDetail: {}
-  };
-  $scope.loginUser = {
-    userDetail: {}
-  };
+  resetUserInfo();
   var root = $firebaseObject(ref);
   root.$bindTo($scope, "root");
 
@@ -80,6 +75,8 @@ angular.module('omnibooks', [
     $('.login_box').css({visibility : 'hidden'});
     $('#signup_form').css({visibility: 'hidden'});
     $('.signup_box').css({visibility : 'hidden'});
+    hideError();
+    resetUserInfo();
   };
   $scope.signup = function (user) {
     hideError();
@@ -105,6 +102,7 @@ angular.module('omnibooks', [
     });
   };
 
+
   $scope.login = function (user) {
     hideError();
 
@@ -126,14 +124,14 @@ angular.module('omnibooks', [
       // $scope.loggedInUser = existingUser;
       $('.red').val('Log out');
       // TODO set User info in firebase service
-      firebase.setUserInfo(existingUser.$id);
+      fireBase.setUserInfo(existingUser);
       $state.go("market");
       // $scope.goMarket();  this doesn't work I don't know why...
     });
   };
 
   var logOut = function () {
-    $scope.loggedInUser = null;
+    fireBase.setUserInfo(null);
     $('.red').val('Login');
     $state.go("home");
   }
@@ -155,12 +153,21 @@ angular.module('omnibooks', [
     $('#signup_form').css({visibility: 'visible'});
     $('.signup_box').css({visibility : 'visible'});
   }
+  function resetUserInfo() {
+    $scope.newUser = {
+      userDetail: {name: '', email: '', password: ''}
+    };
+    $scope.loginUser = {name: '', password: ''};
+  }
 
 }])
 
-.run(['$rootScope', '$state', 'firebase', function ($rootScope, $state, firebase) {
+.run(['$rootScope', '$state', 'fireBase', function ($rootScope, $state, fireBase) {
   $rootScope.$on('$stateChangeStart', function (event, toState) {
-    if(!firebase.loggedInUser){
+    if(toState.name === "home"){
+      return;
+    }
+    if(!fireBase.isLoggedIn()){
       // TODO move isLoggedIn function to firebase service
       event.preventDefault();
       $state.go("home");

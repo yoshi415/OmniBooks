@@ -2,9 +2,12 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
 
 .controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', function($scope, fireBase, $stateParams, $modal) {
   $scope.enterBook = function(title, url, author, subject, isbn) {
-    if (title !== "" && url !== "" && author !== "" && subject !== "" && isbn !== "") {
-      console.log('enter!');
+    if (title && url && author && subject && isbn) {
+      $scope.error = false;
       fireBase.enterBook(title, url, author, subject, isbn);
+      console.log('successfully entered');
+    } else {
+      $scope.error = "You must fill out all required fields";
     }
   };
   $scope.userId = $stateParams.userId;
@@ -12,14 +15,16 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
   $scope.books = fireBase.bookshelf;
   $scope.modalShown = false;
   $scope.toggleModal = function() {
-    $scope.modalShown = !$scope.modalShown;
+    if(!$scope.error) {
+      $scope.modalShown = !$scope.modalShown;
+    }
   };
 }])
 
 .factory('fireBase', function($firebaseArray, $firebaseObject) {
   var loggedInUser = {name: 'Suzanne', org: 'mks'}; // updated when user logs in
   var bookshelf = [];
-  var myDataRef = new Firebase('https://brilliant-heat-9814.firebaseio.com');
+  var myDataRef = new Firebase('https://blazing-inferno-7614.firebaseio.com/');
   var enterBook = function(title, url, author, subject, isbn) {
     myDataRef.push({
       title: title,

@@ -11,8 +11,8 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
     }
   };
   $scope.userId = $stateParams.userId;
-  $scope.profile = fireBase.loggedInUser; // sets user details for view
-  $scope.books = fireBase.bookshelf;
+  // $scope.profile = fireBase.loggedInUser; // sets user details for view
+  // $scope.books = fireBase.bookshelf;
   $scope.modalShown = false;
   $scope.toggleModal = function() {
     if(!$scope.error) {
@@ -20,43 +20,6 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
     }
   };
 }])
-
-.factory('fireBase', function($firebaseArray, $firebaseObject) {
-  var loggedInUser = {name: 'Suzanne', org: 'mks'}; // updated when user logs in
-  var bookshelf = [];
-  var myDataRef = new Firebase('https://blazing-inferno-7614.firebaseio.com/');
-  var enterBook = function(title, url, author, subject, isbn) {
-    myDataRef.push({
-      title: title,
-      url: url,
-      author: author,
-      subject: subject,
-      isbn: isbn
-    });
-  };
-  var getBook = function(id) {
-    var temp = myDataRef.child(id);
-    return $firebaseObject(temp);
-  };
-
-  var getUserBookshelf = function(user) {
-    bookshelf = $firebaseArray(myDataRef.child(user));
-    return bookshelf;
-  };
-
-  var setUserInfo = function(id) {
-    loggedInUser = $firebaseObject(myDataRef.child(id)); //returns object with user details
-    return loggedInUser;
-  }
-
-  return {
-    allbooks: $firebaseArray(myDataRef),
-    enterBook: enterBook,
-    getBook: getBook,
-    setUserInfo: setUserInfo,
-    loggedInUser: loggedInUser
-  };
-})
 .directive('modal', function() {
   return {
     templateUrl: "../html/bookUpload.html",

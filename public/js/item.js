@@ -5,7 +5,6 @@ angular.module('omnibooks.item', [])
     $scope.book = fireBase.getBook($scope.itemId);
     $scope.getDetail = bookAPI.getDetail;
     $scope.displayDetail = function(res){
-      console.log(res.data.error);
       $scope.prices = {};
       if(res.data.error){
         $scope.prices.price = res.data.error;

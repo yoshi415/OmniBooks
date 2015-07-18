@@ -30,7 +30,8 @@ angular.module('omnibooks', [
         controller: 'itemController',
       });
   })
-  .controller('indexController', ['$scope', '$location', '$state', '$firebaseObject', function($scope, $location, $state, $firebaseObject) {
+  .controller('indexController', ['$scope', '$location', '$state', '$firebaseObject',
+    function($scope, $location, $state, $firebaseObject) {
     $scope.goHome = function() {
       $location.path('/home');
     };
@@ -39,9 +40,6 @@ angular.module('omnibooks', [
     };
     $scope.goMarket = function(id) {
       $location.path('/market');
-    };
-    $scope.goItem = function() {
-      $location.path('/item');
     };
   }]);
 

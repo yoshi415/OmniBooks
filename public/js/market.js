@@ -3,9 +3,7 @@ angular.module('omnibooks.market', [])
 
   $scope.findDetail = function(book){
     $stateParams.itemId = book.$id;
-    console.log('book',book,'bookid',book.$id);
-    var str = JSON.stringify(book);
-    $state.go("books",{itemId:book.$id, book:str});
+    $state.go("books",{itemId:book.$id});
   };
   $scope.books = fireBase.allbooks;
 }]);

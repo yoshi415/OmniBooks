@@ -1,4 +1,4 @@
-angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
+angular.module('omnibooks.profile', ['ui.bootstrap'])
 
 .controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', function($scope, fireBase, $stateParams, $modal) {
   $scope.enterBook = function(title, url, author, subject, isbn) {

@@ -17,24 +17,25 @@ angular.module('omnibooks.database', ['firebase'])
   //get all books in same org
   var getOrgBook = function(org){
     var ref = myDataRef.child(org);
-    var users = $firebaseusersect(ref);
-    var books = {};
+    var users = $firebaseObject(ref);
+    var books = [];
     for(var username in users){
-      for (var bookId in users[username].books)
-        { books[bookId] = users[username].books[bookId]; }
-    }
+      if(username[0] !== '$'){
+        books = getUserBooks(org,username);
+       }
+     }
     return books;
   };
 
   //get all books from same user, return Array
   var getUserBooks = function(org,username) {
-    var ref = myDataRef.child(org).child(username);
+    var ref = myDataRef.child(org).child(username).child('books');
     return $firebaseArray(ref);
   };
 
   //get one book from a user, return object
   var getUserBook = function(org,username,id) {
-    var ref = myDataRef.child(org).child(username).child(id);
+    var ref = myDataRef.child(org).child(username).child('books').child(id);
     return $firebaseObject(ref);
   };
 

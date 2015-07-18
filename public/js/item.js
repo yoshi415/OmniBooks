@@ -1,9 +1,12 @@
 angular.module('omnibooks.item', [])
 .controller('itemController',['$scope','$stateParams','fireBase','bookAPI',
   function ($scope,$stateParams,fireBase,bookAPI) {
+    var org = 'purdue';
+    var user = 'daichuqi'
     $scope.itemId = $stateParams.itemId;
-    $scope.book = fireBase.getBook($scope.itemId);
+    $scope.book = fireBase.getUserBook(org,user,$scope.itemId);
     $scope.getDetail = bookAPI.getDetail;
+
     $scope.displayDetail = function(res){
       $scope.prices = {};
       if(res.data.error){

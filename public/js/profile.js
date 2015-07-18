@@ -24,7 +24,7 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
 .factory('fireBase', function($firebaseArray, $firebaseObject) {
   var loggedInUser = {name: 'Suzanne', org: 'mks'}; // updated when user logs in
   var bookshelf = [];
-  var myDataRef = new Firebase('https://brilliant-heat-9814.firebaseio.com');
+  var myDataRef = new Firebase('https://blazing-inferno-7614.firebaseio.com/');
   var enterBook = function(title, url, author, subject, isbn) {
     myDataRef.push({
       title: title,

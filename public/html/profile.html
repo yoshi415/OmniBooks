@@ -28,6 +28,9 @@
         <input type="text" placeholder = 'ISBN number' ng-model= 'isbn'>
       </div>
     </form>
+    <div>
+      <span>{{error}}</span>
+    </div>
     <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="enterBook(booktitle, bookimgurl, author, booksubject, isbn); toggleModal()">Submit</button>
   </modal>
   </div>

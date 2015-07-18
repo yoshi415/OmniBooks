@@ -46,13 +46,13 @@ angular.module('omnibooks.database', ['firebase'])
   //for signup
   var createUser = function(org,username,password,email){
     var ref = myDataRef.child(org).child(username).child('userDetail')
-    ref.child('password').set(password)；
-    ref.child('email').set(email)；
+    ref.child('password').set(password);
+    ref.child('email').set(email);
   }
 
   return {
     enterBook: enterBook,
-    getOrgBook:getOrgBook
+    getOrgBook:getOrgBook,
     getUserBooks: getUserBooks,
     getUserBook: getUserBook,
     getUserInfo: getUserInfo,

@@ -11,8 +11,6 @@ angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
     }
   };
   $scope.userId = $stateParams.userId;
-  // $scope.profile = fireBase.loggedInUser; // sets user details for view
-  // $scope.books = fireBase.bookshelf;
   $scope.modalShown = false;
   $scope.toggleModal = function() {
     if(!$scope.error) {

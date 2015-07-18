@@ -6,10 +6,6 @@ var bodyParser  = require('body-parser');
 var PORT_num = process.env.PORT;
 
 
-var users = {
-  'user':'123',
-};
-
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

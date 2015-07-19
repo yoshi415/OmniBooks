@@ -8,5 +8,5 @@ angular.module('omnibooks.market', [])
     };
     var org = 'purdue';
     var user = 'daichuqi'
-    $scope.books = fireBase.getUserBooks(org,user);
+    $scope.books = fireBase.getOrgBook(org);
 }]);

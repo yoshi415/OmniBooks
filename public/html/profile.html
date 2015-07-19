@@ -24,14 +24,13 @@
         <input type="text" placeholder = 'Book Image Url' ng-model= 'bookimgurl'>
         <input type='text'  placeholder = 'Book Title' ng-model = 'booktitle'>
         <input type="text" placeholder = 'Author' ng-model= 'author'>
-        <input type="text" placeholder = 'Subject' ng-model= 'booksubject'>
         <input type="text" placeholder = 'ISBN number' ng-model= 'isbn'>
       </div>
     </form>
     <div>
       <span>{{error}}</span>
     </div>
-    <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="enterBook(booktitle, bookimgurl, author, booksubject, isbn); toggleModal()">Submit</button>
+    <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleModal()">Submit</button>
   </modal>
   </div>
 </div>

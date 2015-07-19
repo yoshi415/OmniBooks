@@ -1,15 +1,28 @@
+<div class = 'container'>
 
-
-<div class=".container" id="itemContainer">
-  <div class="row">
-    <div class=".col-md-9 .col-md-push-3">
-
-      <img src=" {{book.url}} " >
-    </div>
-
-   <div class=".col-md-3 .col-md-pull-9">
-      <div> {{book.title}} </div>
-      <div> {{book.author}} </div>
-    </div>
+  <div id = 'itemLeft'>
+     <img src= {{book.url}} >
   </div>
+
+
+  <div id = 'itemMiddle'>
+    <div class="b-title"> {{book.title}} </div>
+    <div class="m-title">by {{book.author}} (Author)</div>
+
+    <div ng-repeat="price in prices">
+      {{price.store_id}}  {{price.price}} USD
+    </div>
+
+  </div>
+
+  <div id= 'itemRight'>
+    <button ng-click="getDetail(book.isbn,displayDetail)">
+      Get more info
+    </button>
+
+
+  </div>
+
 </div>
+
+

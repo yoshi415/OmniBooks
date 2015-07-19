@@ -1,63 +1,27 @@
 angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
 
 .controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', function($scope, fireBase, $stateParams, $modal) {
-  $scope.enterBook = function(title, url, author, subject) {
-      if (title !== "" && url !== "" && author !== "" && subject !== "" && ibsn !== "") {
-        console.log('enter!');
-        fireBase.enterBook(title, url, author, subject, isbn);
-      }
-    };
+  $scope.enterBook = function(title, url, author, subject, isbn) {
+    if (title && url && author && subject && isbn) {
+      $scope.error = false;
+      fireBase.enterBook(title, url, author, subject, isbn);
+      console.log('successfully entered');
+    } else {
+      $scope.error = "You must fill out all required fields";
+    }
+  };
   $scope.userId = $stateParams.userId;
-
   $scope.modalShown = false;
   $scope.toggleModal = function() {
-    $scope.modalShown = !$scope.modalShown;
+    if(!$scope.error) {
+      $scope.modalShown = !$scope.modalShown;
+    }
   };
 }])
 
-.factory('fireBase', function($firebaseArray, $firebaseObject) {
-  var loggedInUser = null; // updated when user logs in
-  var myDataRef = new Firebase('https://shutorial.firebaseio.com');
-  var enterBook = function(title, url, author, subject, isbn) {
-    myDataRef.push({
-      title: title,
-      url: url,
-      author: author,
-      subject: subject,
-      isbn: isbn
-    });
-  };
-  var getBook = function(id) {
-    var temp = myDataRef.child(id);
-    return $firebaseObject(temp);
-  };
-  var setUserInfo = function(user) {
-    loggedInUser = user; //returns object with user details
-    return loggedInUser;
-  }
-  var isLoggedIn = function () {
-    return !!loggedInUser;
-  }
-
-  return {
-    allbooks: $firebaseArray(myDataRef),
-    enterBook: enterBook,
-    getBook: getBook,
-    setUserInfo: setUserInfo,
-    loggedInUser: loggedInUser,
-    isLoggedIn: isLoggedIn
-  };
-})
-
 .directive('modal', function() {
   return {
-    template: "<div class='ng-modal' ng-show='show'>" +
-      "<div class='ng-modal-overlay' ng-click='hideModal()'></div>" +
-      "<div class='ng-modal-dialog' ng-style='dialogStyle'>" +
-      "<div class='ng-modal-close' ng-click='hideModal()'>X</div>" +
-      "<div class='ng-modal-dialog-content' ng-transclude></div>" +
-      "</div>" +
-      "</div>",
+    templateUrl: "../html/bookUpload.html",
     restrict: 'E',
     scope: {
       show: '='

@@ -1,9 +1,6 @@
-<div ng-controller="profileController" class="container">
-
+<div ng-controller="profileController" class="padding">
   <h1>Welcome, {{profile.name}}!</h1>
-
   <h2>Your bookshelf</h2>
-
   <div ng-repeat="book in books">
     <ul>
       <li class='bookitem' ng-repeat="book in books | filter:search">
@@ -13,24 +10,25 @@
       </li>
     </ul>
   </div>
+
   <button ng-click="toggleModal()" class="btn btn-default">Sell</button>
   <div modal-show="showDialog" class="modal fade">
-
-  <modal title="bookUpload" show='modalShown'>
-
-    <form role="form">
-      <h1 id="bookUpload">Enter book information here!</h1>
-      <div class="form-group">
-        <input type="text" placeholder = 'Book Image Url' ng-model= 'bookimgurl'>
-        <input type='text'  placeholder = 'Book Title' ng-model = 'booktitle'>
-        <input type="text" placeholder = 'Author' ng-model= 'author'>
-        <input type="text" placeholder = 'ISBN number' ng-model= 'isbn'>
+    <modal title="bookUpload" show='modalShown'>
+      <form role="form">
+        <h1 id="bookUpload">Enter book information here!</h1>
+        <div class="form-group">
+          <input type="text" placeholder = 'Book Image Url' ng-model= 'bookimgurl'>
+          <input type='text'  placeholder = 'Book Title' ng-model = 'booktitle'>
+          <input type="text" placeholder = 'Author' ng-model= 'author'>
+          <input type="text" placeholder = 'ISBN number' ng-model= 'isbn'>
+        </div>
+      </form>
+      <div>
+        <span>{{error}}</span>
       </div>
-    </form>
-    <div>
-      <span>{{error}}</span>
-    </div>
-    <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleModal()">Submit</button>
-  </modal>
+      <button class="btn btn-default" id='sellButton' class="md-trigger"
+              ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleModal()">Submit</button>
+    </modal>
   </div>
+
 </div>

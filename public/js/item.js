@@ -3,21 +3,19 @@ angular.module('omnibooks.item', [])
   function ($scope,$stateParams,fireBase,bookAPI) {
     var org = 'purdue';
     var user = 'daichuqi'
+    var displayDetail = function(res){
+      $scope.prices = res.data.data;
+    }
     $scope.itemId = $stateParams.itemId;
-    $scope.book = fireBase.getUserBook(org,user,$scope.itemId);
-    $scope.getDetail = bookAPI.getDetail;
+    $scope.book = fireBase.getUserBook(org,user,$scope.itemId,function(data){
+      bookAPI.getDetail(data.isbn,displayDetail);
+    });
 
-    $scope.displayDetail = function(res){
-      $scope.prices = {};
-      if(res.data.error){
-        $scope.prices.price = res.data.error;
-      }else{
-        $scope.prices = res.data.data;
-      }
-     }
 }])
 .factory('bookAPI', function($http){
   var key = 'UTUJEB5A';
+
+
   var getDetail  = function(isbn,callback){
     return $http({
       method: 'GET',

@@ -4,10 +4,10 @@ angular.module('omnibooks.database', ['firebase'])
   var org = 'purdue';
   var username = 'richie';
 
-  var enterBook = function(title, url, author, isbn) {
+  var enterBook = function(title, img, author, isbn) {
     myDataRef.child(org).child('books').push({
       title: title,
-      url: url,
+      img: img,
       author: author,
       isbn: isbn
     });
@@ -20,8 +20,12 @@ angular.module('omnibooks.database', ['firebase'])
   };
 
   //get one book from a user, return object
-  var getUserBook = function(org,username,id) {
+  var getUserBook = function(org,username,id,callback) {
     var ref = myDataRef.child(org).child('books').child(id);
+    ref.on('value', function(dataSnapshot) {
+      callback(dataSnapshot.val());
+      ref.off();
+    });
     return $firebaseObject(ref);
   };
 

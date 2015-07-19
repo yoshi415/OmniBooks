@@ -4,43 +4,34 @@ angular.module('omnibooks.database', ['firebase'])
   var org = 'purdue';
   var username = 'richie';
 
-  var enterBook = function(title, url, author, subject, isbn) {
-    myDataRef.child(org).child(username).child('books').push({
+  var enterBook = function(title, img, author, isbn) {
+    myDataRef.child(org).child('books').push({
       title: title,
-      url: url,
+      img: img,
       author: author,
-      subject: subject,
       isbn: isbn
     });
   };
 
   //get all books in same org
   var getOrgBook = function(org){
-    var ref = myDataRef.child(org);
-    var users = $firebaseusersect(ref);
-    var books = {};
-    for(var username in users){
-      for (var bookId in users[username].books)
-        { books[bookId] = users[username].books[bookId]; }
-    }
-    return books;
-  };
-
-  //get all books from same user, return Array
-  var getUserBooks = function(org,username) {
-    var ref = myDataRef.child(org).child(username);
+    var ref = myDataRef.child(org).child('books');
     return $firebaseArray(ref);
   };
 
   //get one book from a user, return object
-  var getUserBook = function(org,username,id) {
-    var ref = myDataRef.child(org).child(username).child(id);
+  var getUserBook = function(org,username,id,callback) {
+    var ref = myDataRef.child(org).child('books').child(id);
+    ref.on('value', function(dataSnapshot) {
+      callback(dataSnapshot.val());
+      ref.off();
+    });
     return $firebaseObject(ref);
   };
 
   //get user detail info, return object
   var getUserInfo = function(org,username){
-    return $firebaseObject(myDataRef.child(org).child(username).child('userDetail'));
+    return $firebaseObject(myDataRef.child(org).child('users').child(username));
   };
 
   //for signup
@@ -74,7 +65,6 @@ angular.module('omnibooks.database', ['firebase'])
   return {
     enterBook: enterBook,
     getOrgBook:getOrgBook,
-    getUserBooks: getUserBooks,
     getUserBook: getUserBook,
     getUserInfo: getUserInfo,
     createUser:createUser,

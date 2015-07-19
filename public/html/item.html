@@ -1,7 +1,6 @@
-<div class = 'container'>
-
+<div class = 'padding'>
   <div id = 'itemLeft'>
-     <img src= {{book.url}} >
+     <img src= {{book.img}} >
   </div>
 
 
@@ -10,15 +9,13 @@
     <div class="m-title">by {{book.author}} (Author)</div>
 
     <div ng-repeat="price in prices">
-      {{price.store_id}}  {{price.price}} USD
+      <span>{{price.store_id}}</span>
+      <span>{{price.price}} USD</span>
     </div>
 
   </div>
 
   <div id= 'itemRight'>
-    <button ng-click="getDetail(book.isbn,displayDetail)">
-      Get more info
-    </button>
 
 
   </div>

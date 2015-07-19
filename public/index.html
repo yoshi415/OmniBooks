@@ -18,19 +18,25 @@
 
   </head>
   <body ng-controller="indexController">
-  <div id='header'>
-    <div id='title'>OmniBooks</div>
-    <div class="auth" ng-controller="authController">
-      <a href="#" id="jointop" ng-click=clickSignup()><input type="button" value="Sign up" class="blue"/></a>
-      <a href="#" id="logintop" ng-click=clickLogin()> <input type="button" value="Login" class="red"/></a>
-    </div>
-  </div>
 
-  <div class="main">
-      <div class="panel">
+    <header id="header">
+      <div class='center'>
+          <ul id="navigation">
+            <li><a ng-click="goMarket()" >Market<span class="border"></span></a></li>
+            <li><a ng-click="goProfile()" >Profile<span class="border"></span></a></li>
+            <li><a ng-click="goHome()" >OmniBooks<span class="border"></span></a></li>
+            <li><a href="#" id="jointop">Signup<span class="border"></span></a></li>
+            <li><a href="#" id="logintop">Login<span class="border"></span></a></li>
 
+          </ul>
       </div>
-  </div>
+      <div class="after"></div>
+
+</header>
+
+
+
+
 
   <div class="loginLayer" ng-controller="authController">
 
@@ -80,11 +86,9 @@
   </div>
       </div>
 
-    <button ng-click="goHome()">Home</button>
-  <button ng-click="goMarket()">market</button>
-  <button ng-click="goProfile()">profile</button>
 
   <div id='uiview'>
+
      <ui-view autoscroll='false'/>
   </div>
 

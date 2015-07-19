@@ -55,10 +55,6 @@ angular.module('omnibooks', [
   var root = $firebaseObject(ref);
   root.$bindTo($scope, "root");
 
-    // FIXME in case users is not exits on the DB. This is not smart.
-    // if(!$scope.root.org.users){
-    //   $scope.root.org.users = {username: "dammy"};
-    // }
 
   $scope.clickLogin = function () {
     if(isLoggedIn()){
@@ -78,63 +74,41 @@ angular.module('omnibooks', [
     hideError();
     resetUserInfo();
   };
-  $scope.signup = function (user) {
+  $scope.signup = function (newUser) {
     hideError();
-    if($scope.root.org.users[$scope.newUser.userDetail.name]){
+    if(!firebase.getUser(newUser.name)){
       showError('The username is already registered. Try another name.');
       console.log('Already exists');
       return;
     }
     console.log('SIGNUP!');
-    var password = $scope.newUser.userDetail.password;
-    console.log('password: ', password);
-    $scope.newUser.userDetail.password = null;
-    $scope.root.org.users[$scope.newUser.userDetail.name] = $scope.newUser;
-    ref.set({
-      org: {
-        users: $scope.root.org.users
-      }
-    });
-
-    $scope.login({
-      name: $scope.newUser.userDetail.name,
-      password: password
-    });
+    try {
+      auth.signup();
+      $state.go("market");
+    } catch (err) {
+      showError(err);
+    }
   };
 
 
   $scope.login = function (user) {
     hideError();
-
-    var existingUser = $scope.root.org.users[user.name];
-    if(!existingUser) {
-      showError('incorrect user name');
-      console.log('User not exists');
-      return;
-    }
-    var authInfo = {email   : existingUser.userDetail.email,
-                    password: user.password}
-    ref.authWithPassword(authInfo, function (err, authData) {
-      if(err){
-        showError('incorrect password');
-        console.error(err);
-        return;
-      }
-      $scope.closeAuthForm();
-      // $scope.loggedInUser = existingUser;
-      $('.red').val('Log out');
-      // TODO set User info in firebase service
-      fireBase.setUserInfo(existingUser);
+    try {
+      auth.login();
       $state.go("market");
-      // $scope.goMarket();  this doesn't work I don't know why...
-    });
+      $scope.closeAuthForm();
+      $('.red').val('Log out');
+      $state.go("market");
+    } catch (e) {
+      showError(err);
+    }
   };
 
   var logOut = function () {
-    fireBase.setUserInfo(null);
+    auth.logOut();
     $('.red').val('Login');
     $state.go("home");
-  }
+  };
 
   function showError(message) {
     $('.error').css({visibility: 'visible'});

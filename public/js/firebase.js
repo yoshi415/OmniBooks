@@ -41,14 +41,35 @@ angular.module('omnibooks.database', ['firebase'])
   //get user detail info, return object
   var getUserInfo = function(org,username){
     return $firebaseObject(myDataRef.child(org).child(username).child('userDetail'));
-  }
+  };
 
   //for signup
-  var createUser = function(org,username,password,email){
-    var ref = myDataRef.child(org).child(username).child('userDetail')
-    ref.child('password').set(password);
-    ref.child('email').set(email);
-  }
+  var createUser = function(authInfo, callback){
+    myDataRef.createUser(authInfo, function (err, userData) {
+      if(err){
+        throw 'the email address is already registered.';
+      }
+      var ref = myDataRef.child(authInfo.org).child('users');
+      var users = $firebaseObject(ref);
+      console.log(users);
+      ref.child(authInfo.name).set({
+        userDetail: {
+          email: authInfo.email
+        }
+      });
+      callback(authInfo);
+    });
+  };
+
+  //for login
+  var authWithPassword = function (authInfo, callback) {
+    myDataRef.authWithPassword(authInfo, function (err, userData) {
+      if(err){
+        throw 'incorrect password.';
+      }
+      callback(authInfo);
+    });
+  };
 
   return {
     enterBook: enterBook,
@@ -56,6 +77,7 @@ angular.module('omnibooks.database', ['firebase'])
     getUserBooks: getUserBooks,
     getUserBook: getUserBook,
     getUserInfo: getUserInfo,
-    createUser:createUser
+    createUser:createUser,
+    authWithPassword: authWithPassword
   };
-})
+});

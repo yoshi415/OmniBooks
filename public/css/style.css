@@ -3,22 +3,58 @@
   font-size: 30px;
 }
 
-.container{
-  margin: 10px 10px 10px 10px;
+
+/*========  Header =======*/
+
+#header {
+  position:fixed;
+  display:block;
+  background-color: black;
+  width:100%;
+  height:70px;
+  z-index:9;
+  min-width:620px;
+  text-align:center;
+}
+
+.center ul{
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 630px;
 }
 
 
 
 
-div#header {
-  width: 100%;
-  height: 80px;
-  background-color:#000000;
+#header.sticky #logo .label {background-color:#000;transform:rotate(0deg);-moz-transform:rotate(0deg);-webkit-transform:rotate(0deg);}
+#navigation {
+  font-size:0;
+  position:relative;
+  top:0px;
 }
+#navigation li {display:inline-block;font-size:14px;width:125px;}
+#navigation li a {display:block;position:relative;padding:21px 0;margin:0;color:#fff;text-transform:uppercase;font-size:0.9em;}
+#navigation li span.arrow {position:relative;top:-1px;}
+#navigation li span.border {position:absolute;left:0;bottom:-5px;width:0;height:5px;background-color:#fff;}
+
+#navigation li a:hover span.border, #navigation li a.active span.border {width:100%;}
+
+
+
 
 #uiview {
-  min-height: 600px;
+
 }
+
+.padding{
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 75px;
+}
+
+
+
 
 
 div#title {
@@ -47,10 +83,10 @@ a {
   color: #265C83;
 }
 
-a:link,
-a:visited { color: #265C83; }
-a:hover   { color: #7FDBFF; }
-a:active  {
+footer a:link,
+footer a:visited { color: #265C83; }
+footer a:hover   { color: #7FDBFF; }
+footer a:active  {
   transition: color .3s;
   color: #007BE6;
 }
@@ -73,9 +109,6 @@ a:active  {
   margin-left: 20px;
   width: 260px;
 }
-
-
-
 
 #itemLeft img{
   width: 300px;
@@ -120,8 +153,41 @@ ul {
 }
 
 
+/*========  Home =======*/
 
+.bgimg {
+  position:absolute;
+  display:block;
+  width:100%;
+  height: 100%;
+  bottom:0;
+  top:0;
+  height:100%;
+  overflow:hidden;
+}
 
+.pattern {
+  position: absolute;
+  opacity: 0.5;
+  left: 0px;
+  top: 0px;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+#hometitle{
+  font-size: 70px;
+  font-family: Sans-Serif, Arial;
+  color: white;
+  top: 200px;
+  left: 20%;
+  position: absolute;
+  z-index: 3;
+  height: 60px;
+  width: 930px;
+}
 
 
 
@@ -130,8 +196,9 @@ ul {
 
 footer{
   width: 100%;
-  position: relative;
+  position: absolute;
   bottom:0;
+  z-index: 6;
 }
 
 .footer-background {

@@ -18,77 +18,40 @@
   </head>
   <body ng-controller="indexController">
 
-    <header id="header">
+    <header>
           <ul id="navigation">
+            <li><a ng-click="goHome()" >OmniBooks<span class="border"></span></a></li>
             <li><a ng-click="goMarket()" >Market<span class="border"></span></a></li>
             <li><a ng-click="goProfile()" >Profile<span class="border"></span></a></li>
-            <li><a ng-click="goHome()" >OmniBooks<span class="border"></span></a></li>
-            <li><a href="#" id="jointop">Signup<span class="border"></span></a></li>
-            <li><a href="#" id="logintop">Login<span class="border"></span></a></li>
+            <button id="jointop">Signup</button>
+            <button id="logintop">Login</button>
           </ul>
-      <div class="after"></div>
 
-</header>
-
-
-
-
-
-  <a href="#x" class="overlay" id="login_form"></a>
+    </header>
 
   <div class="login_box box">
     <h2>LOG IN</h2>
-    <input type="text" class="text-field" placeholder="Username" ng-model=loginUser.name />
-    <input type="password" class="text-field" placeholder="Password" ng-model=loginUser.password />
-    <div id="buttons">
-      <input type="button" value="Login" class="red" ng-click=login(loginUser) />
-      <a href="#signup_form">
-      <input type="button" value="Sign up" class="blue"/>
-      </a>
-    </div>
-    <p><a id="forg" href="#recover">Forgot Your Password?</a></p>
-    </br>
+    <input type="text" placeholder="Username" ng-model="loginUser.name" />
+    <input type="password" placeholder="Password" ng-model="loginUser.password" />
+    <button ng-click="login(loginUser)">Login</button>
     <a class="close" href="#close"></a>
-    <div class="error">
-      <div class="errortext">{{erroMessage}}</div>
-    </div>
-
   </div>
 
-  <a href="#x" class="overlay" id="signup_form"></a>
   <div class="signup_box box">
     <h2>SIGN UP</h2>
-      <input type="email" class="text-field" placeholder="email" ng-model=newUser.userDetail.email />
-      <input type="text" class="text-field" placeholder="user name" ng-model=newUser.userDetail.name />
-      <input type="password" class="text-field" placeholder="Password" ng-model=newUser.userDetail.password />
-      <p><input type="checkbox"><label>I agree <a href="#">terms and conditions</a></label></p>
-      </br></br>
-      <input type="button" value="signup" class="blue-round" ng-click=signup(newUser.userDetail) /></br>
-      <p>Already have account? <a href="#login_form">Log In</a></p>
-      <a class="close" href="#"></a>
-      {{root.org.users[$scope.newUser.userDetail.name]}}
-      {{$scope.newUser.userDetail.name}}
+      <input type="email"  placeholder="email" ng-model="newUser.email" />
+      <input type="text" placeholder="user name" ng-model="newUser.name" />
+      <input type="password" placeholder="Password" ng-model="newUser.password" />
+      <button ng-click="signup(newUser)">SIGNUP</button>
+      <a class="close" href="#close"></a>
   </div>
-
-  <a href="#x" class="overlay" id="recover"></a>
-  <div class="box">
-    <h2>Forgot your password?</h2>
-      <p>We’ll email a code to this address.</p>
-      <br><br>
-        <input type="text" class="text-field" placeholder="email" />
-        <input type="button" value="Send" class="blue-round"/>
-        <a class="close" href="#close"></a>
-  </div>
-      </div>
-
 
   <div id='uiview'>
      <ui-view autoscroll='false'/>
   </div>
 
-
     <footer>
-      <div class="footer-background container-fluid row">
+      <div class="footer-background">
         <p>Find us on
          <a target="_blank" href="https://github.com/OmniAstronauts/OmniBooks">Github</a>
            <i class="fa fa-github"></i>

@@ -10,6 +10,8 @@ $(document).ready(function() {
   });
   $('.close').on('click', closeAuthForm);
 });
+
+
 function closeAuthForm() {
   $('#login_form').css({visibility: 'hidden'});
   $('.login_box').css({visibility : 'hidden'});

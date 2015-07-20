@@ -43,6 +43,23 @@ angular.module('omnibooks', [
       $location.path('/market');
     };
 
+
+
+   $scope.options = [{
+          name: 'Purdue',
+          value: 'Purdue'
+        },{
+          name: 'Wellesley',
+          value: 'Wellesley'
+        },{
+          name: 'Berkeley',
+          value: 'Berkeley'
+        },{
+          name: 'Stanford',
+          value: 'Stanford'
+        }];
+    $scope.selectedOption = $scope.options[0];
+
     var ref = new Firebase('https://shutorial.firebaseio.com');
     $scope.newUser = {
       userDetail: {}

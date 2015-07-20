@@ -44,6 +44,10 @@
       <input type="email"  placeholder="email" ng-model="newUser.email" />
       <input type="text" placeholder="user name" ng-model="newUser.name" />
       <input type="password" placeholder="Password" ng-model="newUser.password" />
+      <select
+        ng-model="selectedOption"
+        ng-options="option.name for option in options">
+      </select>
       <button ng-click="signup(newUser)">SIGNUP</button>
       <a class="close" href="#close"></a>
   </div>

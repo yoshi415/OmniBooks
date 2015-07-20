@@ -1,7 +1,6 @@
 
 /*========  General =======*/
 
-
 .padding{
   padding-top: 60px;
 }
@@ -98,12 +97,12 @@ footer a{
   margin-top: 20px;
   margin-right:310px;
   margin-left: 340px;
-  width: 400px;
+  width: 600px;
 }
 #itemRight{
-  float: right;;
+  float: right;
   margin-left: 20px;
-  width: 200px;
+  width: 100px;
 }
 
 #itemLeft img{
@@ -116,6 +115,26 @@ footer a{
   font-size: 30px;
 }
 
+.s-title {
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 40px;
+  width: 400px;
+}
+
+.bookstore{
+  margin:5px;
+  width: 100px;
+  float: left;
+  text-transform:uppercase;
+}
+
+.bookprice{
+  width: 200px;
+  float: left;
+  margin: 5px;
+  color: red;
+}
 
 
 /*========  Market =======*/

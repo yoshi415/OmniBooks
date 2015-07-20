@@ -6,10 +6,9 @@
   <div id = 'itemMiddle'>
     <div class="b-title"> {{book.title}} </div>
     <div class="m-title">by {{book.author}} (Author)</div>
-
-    <div ng-repeat="price in prices">
-      <span>{{price.store_id}}</span>
-      <span>{{price.price}} USD</span>
+    <div class="s-title" ng-repeat="price in prices">
+      <span class="bookstore">{{price.store_id}}</span>
+      <span class="bookprice">${{price.price}}</span>
     </div>
 
   </div>

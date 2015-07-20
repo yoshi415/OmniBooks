@@ -1,4 +1,4 @@
-<div class="padding">
+<div class="padding market">
   <ul id='bookshelf'>
   <input type="text" ng-model="search" placeholder="search">
 
@@ -6,9 +6,10 @@
 
       <a ng-click="findDetail(book)">
         <img src=" {{book.img}} ">
-        <p>  {{ book.title }} </p>
+        <p class="booktitle">  {{ book.title }} </p>
+        <p class="bookauthor"> {{ book.author}} </p>
       </a>
-        <p>  {{ book.author}} </p>
+
     </li>
   </ul>
 </div>

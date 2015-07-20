@@ -4,7 +4,12 @@
 
 .padding{
   padding-top: 60px;
-  min-height: 700px;
+}
+
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 html {
@@ -20,13 +25,14 @@ header{
   position:fixed;
   height: 60px;
   width: 100%;
-  background-color: #000;
+  background-color: rgba(63, 39, 15, 1);
   box-shadow:0 5px 10px rgba(0,0,0,0,3);
-  z-index: 20;
+  z-index: 500;
 }
 
 header button{
   float: right;
+  margin: 10px 10px 10px 10px;
   top: 0;
 }
 
@@ -39,19 +45,12 @@ header button{
   z-index: 100;
 }
 
-#navigation li {
-  font-size:20px;
-  width:100px;
-  margin-right: 50px;
-}
 #navigation li a {
   display:block;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  margin: 5px 10px 5px 10px;
+  margin: 20px;
   color:#fff;
   text-transform:uppercase;
-  font-size:0.9em;
+  font-size:20px;
 }
 
 #navigation li a:hover{
@@ -79,33 +78,32 @@ input{
   width: 60%;
 }
 
-a {
+header a,
+footer a{
   transition: color .4s;
-  color: #fff;
+  color: #000;
 }
 
-footer a:link,
-footer a:visited { color: #265C83; }
-footer a:hover   { color: #7FDBFF; }
-footer a:active  {
-  transition: color .3s;
-  color: #007BE6;
-}
+
 
 /*========  Item =======*/
 #itemLeft{
   float: left;
+  margin-top: 20px;
   margin-right: 20px;
+  margin-left: 20px;
   width: 260px;
 }
 #itemMiddle{
+  margin-top: 20px;
   margin-right:310px;
-  margin-left: 320px;
+  margin-left: 340px;
+  width: 400px;
 }
 #itemRight{
   float: right;;
   margin-left: 20px;
-  width: 260px;
+  width: 200px;
 }
 
 #itemLeft img{
@@ -120,32 +118,37 @@ footer a:active  {
 
 
 
-
-
-
 /*========  Market =======*/
 
 #bookshelf img{
-  width: 180px;
-  height: 220px;
-  padding: 20px 20px 20px 20px;
-}
-
-#bookshlef p{
-  font-size: 20px;
+  width: 195px;
+  height: 240px;
 }
 
 .bookitem{
   width: 200px;
-  height: 280px;
+  height: 325px;
   font-size: 10px;
   text-align: center;
-  border-color: rgba(47, 7, 19, 0.28);
+  border-color: rgba(21, 90, 126, 0.26);
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
   margin: 10px 10px 10px 10px;
-  padding: 0px 0px 0px 0px;
+  padding: 0;
 }
+
+.booktitle {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 15px;
+}
+.bookauthor{
+  position: relative;
+  bottom: 0;
+}
+
 
 li {
   display: inline;
@@ -158,50 +161,60 @@ ul {
     padding: 0;
 }
 
+.bookitem:hover{
+  transition: background-color .6s, color .2s;
+  background-color: rgba(75, 109, 134, 0.89);
+  color: white;
+}
+
+
 
 /*========  Home =======*/
 
-.bgimg {
-  position:fixed;
-  background-size: cover
-  bottom:0;
-  top:0;
-  width: 100%;
-  z-index: 4;
-}
 
-.pattern {
-  position: fixed;
-  opacity: 0.5;
-  left: 0px;
-  top: 0px;
-  right: 0;
-  bottom: 0;
+#banner {
+  min-height: 500px;
   width: 100%;
   height: 100%;
-  z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0.9;
 }
 
-#hometitle{
-  font-size: 70px;
+.logo{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  width: 400px;
+  height: 250px;
+  display: block;
+  z-index: 4;
+  position: relative;
   color: white;
-  top: 200px;
-  left: 20%;
-  position: fixed;
-  z-index: 6;
-  height: 60px;
-  width: 930px;
+  font-size: 20px;
 }
+
+.content{
+  position: relative;
+  margin-top: 50px;
+  display: block;
+  background-color: white;
+  height: 600px;
+  z-index: 7;
+}
+
 
 
 
 /*========  Footer =======*/
 
 footer{
-  width: 100%;
+  clear: both;
   position: relative;
   z-index: 10;
-  float: left;
+  height: 3em;
 }
 
 .footer-background {
@@ -210,6 +223,12 @@ footer{
   color: #fff;
 }
 
+footer a:link,
+footer a:visited { color: #265C83; }
+footer a:hover   { color: #7FDBFF; }
+footer a:active  {
+  color: #007BE6;
+}
 
 /*========  Profile =======*/
 

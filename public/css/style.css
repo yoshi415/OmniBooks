@@ -1,8 +1,12 @@
-.b-title{
-  font-weight: bold;
-  font-size: 30px;
-}
 
+/*========  General =======*/
+
+
+.padding{
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 60px;
+}
 
 /*========  Header =======*/
 
@@ -11,50 +15,49 @@
   display:block;
   background-color: black;
   width:100%;
-  height:70px;
+  height:60px;
   z-index:9;
   min-width:620px;
   text-align:center;
 }
 
-.center ul{
-  height: 60px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 630px;
-}
-
-
-
-
-#header.sticky #logo .label {background-color:#000;transform:rotate(0deg);-moz-transform:rotate(0deg);-webkit-transform:rotate(0deg);}
 #navigation {
   font-size:0;
   position:relative;
   top:0px;
-}
-#navigation li {display:inline-block;font-size:14px;width:125px;}
-#navigation li a {display:block;position:relative;padding:21px 0;margin:0;color:#fff;text-transform:uppercase;font-size:0.9em;}
-#navigation li span.arrow {position:relative;top:-1px;}
-#navigation li span.border {position:absolute;left:0;bottom:-5px;width:0;height:5px;background-color:#fff;}
-
-#navigation li a:hover span.border, #navigation li a.active span.border {width:100%;}
-
-
-
-
-#uiview {
-
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
 }
 
-.padding{
-  margin-left: 10px;
-  margin-right: 10px;
-  padding-top: 75px;
+#navigation li {
+  display:inline-block;
+  font-size:16px;
+  width:100px;
+}
+#navigation li a {
+  display:block;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  position:relative;
+  margin: 5px 10px 5px 10px;
+  color:#fff;
+  text-transform:uppercase;
+  font-size:0.9em;
 }
 
+#navigation li span.border {
+  position:absolute;
+  left:0;bottom:-5px;
+  width:0;height:2px;
+  background-color:#fff;
+}
 
-
+#navigation li a:hover span.border,
+#navigation li a.active span.border {
+  width:100%;
+}
 
 
 div#title {
@@ -77,7 +80,6 @@ input{
   width: 60%;
 }
 
-
 a {
   transition: color .4s;
   color: #265C83;
@@ -90,9 +92,6 @@ footer a:active  {
   transition: color .3s;
   color: #007BE6;
 }
-
-.link { text-decoration: none; }
-
 
 /*========  Item =======*/
 #itemLeft{
@@ -114,6 +113,14 @@ footer a:active  {
   width: 300px;
   height: 400px;
 }
+
+.b-title{
+  font-weight: bold;
+  font-size: 30px;
+}
+
+
+
 
 
 
@@ -163,7 +170,6 @@ ul {
   bottom:0;
   top:0;
   height:100%;
-  overflow:hidden;
 }
 
 .pattern {
@@ -177,9 +183,9 @@ ul {
   height: 100%;
   z-index: 1;
 }
+
 #hometitle{
   font-size: 70px;
-  font-family: Sans-Serif, Arial;
   color: white;
   top: 200px;
   left: 20%;
@@ -188,7 +194,6 @@ ul {
   height: 60px;
   width: 930px;
 }
-
 
 
 
@@ -207,43 +212,9 @@ footer{
   color: #fff;
 }
 
-.col-right {
-  padding: 0;
-  text-align: right;
-}
 
-.col-right a {
-  position: relative;
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  color: rgba(255, 255, 255, 0.3);
-  text-align: center;
-  -webkit-transition: linear 0.2s;
-  -moz-transition: linear 0.2s;
-  -o-transition: linear 0.2s;
-  transition: linear 0.2s;
-}
+/*========  Profile =======*/
 
-.col-right a:after {
-  position: absolute;
-  content: '';
-  bottom: -1px;
-  left: 0;
-  background: #fff;
-  width: 0;
-  height: 1px;
-  -webkit-transition: linear 0.2s;
-  -moz-transition: linear 0.2s;
-  -o-transition: linear 0.2s;
-  transition: linear 0.2s;
-}
-
-.col-right a:hover:after{
-  width: 100%;
-}
 
 #bookUpload {
   font-weight: bold;

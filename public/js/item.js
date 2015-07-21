@@ -14,8 +14,6 @@ angular.module('omnibooks.item', [])
 }])
 .factory('bookAPI', function($http){
   var key = 'UTUJEB5A';
-
-
   var getDetail  = function(isbn,callback){
     return $http({
       method: 'GET',

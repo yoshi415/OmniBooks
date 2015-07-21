@@ -1,4 +1,3 @@
-// keeoing this file for future refactoring
 angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
 
 .factory('auth', function(fireBase) {

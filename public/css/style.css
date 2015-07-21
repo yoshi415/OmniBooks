@@ -1,60 +1,60 @@
-.b-title{
-  font-weight: bold;
-  font-size: 30px;
+
+/*========  General =======*/
+
+.padding{
+  padding-top: 60px;
 }
 
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+html {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 /*========  Header =======*/
 
-#header {
+header{
   position:fixed;
-  display:block;
-  background-color: black;
-  width:100%;
-  height:70px;
-  z-index:9;
-  min-width:620px;
-  text-align:center;
+  height: 60px;
+  width: 100%;
+  background-color: rgba(63, 39, 15, 1);
+  box-shadow:0 5px 10px rgba(0,0,0,0,3);
+  z-index: 500;
 }
 
-.center ul{
+header button{
+  float: right;
+  margin: 10px 10px 10px 10px;
+  top: 0;
+}
+
+#navigation {
+  position:absolute;
   height: 60px;
   margin-left: auto;
   margin-right: auto;
-  width: 630px;
+  width: 100%;
+  z-index: 100;
 }
 
-
-
-
-#header.sticky #logo .label {background-color:#000;transform:rotate(0deg);-moz-transform:rotate(0deg);-webkit-transform:rotate(0deg);}
-#navigation {
-  font-size:0;
-  position:relative;
-  top:0px;
-}
-#navigation li {display:inline-block;font-size:14px;width:125px;}
-#navigation li a {display:block;position:relative;padding:21px 0;margin:0;color:#fff;text-transform:uppercase;font-size:0.9em;}
-#navigation li span.arrow {position:relative;top:-1px;}
-#navigation li span.border {position:absolute;left:0;bottom:-5px;width:0;height:5px;background-color:#fff;}
-
-#navigation li a:hover span.border, #navigation li a.active span.border {width:100%;}
-
-
-
-
-#uiview {
-
+#navigation li a {
+  display:block;
+  margin: 20px;
+  color:#fff;
+  text-transform:uppercase;
+  font-size:20px;
 }
 
-.padding{
-  margin-left: 10px;
-  margin-right: 10px;
-  padding-top: 75px;
+#navigation li a:hover{
+  color: red;
 }
-
-
-
 
 
 div#title {
@@ -77,37 +77,32 @@ input{
   width: 60%;
 }
 
-
-a {
+header a,
+footer a{
   transition: color .4s;
-  color: #265C83;
+  color: #000;
 }
 
-footer a:link,
-footer a:visited { color: #265C83; }
-footer a:hover   { color: #7FDBFF; }
-footer a:active  {
-  transition: color .3s;
-  color: #007BE6;
-}
-
-.link { text-decoration: none; }
 
 
 /*========  Item =======*/
 #itemLeft{
   float: left;
+  margin-top: 20px;
   margin-right: 20px;
+  margin-left: 20px;
   width: 260px;
 }
 #itemMiddle{
+  margin-top: 20px;
   margin-right:310px;
-  margin-left: 320px;
+  margin-left: 340px;
+  width: 600px;
 }
 #itemRight{
-  float: right;;
+  float: right;
   margin-left: 20px;
-  width: 260px;
+  width: 100px;
 }
 
 #itemLeft img{
@@ -115,31 +110,73 @@ footer a:active  {
   height: 400px;
 }
 
+.b-title{
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.s-title {
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 40px;
+  width: 400px;
+}
+
+.bookstore{
+  margin:5px;
+  width: 100px;
+  float: left;
+  text-transform:uppercase;
+}
+
+.bookprice{
+  width: 200px;
+  float: left;
+  margin: 5px;
+  color: red;
+}
 
 
 /*========  Market =======*/
 
-#bookshelf img{
-  width: 180px;
-  height: 220px;
-  padding: 20px 20px 20px 20px;
+#bookshelf{
+  width: 100%;
+  display: block;
+  margin-left:auto;
+  margin-right: auto;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
-#bookshlef p{
-  font-size: 20px;
+#bookshelf img{
+  width: 195px;
+  height: 240px;
 }
 
 .bookitem{
   width: 200px;
-  height: 280px;
+  height: 325px;
   font-size: 10px;
   text-align: center;
-  border-color: rgba(47, 7, 19, 0.28);
+  border-color: rgba(21, 90, 126, 0.26);
   border-style: solid;
-  border-width: 1px;
-  margin: 0px 0px 0px 10px;
-  padding: 0px 0px 0px 0px;
+  border-width: 2px;
+  margin: 10px 10px 10px 10px;
+  padding: 0;
 }
+
+.booktitle {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 15px;
+}
+.bookauthor{
+  position: relative;
+  bottom: 0;
+}
+
 
 li {
   display: inline;
@@ -152,41 +189,48 @@ ul {
     padding: 0;
 }
 
+.bookitem:hover{
+  transition: background-color .6s, color .2s;
+  background-color: rgba(75, 109, 134, 0.89);
+  color: white;
+}
+
+
 
 /*========  Home =======*/
 
-.bgimg {
-  position:absolute;
-  display:block;
-  width:100%;
-  height: 100%;
-  bottom:0;
-  top:0;
-  height:100%;
-  overflow:hidden;
-}
 
-.pattern {
-  position: absolute;
-  opacity: 0.5;
-  left: 0px;
-  top: 0px;
-  right: 0;
-  bottom: 0;
+#banner {
+  min-height: 500px;
   width: 100%;
   height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1;
+  opacity: 0.9;
 }
-#hometitle{
-  font-size: 70px;
-  font-family: Sans-Serif, Arial;
+
+.logo{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  width: 400px;
+  height: 250px;
+  display: block;
+  z-index: 4;
+  position: relative;
   color: white;
-  top: 200px;
-  left: 20%;
-  position: absolute;
-  z-index: 3;
-  height: 60px;
-  width: 930px;
+  font-size: 20px;
+}
+
+.content{
+  position: relative;
+  margin-top: 50px;
+  display: block;
+  background-color: white;
+  height: 600px;
+  z-index: 7;
 }
 
 
@@ -195,10 +239,10 @@ ul {
 /*========  Footer =======*/
 
 footer{
-  width: 100%;
-  position: absolute;
-  bottom:0;
-  z-index: 6;
+  clear: both;
+  position: relative;
+  z-index: 10;
+  height: 3em;
 }
 
 .footer-background {
@@ -207,43 +251,15 @@ footer{
   color: #fff;
 }
 
-.col-right {
-  padding: 0;
-  text-align: right;
+footer a:link,
+footer a:visited { color: #265C83; }
+footer a:hover   { color: #7FDBFF; }
+footer a:active  {
+  color: #007BE6;
 }
 
-.col-right a {
-  position: relative;
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  color: rgba(255, 255, 255, 0.3);
-  text-align: center;
-  -webkit-transition: linear 0.2s;
-  -moz-transition: linear 0.2s;
-  -o-transition: linear 0.2s;
-  transition: linear 0.2s;
-}
+/*========  Profile =======*/
 
-.col-right a:after {
-  position: absolute;
-  content: '';
-  bottom: -1px;
-  left: 0;
-  background: #fff;
-  width: 0;
-  height: 1px;
-  -webkit-transition: linear 0.2s;
-  -moz-transition: linear 0.2s;
-  -o-transition: linear 0.2s;
-  transition: linear 0.2s;
-}
-
-.col-right a:hover:after{
-  width: 100%;
-}
 
 #bookUpload {
   font-weight: bold;

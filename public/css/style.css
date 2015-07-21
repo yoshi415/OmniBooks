@@ -139,6 +139,15 @@ footer a{
 
 /*========  Market =======*/
 
+#bookshelf{
+  width: 100%;
+  display: block;
+  margin-left:auto;
+  margin-right: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
 #bookshelf img{
   width: 195px;
   height: 240px;

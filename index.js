@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
 
+
 app.get('/bookDetail', cors(), function(req, res, next){
 console.log(req.query.book_isbn);
 var options = {

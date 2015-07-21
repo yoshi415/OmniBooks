@@ -1,16 +1,26 @@
 angular.module('omnibooks.profile', ['ui.bootstrap'])
 
-.controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', function($scope, fireBase, $stateParams, $modal) {
+.controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', '$state', 
+  function($scope, fireBase, $stateParams, $modal, $state) {
   $scope.enterBook = function(title, url, author, isbn) {
     if (title && url && author && isbn) {
       $scope.error = false;
       fireBase.enterBook(title, url, author, isbn);
       console.log('successfully entered');
     } else {
-      $scope.error = "You must fill out all required fields";
+      $scope.error = "*You must fill out all required fields";
     }
   };
-  $scope.userId = $stateParams.userId;
+  $scope.username = $stateParams.username;
+
+  $scope.books = fireBase.getUserBookshelf();
+  console.log($scope.books);
+
+  $scope.findDetail = function(book){
+    $stateParams.itemId = book.$id;
+    $state.go("books",{itemId:book.$id});
+  };
+  // modal methods
   $scope.modalShown = false;
   $scope.toggleModal = function() {
     if(!$scope.error) {
@@ -18,6 +28,8 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
     }
   };
 }])
+
+//TODO display books in bookshelf based on user
 .directive('modal', function() {
   return {
     templateUrl: "../html/bookUpload.html",

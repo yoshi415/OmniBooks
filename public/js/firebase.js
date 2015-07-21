@@ -5,12 +5,15 @@ angular.module('omnibooks.database', ['firebase'])
   var username = 'richie';
 
   var enterBook = function(title, img, author, isbn) {
-    myDataRef.child(org).child('books').push({
+    var bookDetails = {
       title: title,
       img: img,
       author: author,
       isbn: isbn
-    });
+    };
+    // push book details in org books and user bookshelf nodes
+    myDataRef.child(org).child('books').push(bookDetails);
+    myDataRef.child(org).child('users').child(username).child('bookshelf').push(bookDetails);
   };
 
   //get all books in same org
@@ -29,6 +32,12 @@ angular.module('omnibooks.database', ['firebase'])
     return $firebaseObject(ref);
   };
 
+  // returns all books belonging to a user
+  var getUserBookshelf = function() {
+    var ref = myDataRef.child(org).child('users').child(username).child('bookshelf');
+    return $firebaseArray(ref);
+  }
+
   //get user detail info, return object
   var getUserInfo = function(org,username){
     return $firebaseObject(myDataRef.child(org).child('users').child(username));
@@ -43,9 +52,10 @@ angular.module('omnibooks.database', ['firebase'])
 
   return {
     enterBook: enterBook,
-    getOrgBook:getOrgBook,
+    getOrgBook: getOrgBook,
     getUserBook: getUserBook,
+    getUserBookshelf: getUserBookshelf,
     getUserInfo: getUserInfo,
-    createUser:createUser
+    createUser: createUser
   };
 })

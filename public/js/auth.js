@@ -17,7 +17,6 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
     }
   };
 
-
   var login = function (authInfo, success, error) {
     var existingUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
     existingUser.$loaded().then(function () {
@@ -59,7 +58,7 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
     isLoggedIn: isLoggedIn,
     logOut: logOut
   };
-})
+});
 
 
 angular.module('omnibooks')

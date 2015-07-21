@@ -22,19 +22,24 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
   };
 
 
-  var login = function (authInfo) {
+  var login = function (authInfo, success, error) {
     var existingUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
-    if(!existingUser) {
-      console.log('User not exists');
-      throw 'incorrect user name.';
-    }
-    try {
-      fireBase.authWithPassword(authInfo, function (authInfo) {
-        setLoggedInInfo(authInfo);
-      });
-    } catch (err) {
-      throw err;
-    }
+    existingUser.$loaded().then(function () {
+      try {
+        if(!existingUser.userDetail) {
+          console.log('User not exists');
+          throw 'incorrect user name.';
+        }
+        authInfo.email = existingUser.userDetail.email;
+        fireBase.authWithPassword(authInfo, function (authInfo) {
+          setLoggedInInfo(authInfo);
+          success();
+        });
+      } catch (err) {
+        console.error('LOGIN ERROR!!');
+        error(err);
+      }
+    });
   };
 
   var setLoggedInInfo = function (authInfo) {
@@ -76,14 +81,11 @@ angular.module('omnibooks')
   };
   $scope.login = function () {
     hideError();
-    try {
-      auth.login($scope.authInfo);
+    auth.login($scope.authInfo, function () {
       $scope.closeAuthForm();
-      $('.red').val('Log out');
+      $('#logintop').text('Log out');
       $state.go("market");
-    } catch (err) {
-      showError(err);
-    }
+    }, showError);
   };
   $scope.signup = function () {
     hideError();
@@ -112,7 +114,7 @@ angular.module('omnibooks')
 
   var logOut = function () {
     auth.logOut();
-    $('.red').val('Login');
+    $('#logintop').text('Login');
     $state.go("home");
   };
 

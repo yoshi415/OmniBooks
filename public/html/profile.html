@@ -11,7 +11,7 @@
   <div class="container" id="bookshelf">
     <ul>
       <li class='bookitem' ng-repeat="book in books | filter:search">
-      <a ng-click="getBookId(book)">
+      <a ng-click="findDetail(book)">
         <img src=" {{book.img}} ">
         <p class="booktitle">  {{ book.title }} </p>
         <p class="bookauthor">  {{ book.author}} </p>

@@ -48,20 +48,15 @@ angular.module('omnibooks.database', ['firebase'])
   // find book id from org node (for navigating to detail page from user profile bookshelf)
   var getOrgBookId = function(book) {
     var books = getOrgBook(org);
+    var id;
     books.$loaded()
-      .then(function() {
-        books.forEach(function(bookObj) {
-          if(bookObj.isbn === book.isbn) {
-            console.log(bookObj.$id, 'hi');
-            return bookObj.$id;
-          }   
-        })
+    .then(function() {
+      books.forEach(function(bookObj) {
+        if(bookObj.isbn === book.isbn) {
+          return bookObj.$id;
+        }
       })
-    // console.log(books);
-    // books.forEach(function(bookObj) {
-    //   console.log('hi');
-    //   }
-    // })
+    })
   }
 
   //for signup

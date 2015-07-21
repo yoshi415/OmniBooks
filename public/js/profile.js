@@ -17,13 +17,14 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
 
   // get book id in org node 
   $scope.getBookId = function(book) {
-    var id = fireBase.getOrgBookId(book);
-    // cb(id);
+    return fireBase.getOrgBookId(book);
   };
 
-  $scope.findDetail = function(id){
+  $scope.findDetail = function(book) {
+    var id = $scope.getBookId(book);
+    console.log(id);
     $stateParams.itemId = id;
-    $state.go("books",{itemId:id});
+    $state.go("books",{itemId:id});   
   };
 
   // modal methods

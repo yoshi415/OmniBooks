@@ -1,8 +1,8 @@
 <div class="padding">
-  <button id="sellBtn" ng-click="toggleModal()" class="btn btn-default">Sell</button>
+  <button id="sellBtn" ng-click="toggleModal()" class="btn btn-default pull-right">Sell</button>
   <div class="bookshelfHeader" class="center-block">
-    <h1 id="welcome">Welcome, {{profile.name}}!</h1>
     <h2>Your Bookshelf</h2>
+    <h1 id="welcome">Welcome, {{profile.name}}!</h1>
   </div>
 
 <!--   <div>
@@ -11,7 +11,7 @@
   <div class="container" id="bookshelf">
     <ul>
       <li class='bookitem' ng-repeat="book in books | filter:search">
-      <a ng-click="findDetail(book)">
+      <a ng-click="getBookId(book)">
         <img src=" {{book.img}} ">
         <p class="booktitle">  {{ book.title }} </p>
         <p class="bookauthor">  {{ book.author}} </p>
@@ -32,7 +32,7 @@
         </div>
       </form>
       <div>
-        <span>{{error}}</span>
+        <span class="entryError">{{error}}</span>
       </div>
       <button class="btn btn-default" id='sellButton' class="md-trigger"
               ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleModal()">Submit</button>

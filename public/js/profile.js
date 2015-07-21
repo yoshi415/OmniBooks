@@ -15,10 +15,17 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
   $scope.profile = fireBase.getUserInfo();
   $scope.books = fireBase.getUserBookshelf();
 
-  $scope.findDetail = function(book){
-    $stateParams.itemId = book.$id;
-    $state.go("books",{itemId:book.$id});
+  // get book id in org node 
+  $scope.getBookId = function(book) {
+    var id = fireBase.getOrgBookId(book);
+    // cb(id);
   };
+
+  $scope.findDetail = function(id){
+    $stateParams.itemId = id;
+    $state.go("books",{itemId:id});
+  };
+
   // modal methods
   $scope.modalShown = false;
   $scope.toggleModal = function() {

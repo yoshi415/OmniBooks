@@ -1,6 +1,7 @@
 angular.module('omnibooks.database', ['firebase'])
 .factory('fireBase', function($firebaseArray, $firebaseObject) {
   var myDataRef = new Firebase('https://shutorial.firebaseio.com/');
+  var loggedIn = true;
   var org = 'purdue';
   var username = 'richie';
 
@@ -44,6 +45,25 @@ angular.module('omnibooks.database', ['firebase'])
     return $firebaseObject(ref);
   }
 
+  // find book id from org node (for navigating to detail page from user profile bookshelf)
+  var getOrgBookId = function(book) {
+    var books = getOrgBook(org);
+    books.$loaded()
+      .then(function() {
+        books.forEach(function(bookObj) {
+          if(bookObj.isbn === book.isbn) {
+            console.log(bookObj.$id, 'hi');
+            return bookObj.$id;
+          }   
+        })
+      })
+    // console.log(books);
+    // books.forEach(function(bookObj) {
+    //   console.log('hi');
+    //   }
+    // })
+  }
+
   //for signup
   var createUser = function(org,username,password,email){
     var ref = myDataRef.child(org).child('users').child(username)
@@ -57,6 +77,7 @@ angular.module('omnibooks.database', ['firebase'])
     getUserBook: getUserBook,
     getUserBookshelf: getUserBookshelf,
     getUserInfo: getUserInfo,
+    getOrgBookId: getOrgBookId,
     createUser: createUser
   };
 })

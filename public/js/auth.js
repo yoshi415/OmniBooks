@@ -5,20 +5,16 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
   var loggedInOrg  = null;
 
   var signup = function (authInfo, success) {
-    if(!fireBase.getUserInfo(authInfo.org, authInfo.name)){
-      console.log('Already exists');
-      throw 'The username is already registered. Try another name.';
-    }
-    console.log('SIGNUP!');
     try {
+      if(!fireBase.getUserInfo(authInfo.org, authInfo.name)){
+        console.log('Already exists');
+        throw 'The username is already registered. Try another name.';
+      }
+      console.log('SIGNUP!');
       fireBase.createUser(authInfo, setLoggedInInfo);
     } catch (err) {
       throw err;
     }
-    // login({
-    //   name: newUser.name,
-    //   password: password
-    // });
   };
 
 

@@ -11,10 +11,9 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
       $scope.error = "*You must fill out all required fields";
     }
   };
-  $scope.username = $stateParams.username;
 
+  $scope.profile = fireBase.getUserInfo();
   $scope.books = fireBase.getUserBookshelf();
-  console.log($scope.books);
 
   $scope.findDetail = function(book){
     $stateParams.itemId = book.$id;

@@ -32,15 +32,16 @@ angular.module('omnibooks.database', ['firebase'])
     return $firebaseObject(ref);
   };
 
-  // returns all books belonging to a user
+  // returns array of all books belonging to a user
   var getUserBookshelf = function() {
     var ref = myDataRef.child(org).child('users').child(username).child('bookshelf');
     return $firebaseArray(ref);
   }
 
-  //get user detail info, return object
-  var getUserInfo = function(org,username){
-    return $firebaseObject(myDataRef.child(org).child('users').child(username));
+  //get user detail info, return object (userDetail)
+  var getUserInfo = function(){
+    var ref = myDataRef.child(org).child('users').child(username).child('userDetail');
+    return $firebaseObject(ref);
   }
 
   //for signup

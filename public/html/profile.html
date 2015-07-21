@@ -1,7 +1,14 @@
 <div class="padding">
-  <h1>Welcome, {{profile.name}}!</h1>
-  <h2>Your bookshelf</h2>
-  <div id="bookshelf" ng-repeat="book in books">
+  <button id="sellBtn" ng-click="toggleModal()" class="btn btn-default">Sell</button>
+  <div class="bookshelfHeader" class="center-block">
+    <h1 id="welcome">Welcome, {{profile.name}}!</h1>
+    <h2>Your Bookshelf</h2>
+  </div>
+
+<!--   <div>
+    <h2 id="bookshelfTitle">Your bookshelf</h2>
+  </div> -->
+  <div class="container" id="bookshelf">
     <ul>
       <li class='bookitem' ng-repeat="book in books | filter:search">
       <a ng-click="findDetail(book)">
@@ -13,7 +20,6 @@
     </ul>
   </div>
 
-  <button ng-click="toggleModal()" class="btn btn-default">Sell</button>
   <div modal-show="showDialog" class="modal fade">
     <modal title="bookUpload" show='modalShown'>
       <form role="form">

@@ -265,6 +265,28 @@ footer a:active  {
   font-weight: bold;
 }
 
+#bookshelfTitle {
+  font-weight: bold;
+  position: absolute;
+}
+
+#welcome {
+  font-weight: bold;
+}
+
+.bookshelfHeader {
+  position: fixed;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.entryError {
+  font-style: italic;
+  color: grey;
+  font-size: 13px;
+}
+
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */
   position:absolute;

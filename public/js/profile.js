@@ -18,6 +18,7 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
     }
   };
 }])
+
 .directive('modal', function() {
   return {
     templateUrl: "../html/bookUpload.html",

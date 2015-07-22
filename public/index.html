@@ -21,36 +21,57 @@
   <body ng-controller="indexController">
 
     <header>
-          <ul id="navigation">
-            <li><a ng-click="goHome()" >OmniBooks<span class="border"></span></a></li>
-            <li><a ng-click="goMarket()" >Market<span class="border"></span></a></li>
-            <li><a ng-click="goProfile()" >Profile<span class="border"></span></a></li>
-            <button id="jointop">Signup</button>
-            <button id="logintop">Login</button>
-          </ul>
-
+      <ul id="navigation">
+        <li><a ng-click="goHome()" >OmniBooks<span class="border"></span></a></li>
+        <li><a ng-click="goMarket()" >Market<span class="border"></span></a></li>
+        <li><a ng-click="goProfile()" >Profile<span class="border"></span></a></li>
+        <button id="jointop" ng-click=clickSignup() ng-controller="authController">Signup</button>
+        <button id="logintop" ng-click=clickLogin() ng-controller="authController">Login</button>
+      </ul>
     </header>
 
-  <div class="login_box box">
-    <h2>LOG IN</h2>
-    <input type="text" placeholder="Username" ng-model="loginUser.name" />
-    <input type="password" placeholder="Password" ng-model="loginUser.password" />
-    <button ng-click="login(loginUser)">Login</button>
-    <a class="close" href="#close"></a>
+
+  <div class="loginLayer" ng-controller="authController">
+
+    <a href="#x" class="overlay" id="login_form"></a>
+
+    <div class="login_box box">
+      <h2>LOG IN</h2>
+      <input type="text" class="text-field" placeholder="Username" ng-model=authInfo.name />
+      <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
+      <div id="buttons">
+        <input type="button" value="Login" class="red" ng-click=login() />
+        <a href="#signup_form">
+        <input type="button" value="Sign up" class="blue"/>
+        </a>
+      </div>
+      </br>
+      <a class="close" href="#close" ng-click=closeAuthForm()></a>
+      <div class="error">
+        <div class="errortext">{{erroMessage}}</div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="signup_box box">
-    <h2>SIGN UP</h2>
-      <input type="email"  placeholder="email" ng-model="newUser.email" />
-      <input type="text" placeholder="user name" ng-model="newUser.name" />
-      <input type="password" placeholder="Password" ng-model="newUser.password" />
-      <select
-        ng-model="selectedOption"
-        ng-options="option.name for option in options">
-      </select>
-      <button ng-click="signup(newUser)">SIGNUP</button>
-      <a class="close" href="#close"></a>
+  <div class="signupLayer" ng-controller="authController">
+    <a href="#x" class="overlay" id="signup_form"></a>
+    <div class="signup_box box">
+      <h2>SIGN UP</h2>
+        <input type="email" class="text-field" placeholder="email" ng-model=authInfo.email />
+        <input type="text" class="text-field" placeholder="user name" ng-model=authInfo.name />
+        <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
+        <select
+          ng-model="selectedOption"
+          ng-options="option.name for option in options">
+        </select>
+
+        <input type="button" value="signup" class="blue-round" ng-click=signup() /></br>
+        <p>Already have account? <a href="#login_form">Log In</a></p>
+        <a class="close" href="#" ng-click=closeAuthForm()></a>
+    </div>
   </div>
+
 
   <div id='uiview'>
      <ui-view autoscroll='false'/>
@@ -59,11 +80,11 @@
 
 
   <script src="js/firebase.js"></script>
-  <script src="js/auth.js"></script>
   <script src="js/home.js"></script>
   <script src="js/profile.js"></script>
   <script src="js/market.js"></script>
   <script src="js/item.js"></script>
   <script src="app.js"></script>
+  <script src="js/auth.js"></script>
   </body>
 </html>

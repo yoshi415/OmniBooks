@@ -60,15 +60,17 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
 angular.module('omnibooks')
 .controller('authController', ['$scope', '$state', 'auth', 'fireBase', function ($scope, $state, auth, fireBase) {
   $scope.authInfo = {org: 'purdue', name: '', email: '', password: ''};
+  $scope.signupShown = false;
+  $scope.loginShown = false;
   $scope.clickSignup = function () {
-    showSignupForm();
+    $scope.signupShown = true;
   };
   $scope.clickLogin = function () {
     if(auth.isLoggedIn()){
       logOut();
       return;
     }
-    showLoginForm();
+    $scope.loginShown = true;
   };
   $scope.login = function () {
     hideError();
@@ -85,10 +87,8 @@ angular.module('omnibooks')
     }, showError);
   };
   $scope.closeAuthForm = function () {
-    $('#login_form').css({visibility: 'hidden'});
-    $('.login_box').css({visibility : 'hidden'});
-    $('#signup_form').css({visibility: 'hidden'});
-    $('.signup_box').css({visibility : 'hidden'});
+    $scope.signupShown = false;
+    $scope.loginShown = false;
     hideError();
     resetUserInfo();
   };
@@ -108,19 +108,32 @@ angular.module('omnibooks')
     $('.error').css({visibility: 'hidden'});
   }
 
-  function showLoginForm() {
-    $('#login_form').css({visibility: 'visible'});
-    $('.login_box').css({visibility : 'visible'});
-  }
-  function showSignupForm() {
-    $('#signup_form').css({visibility: 'visible'});
-    $('.signup_box').css({visibility : 'visible'});
-  }
   function resetUserInfo() {
     $scope.authInfo = {org: 'purdue', name: '', email: '', password: ''};
   }
 
 }])
+.directive('modal', function() {
+  return {
+    templateUrl: "../html/bookUpload.html",
+    restrict: 'E',
+    scope: {
+      show: '='
+    },
+    replace: true, // Replace with the template below
+    transclude: true, // we want to insert custom content inside the directive
+    link: function(scope, element, attrs) {
+      scope.dialogStyle = {};
+      if (attrs.width)
+        scope.dialogStyle.width = attrs.width;
+      if (attrs.height)
+        scope.dialogStyle.height = attrs.height;
+      scope.hideModal = function() {
+        scope.show = false;
+      };
+    }
+  };
+})
 .run(['$rootScope', '$state', 'auth', function ($rootScope, $state, auth) {
   $rootScope.$on('$stateChangeStart', function (event, toState) {
     if(toState.name === "home"){

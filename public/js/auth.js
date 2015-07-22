@@ -4,36 +4,32 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
   var loggedInUser = null; // updated when user logs in
   var loggedInOrg  = null;
 
-  var signup = function (authInfo, success) {
-    try {
-      if(!fireBase.getUserInfo(authInfo.org, authInfo.name)){
-        console.log('Already exists');
-        throw 'The username is already registered. Try another name.';
-      }
-      console.log('SIGNUP!');
-      fireBase.createUser(authInfo, setLoggedInInfo);
-    } catch (err) {
-      throw err;
-    }
-  };
-
-  var login = function (authInfo, success, error) {
+  var signup = function (authInfo, success, failed) {
     var existingUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
     existingUser.$loaded().then(function () {
-      try {
-        if(!existingUser.userDetail) {
-          console.log('User not exists');
-          throw 'incorrect user name.';
-        }
-        authInfo.email = existingUser.userDetail.email;
-        fireBase.authWithPassword(authInfo, function (authInfo) {
-          setLoggedInInfo(authInfo);
-          success();
-        });
-      } catch (err) {
-        console.error('LOGIN ERROR!!');
-        error(err);
+      if(existingUser.userDetail){
+        console.log('Already exists');
+        failed('The username is already registered. Try another name.');
+        return;
       }
+      console.log('SIGNUP!');
+      fireBase.createUser(authInfo, setLoggedInInfo, failed);
+    });
+  };
+
+  var login = function (authInfo, success, failed) {
+    var existingUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
+    existingUser.$loaded().then(function () {
+      if(!existingUser.userDetail) {
+        console.log('User not exists');
+        failed('incorrect user name.');
+        return;
+      }
+      authInfo.email = existingUser.userDetail.email;
+      fireBase.authWithPassword(authInfo, function (authInfo) {
+        setLoggedInInfo(authInfo);
+        success();
+      }, failed);
     });
   };
 
@@ -84,19 +80,9 @@ angular.module('omnibooks')
   };
   $scope.signup = function () {
     hideError();
-    if(!fireBase.getUserInfo($scope.authInfo.org, $scope.authInfo.name)){
-      showError('The username is already registered. Try another name.');
-      console.log('Already exists');
-      return;
-    }
-    console.log('SIGNUP!');
-    try {
-      auth.signup($scope.authInfo);
+    auth.signup($scope.authInfo, function () {
       $state.go("market");
-    } catch (err) {
-      console.error(err);
-      showError(err);
-    }
+    }, showError);
   };
   $scope.closeAuthForm = function () {
     $('#login_form').css({visibility: 'hidden'});

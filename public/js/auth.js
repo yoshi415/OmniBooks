@@ -1,4 +1,4 @@
-angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
+angular.module('omnibooks.auth', ['ui.bootstrap'])
 
 .factory('auth', function(fireBase) {
   var loggedInUser = null; // updated when user logs in
@@ -39,7 +39,9 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
 
   var setLoggedInInfo = function (authInfo) {
     loggedInUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
+    console.log(loggedInUser);
     loggedInOrg  = authInfo.org;
+    console.log(loggedInOrg);
   };
 
   var logOut = function () {
@@ -50,13 +52,23 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
     return !!loggedInUser;
   };
 
+  var getUsername = function() {
+    return loggedInUser;
+  };
+
+  var getOrg = function() {
+    return loggedInOrg;
+  }
+
   return {
     signup: signup,
     login: login,
     loggedInUser: loggedInUser,
     loggedInOrg: loggedInOrg,
     isLoggedIn: isLoggedIn,
-    logOut: logOut
+    logOut: logOut,
+    getUsername: getUsername,
+    getOrg: getOrg
   };
 });
 

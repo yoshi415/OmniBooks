@@ -35,10 +35,11 @@ angular.module('omnibooks.database', ['firebase'])
   };
 
   //for signup
-  var createUser = function(authInfo, callback){
+  var createUser = function(authInfo, success, failed){
     myDataRef.createUser(authInfo, function (err, userData) {
       if(err){
-        throw 'the email address is already registered.';
+        failed('the email address is already registered.');
+        return;
       }
       var ref = myDataRef.child(authInfo.org).child('users');
       var users = $firebaseObject(ref);
@@ -48,17 +49,18 @@ angular.module('omnibooks.database', ['firebase'])
           email: authInfo.email
         }
       });
-      callback(authInfo);
+      success(authInfo);
     });
   };
 
   //for login
-  var authWithPassword = function (authInfo, callback) {
+  var authWithPassword = function (authInfo, success, failed) {
     myDataRef.authWithPassword(authInfo, function (err, userData) {
       if(err){
-        throw 'incorrect password.';
+        failed('incorrect password.');
+        return;
       }
-      callback(authInfo);
+      success(authInfo);
     });
   };
 

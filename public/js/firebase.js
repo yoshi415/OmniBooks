@@ -42,8 +42,6 @@ angular.module('omnibooks.database', ['firebase'])
         return;
       }
       var ref = myDataRef.child(authInfo.org).child('users');
-      var users = $firebaseObject(ref);
-      console.log(users);
       ref.child(authInfo.name).set({
         userDetail: {
           email: authInfo.email

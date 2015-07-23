@@ -1,16 +1,19 @@
 angular.module('omnibooks.database', ['firebase'])
 .factory('fireBase', function($firebaseArray, $firebaseObject) {
   var myDataRef = new Firebase('https://shutorial.firebaseio.com/');
-  var org = 'purdue';
-  var username = 'richie';
+  // var org = 'purdue';
+  // var username = 'richie';
 
-  var enterBook = function(title, img, author, isbn) {
-    myDataRef.child(org).child('books').push({
+  var enterBook = function(org, username, title, img, author, isbn) {
+    var bookDetails = {
       title: title,
       img: img,
       author: author,
       isbn: isbn
-    });
+    };
+    // push book details in org books and user bookshelf nodes
+    myDataRef.child(org).child('books').push(bookDetails);
+    myDataRef.child(org).child('users').child(username).child('bookshelf').push(bookDetails);
   };
 
   //get all books in same org
@@ -29,6 +32,12 @@ angular.module('omnibooks.database', ['firebase'])
     return $firebaseObject(ref);
   };
 
+  // returns array of all books belonging to a user
+  var getUserBookshelf = function(org, username) {
+    var ref = myDataRef.child(org).child('users').child(username).child('bookshelf');
+    return $firebaseArray(ref);
+  }
+
   //get user detail info, return object
   var getUserInfo = function(org,username){
     return $firebaseObject(myDataRef.child(org).child('users').child(username));
@@ -42,8 +51,6 @@ angular.module('omnibooks.database', ['firebase'])
         return;
       }
       var ref = myDataRef.child(authInfo.org).child('users');
-      var users = $firebaseObject(ref);
-      console.log(users);
       ref.child(authInfo.name).set({
         userDetail: {
           email: authInfo.email
@@ -66,10 +73,11 @@ angular.module('omnibooks.database', ['firebase'])
 
   return {
     enterBook: enterBook,
-    getOrgBook:getOrgBook,
+    getOrgBook: getOrgBook,
     getUserBook: getUserBook,
+    getUserBookshelf: getUserBookshelf,
     getUserInfo: getUserInfo,
-    createUser:createUser,
+    createUser: createUser,
     authWithPassword: authWithPassword
   };
 });

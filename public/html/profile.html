@@ -1,17 +1,25 @@
 <div class="padding">
-  <h1>Welcome, {{profile.name}}!</h1>
-  <h2>Your bookshelf</h2>
-  <div ng-repeat="book in books">
+  <button id="sellBtn" ng-click="toggleModal()" class="btn btn-default pull-right">Sell</button>
+  <div class="bookshelfHeader" class="center-block">
+    <h1 id="welcome">Welcome, {{profile.name}}!</h1>
+    <h2>Your Bookshelf</h2>
+  </div>
+
+<!--   <div>
+    <h2 id="bookshelfTitle">Your bookshelf</h2>
+  </div> -->
+  <div class="container" id="bookshelf">
     <ul>
       <li class='bookitem' ng-repeat="book in books | filter:search">
-        <img src=" {{book.url}} ">
-        <p>  {{ book.title }} </p>
-        <p>  {{ book.author}} </p>
+      <a ng-click="">
+        <img src=" {{book.img}} ">
+        <p class="booktitle">  {{ book.title }} </p>
+        <p class="bookauthor">  {{ book.author}} </p>
+      </a>
       </li>
     </ul>
   </div>
 
-  <button ng-click="toggleModal()" class="btn btn-default">Sell</button>
   <div modal-show="showDialog" class="modal fade">
     <modal title="bookUpload" show='modalShown'>
       <form role="form">
@@ -24,7 +32,7 @@
         </div>
       </form>
       <div>
-        <span>{{error}}</span>
+        <span class="entryError">{{error}}</span>
       </div>
       <button class="btn btn-default" id='sellButton' class="md-trigger"
               ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleModal()">Submit</button>

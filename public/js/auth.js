@@ -1,8 +1,9 @@
-angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
+angular.module('omnibooks.auth', ['ui.bootstrap'])
 
 .factory('auth', function(fireBase) {
   var loggedInUser = null; // updated when user logs in
   var loggedInOrg  = null;
+
 
   var signup = function (authInfo, success, failed) {
     var existingUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
@@ -13,7 +14,10 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
         return;
       }
       console.log('SIGNUP!');
-      fireBase.createUser(authInfo, setLoggedInInfo, failed);
+      fireBase.createUser(authInfo, function () {
+        setLoggedInInfo(authInfo);
+        success();
+      }, failed);
     });
   };
 
@@ -26,7 +30,7 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
         return;
       }
       authInfo.email = existingUser.userDetail.email;
-      fireBase.authWithPassword(authInfo, function (authInfo) {
+      fireBase.authWithPassword(authInfo, function () {
         setLoggedInInfo(authInfo);
         success();
       }, failed);
@@ -35,7 +39,9 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
 
   var setLoggedInInfo = function (authInfo) {
     loggedInUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
+    console.log(loggedInUser);
     loggedInOrg  = authInfo.org;
+    console.log(loggedInOrg);
   };
 
   var logOut = function () {
@@ -46,20 +52,32 @@ angular.module('omnibooks.auth', ['firebase', 'ui.bootstrap'])
     return !!loggedInUser;
   };
 
+  var getUsername = function() {
+    return loggedInUser;
+  };
+
+  var getOrg = function() {
+    return loggedInOrg;
+  }
+
   return {
     signup: signup,
     login: login,
     loggedInUser: loggedInUser,
     loggedInOrg: loggedInOrg,
     isLoggedIn: isLoggedIn,
-    logOut: logOut
+    logOut: logOut,
+    getUsername: getUsername,
+    getOrg: getOrg
   };
 });
 
 
 angular.module('omnibooks')
 .controller('authController', ['$scope', '$state', 'auth', 'fireBase', function ($scope, $state, auth, fireBase) {
+  $scope.orgs = ['Purdue','Wellesley','Berkeley','Stanford'];
   $scope.authInfo = {org: 'purdue', name: '', email: '', password: ''};
+  $scope.authInfo.org = $scope.orgs[0];
   $scope.signupShown = false;
   $scope.loginShown = false;
   $scope.clickSignup = function () {
@@ -83,6 +101,8 @@ angular.module('omnibooks')
   $scope.signup = function () {
     hideError();
     auth.signup($scope.authInfo, function () {
+      $scope.closeAuthForm();
+      $('#logintop').text('Log out');
       $state.go("market");
     }, showError);
   };

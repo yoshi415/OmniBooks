@@ -47,20 +47,4 @@ angular.module('omnibooks', [
     $location.path('/item');
   };
 
-
-   $scope.options = [{
-          name: 'Purdue',
-          value: 'Purdue'
-        },{
-          name: 'Wellesley',
-          value: 'Wellesley'
-        },{
-          name: 'Berkeley',
-          value: 'Berkeley'
-        },{
-          name: 'Stanford',
-          value: 'Stanford'
-        }];
-    $scope.selectedOption = $scope.options[0];
-
 }]);

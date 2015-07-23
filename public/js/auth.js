@@ -39,9 +39,7 @@ angular.module('omnibooks.auth', ['ui.bootstrap'])
 
   var setLoggedInInfo = function (authInfo) {
     loggedInUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
-    console.log(loggedInUser);
     loggedInOrg  = authInfo.org;
-    console.log(loggedInOrg);
   };
 
   var logOut = function () {
@@ -67,6 +65,7 @@ angular.module('omnibooks.auth', ['ui.bootstrap'])
     loggedInOrg: loggedInOrg,
     isLoggedIn: isLoggedIn,
     logOut: logOut,
+    // these were added because the variables themselves were not able to be exported
     getUsername: getUsername,
     getOrg: getOrg
   };

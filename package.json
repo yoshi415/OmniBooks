@@ -19,7 +19,8 @@
   "dependencies": {
     "angular": "^1.4.3",
     "body-parser": "^1.13.2",
-    "express": "^4.13.1"
+    "express": "^4.13.1",
+    "nodemailer": "^1.4.0"
   },
   "engines": {
     "node": ">= 0.10.0"

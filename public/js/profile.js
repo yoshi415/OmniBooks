@@ -1,59 +1,46 @@
-angular.module('omnibooks.profile', ['firebase', 'ui.bootstrap'])
+angular.module('omnibooks.profile', ['ui.bootstrap'])
 
-.controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', function($scope, fireBase, $stateParams, $modal) {
-  $scope.enterBook = function(title, url, author, subject) {
-      if (title !== "" && url !== "" && author !== "" && subject !== "" && ibsn !== "") {
-        console.log('enter!');
-        fireBase.enterBook(title, url, author, subject, isbn);
-      }
-    };
-  $scope.userId = $stateParams.userId;
+.controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', '$state', 'auth', 
+  function($scope, fireBase, $stateParams, $modal, $state, auth) {
+  $scope.enterBook = function(title, url, author, isbn) {
+    if (title && url && author && isbn) {
+      $scope.error = false;
+      fireBase.enterBook($scope.org, $scope.username, title, url, author, isbn);
+      console.log('successfully entered');
+    } else {
+      $scope.error = "*You must fill out all required fields";
+    }
+  };
 
+  $scope.username = auth.getUsername().$id;
+  $scope.org = auth.getOrg();
+
+  $scope.books = fireBase.getUserBookshelf($scope.org, $scope.username);
+
+  // get book id in org node 
+  $scope.getBookId = function(book) {
+    return fireBase.getOrgBookId(book);
+  };
+
+  $scope.findDetail = function(book) {
+    var id = $scope.getBookId(book);
+    console.log(id);
+    $stateParams.itemId = id;
+    $state.go("books",{itemId:id});   
+  };
+
+  // modal methods
   $scope.modalShown = false;
   $scope.toggleModal = function() {
-    $scope.modalShown = !$scope.modalShown;
-  };
+    if(!$scope.error) {
+      $scope.modalShown = !$scope.modalShown;
+    }
+  }; 
 }])
-
-.factory('fireBase', function($firebaseArray, $firebaseObject) {
-  var loggedInUser = {}; // updated when user logs in
-  var myDataRef = new Firebase('https://brilliant-heat-9814.firebaseio.com');
-  var enterBook = function(title, url, author, subject, isbn) {
-    myDataRef.push({
-      title: title,
-      url: url,
-      author: author,
-      subject: subject,
-      isbn: isbn
-    });
-  };
-  var getBook = function(id) {
-    var temp = myDataRef.child(id);
-    return $firebaseObject(temp);
-  };
-  var setUserInfo = function(id) {
-    loggedInUser = $firebaseObject(myDataRef.child(id)); //returns object with user details
-    return loggedInUser;
-  }
-
-  return {
-    allbooks: $firebaseArray(myDataRef),
-    enterBook: enterBook,
-    getBook: getBook,
-    setUserInfo: setUserInfo,
-    loggedInUser: loggedInUser
-  };
-})
 
 .directive('modal', function() {
   return {
-    template: "<div class='ng-modal' ng-show='show'>" +
-      "<div class='ng-modal-overlay' ng-click='hideModal()'></div>" +
-      "<div class='ng-modal-dialog' ng-style='dialogStyle'>" +
-      "<div class='ng-modal-close' ng-click='hideModal()'>X</div>" +
-      "<div class='ng-modal-dialog-content' ng-transclude></div>" +
-      "</div>" +
-      "</div>",
+    templateUrl: "../html/bookUpload.html",
     restrict: 'E',
     scope: {
       show: '='

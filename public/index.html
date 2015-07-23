@@ -1,107 +1,92 @@
 <!doctype html>
 <html ng-app="omnibooks">
   <head>
-    <script src="lib/angular/angular.js"></script>
-    <link rel="stylesheet" href="css/reset.css" >
-    <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="css/reset.css" >
+    <!-- <link rel="stylesheet" href="css/bootstrap.css" > -->
+    <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="lib/modal/default.css" type="text/css">
     <link rel="stylesheet" href="lib/modal/component.css" type="text/css">
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js.map"></script>
+    <script src="lib/angular/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js"></script>
-
     <title>OmniBooks</title>
+
   </head>
   <body ng-controller="indexController">
-  <div id='header'>
-    <div id='title'>OmniBooks</div>
-  </div>
 
-  <div class="main">
-      <div class="panel">
-          <a href="#" id="jointop"><input type="button" value="Sign up" class="blue"/></a>
-          <a href="#" id="logintop"> <input type="button" value="Login" class="red"/></a>
+    <header>
+      <ul id="navigation">
+        <li><a ng-click="goHome()" >OmniBooks<span class="border"></span></a></li>
+        <li><a ng-click="goMarket()" >Market<span class="border"></span></a></li>
+        <li><a ng-click="goProfile()" >Profile<span class="border"></span></a></li>
+        <li><a ng-click="goMail()">Mail-test<span class="border"></span></a></li>
+        <button id="jointop" ng-click=clickSignup() ng-controller="authController">Signup</button>
+        <button id="logintop" ng-click=clickLogin() ng-controller="authController">Login</button>
+      </ul>
+    </header>
+
+
+  <div class="loginLayer" ng-controller="authController">
+
+    <a href="#x" class="overlay" id="login_form"></a>
+
+    <div class="login_box box">
+      <h2>LOG IN</h2>
+      <input type="text" class="text-field" placeholder="Username" ng-model=authInfo.name />
+      <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
+      <div id="buttons">
+        <input type="button" value="Login" class="red" ng-click=login() />
+        <a href="#signup_form">
+        <input type="button" value="Sign up" class="blue"/>
+        </a>
       </div>
-  </div>
-
-  <a href="#x" class="overlay" id="login_form"></a>
-
-  <div class="login_box box">
-    <h2>LOG IN</h2>
-    <input type="text" class="text-field" placeholder="Username" ng-model=loginUser.name />
-    <input type="password" class="text-field" placeholder="Password" ng-model=loginUser.password />
-    <div id="buttons">
-      <input type="button" value="Login" class="red" ng-click=login(loginUser) />
-      <a href="#signup_form">
-      <input type="button" value="Sign up" class="blue"/>
-      </a>
-    </div>
-    <p><a id="forg" href="#recover">Forgot Your Password?</a></p>
-    </br>
-    <a class="close" href="#close"></a>
-    <div class="error">
-      <div class="errortext">{{erroMessage}}</div>
-    </div>
-
-  </div>
-
-  <a href="#x" class="overlay" id="signup_form"></a>
-  <div class="signup_box box">
-    <h2>SIGN UP</h2>
-      <input type="email" class="text-field" placeholder="email" ng-model=newUser.userDetail.email />
-      <input type="text" class="text-field" placeholder="user name" ng-model=newUser.userDetail.name />
-      <input type="password" class="text-field" placeholder="Password" ng-model=newUser.userDetail.password />
-      <p><input type="checkbox"><label>I agree <a href="#">terms and conditions</a></label></p></br></br>
-      <input type="button" value="signup" class="blue-round" ng-click=signup(newUser.userDetail) /></br>
-      <p>Already have account? <a href="#login_form">Log In</a></p>
-      <a class="close" href="#"></a>
-      {{root.org.users[$scope.newUser.userDetail.name]}}
-      {{$scope.newUser.userDetail.name}}
-  </div>
-
-  <a href="#x" class="overlay" id="recover"></a>
-  <div class="box">
-    <h2>Forgot your password?</h2>
-      <p>We’ll email a code to this address.</p>
-      <br><br>
-        <input type="text" class="text-field" placeholder="email" />
-        <input type="button" value="Send" class="blue-round"/>
-        <a class="close" href="#close"></a>
-  </div>
+      </br>
+      <a class="close" href="#close" ng-click=closeAuthForm()></a>
+      <div class="error">
+        <div class="errortext">{{erroMessage}}</div>
       </div>
 
-  <button ng-click="goHome()">Home</button>
-  <button ng-click="goMarket()">market</button>
-  <button ng-click="goProfile()">profile</button>
+    </div>
+  </div>
+
+  <div class="signupLayer" ng-controller="authController">
+    <a href="#x" class="overlay" id="signup_form"></a>
+    <div class="signup_box box">
+      <h2>SIGN UP</h2>
+        <input type="email" class="text-field" placeholder="email" ng-model=authInfo.email />
+        <input type="text" class="text-field" placeholder="user name" ng-model=authInfo.name />
+        <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
+        <select
+          ng-model="selectedOption"
+          ng-options="option.name for option in options">
+        </select>
+
+        <input type="button" value="signup" class="blue-round" ng-click=signup() /></br>
+        <p>Already have account? <a href="#login_form">Log In</a></p>
+        <a class="close" href="#" ng-click=closeAuthForm()></a>
+    </div>
+  </div>
+
 
   <div id='uiview'>
      <ui-view autoscroll='false'/>
   </div>
 
-    <footer>
-      <div class="footer-background container-fluid row">
-          <p>Find us on
-           <a target="_blank" href="https://github.com/OmniAstronauts/OmniBooks">Github</a>
-           <i class="fa fa-github"></i>
-          </p>
-      </div>
-    </footer>
 
-  <script src="lib/modal/classie.js"></script>
-  <script src="lib/modal/modalEffects.js"></script>
 
-  <script src="js/auth.js"></script>
+  <script src="app.js"></script>
+  <script src="js/firebase.js"></script>
   <script src="js/home.js"></script>
   <script src="js/profile.js"></script>
   <script src="js/market.js"></script>
   <script src="js/item.js"></script>
-  <script src="app.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/mail.js"></script>
   </body>
 </html>

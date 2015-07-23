@@ -1,15 +1,22 @@
+<div class = 'padding'>
+  <div id = 'itemLeft'>
+     <img src= {{book.img}} >
+  </div>
 
-
-<div class=".container" id="itemContainer">
-  <div class="row">
-    <div class=".col-md-9 .col-md-push-3">
-
-      <img src=" {{book.url}} " >
-    </div>
-
-   <div class=".col-md-3 .col-md-pull-9">
-      <div> {{book.title}} </div>
-      <div> {{book.author}} </div>
+  <div id = 'itemMiddle'>
+    <div class="b-title"> {{book.title}} </div>
+    <div class="m-title">by {{book.author}} (Author)</div>
+    <div class="s-title" ng-repeat="price in prices">
+      <span class="bookstore">{{price.store_id}}</span>
+      <span class="bookprice">${{price.price}}</span>
     </div>
   </div>
+
+  <div id= 'itemRight'>
+
+
+  </div>
+
 </div>
+
+

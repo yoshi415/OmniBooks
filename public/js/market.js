@@ -1,11 +1,11 @@
 angular.module('omnibooks.market', [])
-.controller('marketController',['$state', '$scope','fireBase','$stateParams', function ($state, $scope, fireBase, $stateParams) {
-
-  $scope.findDetail = function(book){
-    $stateParams.itemId = book.$id;
-    console.log('book',book,'bookid',book.$id);
-    var str = JSON.stringify(book);
-    $state.go("books",{itemId:book.$id, book:str});
-  };
-  $scope.books = fireBase.allbooks;
+.controller('marketController',['$state', '$scope','fireBase','$stateParams',
+  function ($state, $scope, fireBase, $stateParams) {
+    $scope.findDetail = function(book){
+      $stateParams.itemId = book.$id;
+      $state.go("books",{itemId:book.$id});
+    };
+    var org = 'purdue';
+    var user = 'daichuqi'
+    $scope.books = fireBase.getOrgBook(org);
 }]);

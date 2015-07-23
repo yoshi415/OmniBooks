@@ -58,6 +58,7 @@ angular.module('omnibooks.auth', ['ui.bootstrap'])
     return loggedInOrg;
   }
 
+
   return {
     signup: signup,
     login: login,
@@ -66,68 +67,69 @@ angular.module('omnibooks.auth', ['ui.bootstrap'])
     isLoggedIn: isLoggedIn,
     logOut: logOut,
     getUsername: getUsername,
-    getOrg: getOrg
+    getOrg: getOrg,
+    signupShown: false
   };
 });
 
 
 angular.module('omnibooks')
-.controller('authController', ['$scope', '$state', 'auth', 'fireBase', function ($scope, $state, auth, fireBase) {
-  $scope.orgs = ['Purdue','Wellesley','Berkeley','Stanford'];
+.controller('authController', ['$scope', '$state', 'auth', 'fireBase', '$rootScope', function ($scope, $state, auth, fireBase, $rootScope) {
+  $scope.orgs = ['purdue','Wellesley','Berkeley','Stanford'];
   $scope.authInfo = {org: 'purdue', name: '', email: '', password: ''};
   $scope.authInfo.org = $scope.orgs[0];
-  $scope.signupShown = false;
-  $scope.loginShown = false;
+  $rootScope.loginBtnText = "Log in";
+  $rootScope.loggedIn = false;
 
   $scope.clickSignup = function () {
-    $scope.signupShown = true;
+    $rootScope.signupShown = true;
   };
   $scope.clickLogin = function () {
     if(auth.isLoggedIn()){
       logOut();
       return;
     }
-    $scope.loginShown = true;
+    $rootScope.loginShown = true;
   };
   $scope.login = function () {
     hideError();
-    auth.login($scope.authInfo, function () {
-      $scope.closeAuthForm();
-      $('#logintop').text('Log out');
-      $state.go("market");
-    }, showError);
+    auth.login($scope.authInfo, moveToMarket, showError);
   };
   $scope.signup = function () {
-    hideError();
-    auth.signup($scope.authInfo, function () {
-      $scope.closeAuthForm();
-      $('#logintop').text('Log out');
-      $state.go("market");
-    }, showError);
+
+    auth.signup($scope.authInfo, moveToMarket, showError);
   };
   $scope.closeAuthForm = function () {
-    $scope.signupShown = false;
-    $scope.loginShown = false;
+    $rootScope.signupShown = false;
+    $rootScope.loginShown = false;
     hideError();
     resetUserInfo();
   };
 
+  function moveToMarket() {
+    $scope.closeAuthForm();
+    $rootScope.loginBtnText = "Log out";
+    $rootScope.loggedIn = true;
+    $state.go("market");
+  }
   function logOut() {
     auth.logOut();
-    $('#logintop').text('Login');
+    $rootScope.loginBtnText = "Log in";
+    $rootScope.loggedIn = false;
     $state.go("home");
   }
   function showError(message) {
-    $scope.erroMessage = message;
-    $('.error').css({visibility: 'visible'});
+    $scope.errorMessage = message;
+    $scope.error = true;
   }
   function hideError() {
-    $scope.erroMessage = '';
-    $('.error').css({visibility: 'hidden'});
+    $scope.errorMessage = '';
+    $scope.error = false;
   }
   function resetUserInfo() {
     $scope.authInfo = {org: 'purdue', name: '', email: '', password: ''};
   }
+  $scope.closeAuthForm();
 
 }])
 .directive('authModal', function() {
@@ -146,7 +148,7 @@ angular.module('omnibooks')
       if (attrs.height)
         scope.dialogStyle.height = attrs.height;
       scope.hideSignup = function() {
-        scope.signupShown = false;
+        scope.show = false;
       };
     }
   };

@@ -6,6 +6,7 @@ angular.module('omnibooks', [
   'omnibooks.market',
   'omnibooks.database',
   'omnibooks.auth',
+  'ui.bootstrap',
   'firebase'
   ])
 .config(function($stateProvider, $urlRouterProvider) {
@@ -33,7 +34,6 @@ angular.module('omnibooks', [
     });
 })
 .controller('indexController', ['$scope','$location', '$state', '$firebaseObject', 'fireBase', function($scope, $location, $state, $firebaseObject, fireBase){
-
   $scope.goHome = function(){
     $location.path('/home');
   };

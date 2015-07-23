@@ -39,9 +39,7 @@ angular.module('omnibooks.auth', ['ui.bootstrap'])
 
   var setLoggedInInfo = function (authInfo) {
     loggedInUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
-    console.log(loggedInUser);
     loggedInOrg  = authInfo.org;
-    console.log(loggedInOrg);
   };
 
   var logOut = function () {
@@ -80,6 +78,7 @@ angular.module('omnibooks')
   $scope.authInfo.org = $scope.orgs[0];
   $scope.signupShown = false;
   $scope.loginShown = false;
+
   $scope.clickSignup = function () {
     $scope.signupShown = true;
   };
@@ -113,12 +112,11 @@ angular.module('omnibooks')
     resetUserInfo();
   };
 
-  var logOut = function () {
+  function logOut() {
     auth.logOut();
     $('#logintop').text('Login');
     $state.go("home");
-  };
-
+  }
   function showError(message) {
     $scope.erroMessage = message;
     $('.error').css({visibility: 'visible'});
@@ -127,15 +125,14 @@ angular.module('omnibooks')
     $scope.erroMessage = '';
     $('.error').css({visibility: 'hidden'});
   }
-
   function resetUserInfo() {
     $scope.authInfo = {org: 'purdue', name: '', email: '', password: ''};
   }
 
 }])
-.directive('modal', function() {
+.directive('authModal', function() {
   return {
-    templateUrl: "../html/bookUpload.html",
+    templateUrl: "../html/authForms.html",
     restrict: 'E',
     scope: {
       show: '='
@@ -148,8 +145,8 @@ angular.module('omnibooks')
         scope.dialogStyle.width = attrs.width;
       if (attrs.height)
         scope.dialogStyle.height = attrs.height;
-      scope.hideModal = function() {
-        scope.show = false;
+      scope.hideSignup = function() {
+        scope.signupShown = false;
       };
     }
   };

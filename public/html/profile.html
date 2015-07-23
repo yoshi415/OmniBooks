@@ -8,10 +8,11 @@
   <div class="container" id="bookshelf">
     <ul>
       <li class='bookitem' ng-repeat="book in books | filter:search">
-      <a ng-click="toggleEditModal()">
+      <a ng-click="toggleEditModal()" class="link">
         <img src=" {{book.img}} ">
         <p class="booktitle">  {{ book.title }} </p>
         <p class="bookauthor">  {{ book.author}} </p>
+        <div class="img-rounded editNote">Click to edit</div>
       </a>
       </li>
     </ul>
@@ -32,7 +33,7 @@
         <span class="entryError">{{error}}</span>
       </div>
       <button class="btn btn-default" id='sellButton' class="md-trigger"
-              ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleModal()">Submit</button>
+              ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleUploadModal()">Submit</button>
     </modal>
   </div>
 
@@ -51,8 +52,9 @@
         <span class="entryError">{{error}}</span>
       </div>
       <button class="btn btn-default" id='sellButton' class="md-trigger"
-              ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleModal()">Submit</button>
+              ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleEditModal()">Submit</button>
     </modal>
   </div>
 
 </div>
+

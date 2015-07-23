@@ -287,6 +287,22 @@ footer a:active  {
   font-size: 13px;
 }
 
+.link .editNote {
+  position: relative;
+  bottom: 200px;
+  visibility: hidden;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  color: white;
+  background-color: rgba(75, 109, 134, 0.89);
+}
+
+.link:hover .editNote {
+  visibility:visible;
+}
+
+
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */
   position:absolute;

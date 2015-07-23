@@ -16,6 +16,10 @@ angular.module('omnibooks.database', ['firebase'])
     myDataRef.child(org).child('users').child(username).child('bookshelf').push(bookDetails);
   };
 
+  var updateBook = function(org, username, title, img, author, isbn) {
+    
+  }
+
   //get all books in same org
   var getOrgBook = function(org){
     var ref = myDataRef.child(org).child('books');

@@ -48,30 +48,37 @@ angular.module('omnibooks.database', ['firebase'])
   };
 
   //for signup
-  var createUser = function(authInfo, callback){
+  var createUser = function(authInfo, success, failed){
     myDataRef.createUser(authInfo, function (err, userData) {
       if(err){
-        throw 'the email address is already registered.';
+        failed('the email address is already registered.');
+        return;
       }
-      var ref = myDataRef.child(authInfo.org).child('users');
-      var users = $firebaseObject(ref);
-      console.log(users);
-      ref.child(authInfo.name).set({
+      var users = myDataRef.child(authInfo.org).child('users');
+      users.child(authInfo.name).set({
         userDetail: {
           email: authInfo.email
         }
       });
-      callback(authInfo);
+      var userOrg = myDataRef.child('userOrg');
+      userOrg.child(authInfo.name).set(authInfo.org);
+      success(authInfo);
     });
   };
 
+  //return users list
+  var getUserOrg = function(){
+    return $firebaseObject(myDataRef.child('userOrg'));
+  };
+
   //for login
-  var authWithPassword = function (authInfo, callback) {
+  var authWithPassword = function (authInfo, success, failed) {
     myDataRef.authWithPassword(authInfo, function (err, userData) {
       if(err){
-        throw 'incorrect password.';
+        failed('incorrect password.');
+        return;
       }
-      callback(authInfo);
+      success(authInfo);
     });
   };
 
@@ -82,6 +89,7 @@ angular.module('omnibooks.database', ['firebase'])
     getUserBookshelf: getUserBookshelf,
     getUserInfo: getUserInfo,
     createUser: createUser,
-    authWithPassword: authWithPassword
+    authWithPassword: authWithPassword,
+    getUserOrg: getUserOrg
   };
 });

@@ -1,39 +1,55 @@
-angular.module('omnibooks.auth', ['ui.bootstrap'])
+angular.module('omnibooks.auth', [])
 
 .factory('auth', function(fireBase) {
   var loggedInUser = null; // updated when user logs in
   var loggedInOrg  = null;
 
-  var signup = function (authInfo, success) {
-    try {
-      if(!fireBase.getUserInfo(authInfo.org, authInfo.name)){
-        console.log('Already exists');
-        throw 'The username is already registered. Try another name.';
+  // success, failed are callbacks
+  var signup = function (authInfo, success, failed) {
+    // check the user-org object to see the username is available
+    var userOrg = fireBase.getUserOrg();
+
+    userOrg.$loaded().then(function () {
+      var org = userOrg[authInfo.name];
+      if(org){
+        console.log('user already exists');
+        failed('The username is already registered. Try another name.');
+        return;
       }
-      console.log('SIGNUP!');
-      fireBase.createUser(authInfo, setLoggedInInfo);
-    } catch (err) {
-      throw err;
-    }
+
+      // if available, save the user on the database
+      fireBase.createUser(authInfo, function () {
+        setLoggedInInfo(authInfo);
+        success();
+      }, failed);
+    });
   };
 
-  var login = function (authInfo, success, error) {
-    var existingUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
-    existingUser.$loaded().then(function () {
-      try {
-        if(!existingUser.userDetail) {
-          console.log('User not exists');
-          throw 'incorrect user name.';
-        }
+  // success, failed are callbacks
+  var login = function (authInfo, success, failed) {
+    // check the user-org object to get the org of the user
+    var userOrg = fireBase.getUserOrg();
+
+    userOrg.$loaded().then(function () {
+      var org = userOrg[authInfo.name];
+      if(!org){
+        console.log('User not exists');
+        failed('incorrect user name.');
+        return;
+      }
+
+      authInfo.org = org;
+      // get the email of the user to use firebase.authWithPassword
+      var existingUser = fireBase.getUserInfo(org, authInfo.name);
+
+      existingUser.$loaded().then(function () {
         authInfo.email = existingUser.userDetail.email;
-        fireBase.authWithPassword(authInfo, function (authInfo) {
+
+        fireBase.authWithPassword(authInfo, function () {
           setLoggedInInfo(authInfo);
           success();
-        });
-      } catch (err) {
-        console.error('LOGIN ERROR!!');
-        error(err);
-      }
+        }, failed);
+      });
     });
   };
 
@@ -50,13 +66,14 @@ angular.module('omnibooks.auth', ['ui.bootstrap'])
     return !!loggedInUser;
   };
 
-  var getUsername = function() {
+  var getUser = function() {
     return loggedInUser;
   };
 
   var getOrg = function() {
     return loggedInOrg;
-  }
+  };
+
 
   return {
     signup: signup,
@@ -65,85 +82,67 @@ angular.module('omnibooks.auth', ['ui.bootstrap'])
     loggedInOrg: loggedInOrg,
     isLoggedIn: isLoggedIn,
     logOut: logOut,
-    // these were added because the variables themselves were not able to be exported
-    getUsername: getUsername,
+    getUser: getUser,
     getOrg: getOrg
   };
 });
 
 
 angular.module('omnibooks')
-.controller('authController', ['$scope', '$state', 'auth', 'fireBase', function ($scope, $state, auth, fireBase) {
-  $scope.authInfo = {org: 'purdue', name: '', email: '', password: ''};
+.controller('authController', ['$scope', '$state', 'auth', 'fireBase', '$rootScope', function ($scope, $state, auth, fireBase, $rootScope) {
+  $scope.orgs = ['Purdue','Wellesley','Berkeley','Stanford'];
+  $scope.authInfo = {org: 'Purdue', name: '', email: '', password: ''};
+  $scope.authInfo.org = $scope.orgs[0];
+  $rootScope.loginBtnText = "Log in";
+  $rootScope.loggedIn = false;
+
   $scope.clickSignup = function () {
-    showSignupForm();
+    $rootScope.signupShown = true;
   };
   $scope.clickLogin = function () {
     if(auth.isLoggedIn()){
       logOut();
       return;
     }
-    showLoginForm();
+    $rootScope.loginShown = true;
   };
   $scope.login = function () {
-    hideError();
-    auth.login($scope.authInfo, function () {
-      $scope.closeAuthForm();
-      $('#logintop').text('Log out');
-      $state.go("market");
-    }, showError);
+    auth.login($scope.authInfo, moveToMarket, showError);
   };
   $scope.signup = function () {
-    hideError();
-    if(!fireBase.getUserInfo($scope.authInfo.org, $scope.authInfo.name)){
-      showError('The username is already registered. Try another name.');
-      console.log('Already exists');
-      return;
-    }
-    console.log('SIGNUP!');
-    try {
-      auth.signup($scope.authInfo);
-      $state.go("market");
-    } catch (err) {
-      console.error(err);
-      showError(err);
-    }
+    auth.signup($scope.authInfo, moveToMarket, showError);
   };
   $scope.closeAuthForm = function () {
-    $('#login_form').css({visibility: 'hidden'});
-    $('.login_box').css({visibility : 'hidden'});
-    $('#signup_form').css({visibility: 'hidden'});
-    $('.signup_box').css({visibility : 'hidden'});
+    $rootScope.signupShown = false;
+    $rootScope.loginShown = false;
     hideError();
     resetUserInfo();
   };
 
-  var logOut = function () {
+  function moveToMarket() {
+    $scope.closeAuthForm();
+    $rootScope.loginBtnText = "Log out";
+    $rootScope.loggedIn = true;
+    $state.go("market");
+  }
+  function logOut() {
     auth.logOut();
-    $('#logintop').text('Login');
+    $rootScope.loginBtnText = "Log in";
+    $rootScope.loggedIn = false;
     $state.go("home");
-  };
-
+  }
   function showError(message) {
-    $scope.erroMessage = message;
-    $('.error').css({visibility: 'visible'});
+    $scope.errorMessage = message;
+    $scope.error = true;
   }
   function hideError() {
-    $scope.erroMessage = '';
-    $('.error').css({visibility: 'hidden'});
-  }
-
-  function showLoginForm() {
-    $('#login_form').css({visibility: 'visible'});
-    $('.login_box').css({visibility : 'visible'});
-  }
-  function showSignupForm() {
-    $('#signup_form').css({visibility: 'visible'});
-    $('.signup_box').css({visibility : 'visible'});
+    $scope.errorMessage = '';
+    $scope.error = false;
   }
   function resetUserInfo() {
     $scope.authInfo = {org: 'purdue', name: '', email: '', password: ''};
   }
+  $scope.closeAuthForm();
 
 }])
 .run(['$rootScope', '$state', 'auth', function ($rootScope, $state, auth) {

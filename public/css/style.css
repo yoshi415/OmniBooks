@@ -295,6 +295,7 @@ footer a:active  {
   font-size: 30px;
   text-align: center;
   color: white;
+  transition: background-color .6s, color .2s;
   background-color: rgba(75, 109, 134, 0.89);
 }
 

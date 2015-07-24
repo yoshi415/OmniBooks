@@ -66,7 +66,7 @@ angular.module('omnibooks.auth', [])
     return !!loggedInUser;
   };
 
-  var getUsername = function() {
+  var getUser = function() {
     return loggedInUser;
   };
 
@@ -82,7 +82,7 @@ angular.module('omnibooks.auth', [])
     loggedInOrg: loggedInOrg,
     isLoggedIn: isLoggedIn,
     logOut: logOut,
-    getUsername: getUsername,
+    getUser: getUser,
     getOrg: getOrg
   };
 });

@@ -1,6 +1,6 @@
 angular.module('omnibooks.profile', ['ui.bootstrap'])
 
-.controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', '$state', 'auth', 
+.controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', '$state', 'auth',
   function($scope, fireBase, $stateParams, $modal, $state, auth) {
   $scope.enterBook = function(title, url, author, isbn) {
     if (title && url && author && isbn) {
@@ -12,12 +12,12 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
     }
   };
 
-  $scope.username = auth.getUsername().$id;
+  $scope.username = auth.getUser().$id;
   $scope.org = auth.getOrg();
 
   $scope.books = fireBase.getUserBookshelf($scope.org, $scope.username);
 
-  // get book id in org node 
+  // get book id in org node
   $scope.getBookId = function(book) {
     return fireBase.getOrgBookId(book);
   };
@@ -26,7 +26,7 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
     var id = $scope.getBookId(book);
     console.log(id);
     $stateParams.itemId = id;
-    $state.go("books",{itemId:id});   
+    $state.go("books",{itemId:id});
   };
 
   // modal methods
@@ -35,7 +35,7 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
     if(!$scope.error) {
       $scope.modalShown = !$scope.modalShown;
     }
-  }; 
+  };
 }])
 
 .directive('modal', function() {

@@ -66,7 +66,7 @@ angular.module('omnibooks.auth', [])
     return !!loggedInUser;
   };
 
-  var getUsername = function() {
+  var getUser = function() {
     return loggedInUser;
   };
 
@@ -82,7 +82,7 @@ angular.module('omnibooks.auth', [])
     loggedInOrg: loggedInOrg,
     isLoggedIn: isLoggedIn,
     logOut: logOut,
-    getUsername: getUsername,
+    getUser: getUser,
     getOrg: getOrg
   };
 });
@@ -90,8 +90,8 @@ angular.module('omnibooks.auth', [])
 
 angular.module('omnibooks')
 .controller('authController', ['$scope', '$state', 'auth', 'fireBase', '$rootScope', function ($scope, $state, auth, fireBase, $rootScope) {
-  $scope.orgs = ['purdue','Wellesley','Berkeley','Stanford'];
-  $scope.authInfo = {org: 'purdue', name: '', email: '', password: ''};
+  $scope.orgs = ['Purdue','Wellesley','Berkeley','Stanford'];
+  $scope.authInfo = {org: 'Purdue', name: '', email: '', password: ''};
   $scope.authInfo.org = $scope.orgs[0];
   $rootScope.loginBtnText = "Log in";
   $rootScope.loggedIn = false;

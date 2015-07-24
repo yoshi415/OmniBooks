@@ -24,6 +24,7 @@
         <li><a ng-click="goHome()" >OmniBooks<span class="border"></span></a></li>
         <li><a ng-click="goMarket()" >Market<span class="border"></span></a></li>
         <li><a ng-click="goProfile()" >Profile<span class="border"></span></a></li>
+        <li><a ng-click="goMail()">Mail-test<span class="border"></span></a></li>
         <div ng-controller="authController">
           <button id="jointop" ng-click=clickSignup() ng-hide="loggedIn">Signup</button>
           <button id="logintop" ng-click=clickLogin() >{{loginBtnText}}</button>
@@ -83,12 +84,13 @@
 
 
 
+  <script src="app.js"></script>
   <script src="js/firebase.js"></script>
   <script src="js/home.js"></script>
   <script src="js/profile.js"></script>
   <script src="js/market.js"></script>
   <script src="js/item.js"></script>
-  <script src="app.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/mail.js"></script>
   </body>
 </html>

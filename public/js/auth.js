@@ -1,19 +1,23 @@
-angular.module('omnibooks.auth', ['ui.bootstrap'])
+angular.module('omnibooks.auth', [])
 
 .factory('auth', function(fireBase) {
   var loggedInUser = null; // updated when user logs in
   var loggedInOrg  = null;
 
-
+  // success, failed are callbacks
   var signup = function (authInfo, success, failed) {
-    var existingUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
-    existingUser.$loaded().then(function () {
-      if(existingUser.userDetail){
-        console.log('Already exists');
+    // check the user-org object to see the username is available
+    var userOrg = fireBase.getUserOrg();
+
+    userOrg.$loaded().then(function () {
+      var org = userOrg[authInfo.name];
+      if(org){
+        console.log('user already exists');
         failed('The username is already registered. Try another name.');
         return;
       }
-      console.log('SIGNUP!');
+
+      // if available, save the user on the database
       fireBase.createUser(authInfo, function () {
         setLoggedInInfo(authInfo);
         success();
@@ -21,19 +25,31 @@ angular.module('omnibooks.auth', ['ui.bootstrap'])
     });
   };
 
+  // success, failed are callbacks
   var login = function (authInfo, success, failed) {
-    var existingUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
-    existingUser.$loaded().then(function () {
-      if(!existingUser.userDetail) {
+    // check the user-org object to get the org of the user
+    var userOrg = fireBase.getUserOrg();
+
+    userOrg.$loaded().then(function () {
+      var org = userOrg[authInfo.name];
+      if(!org){
         console.log('User not exists');
         failed('incorrect user name.');
         return;
       }
-      authInfo.email = existingUser.userDetail.email;
-      fireBase.authWithPassword(authInfo, function () {
-        setLoggedInInfo(authInfo);
-        success();
-      }, failed);
+
+      authInfo.org = org;
+      // get the email of the user to use firebase.authWithPassword
+      var existingUser = fireBase.getUserInfo(org, authInfo.name);
+
+      existingUser.$loaded().then(function () {
+        authInfo.email = existingUser.userDetail.email;
+
+        fireBase.authWithPassword(authInfo, function () {
+          setLoggedInInfo(authInfo);
+          success();
+        }, failed);
+      });
     });
   };
 
@@ -56,7 +72,7 @@ angular.module('omnibooks.auth', ['ui.bootstrap'])
 
   var getOrg = function() {
     return loggedInOrg;
-  }
+  };
 
 
   return {
@@ -67,8 +83,7 @@ angular.module('omnibooks.auth', ['ui.bootstrap'])
     isLoggedIn: isLoggedIn,
     logOut: logOut,
     getUsername: getUsername,
-    getOrg: getOrg,
-    signupShown: false
+    getOrg: getOrg
   };
 });
 
@@ -92,11 +107,9 @@ angular.module('omnibooks')
     $rootScope.loginShown = true;
   };
   $scope.login = function () {
-    hideError();
     auth.login($scope.authInfo, moveToMarket, showError);
   };
   $scope.signup = function () {
-
     auth.signup($scope.authInfo, moveToMarket, showError);
   };
   $scope.closeAuthForm = function () {
@@ -132,27 +145,6 @@ angular.module('omnibooks')
   $scope.closeAuthForm();
 
 }])
-.directive('authModal', function() {
-  return {
-    templateUrl: "../html/authForms.html",
-    restrict: 'E',
-    scope: {
-      show: '='
-    },
-    replace: true, // Replace with the template below
-    transclude: true, // we want to insert custom content inside the directive
-    link: function(scope, element, attrs) {
-      scope.dialogStyle = {};
-      if (attrs.width)
-        scope.dialogStyle.width = attrs.width;
-      if (attrs.height)
-        scope.dialogStyle.height = attrs.height;
-      scope.hideSignup = function() {
-        scope.show = false;
-      };
-    }
-  };
-})
 .run(['$rootScope', '$state', 'auth', function ($rootScope, $state, auth) {
   $rootScope.$on('$stateChangeStart', function (event, toState) {
     if(toState.name === "home"){

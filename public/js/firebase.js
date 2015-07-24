@@ -50,14 +50,21 @@ angular.module('omnibooks.database', ['firebase'])
         failed('the email address is already registered.');
         return;
       }
-      var ref = myDataRef.child(authInfo.org).child('users');
-      ref.child(authInfo.name).set({
+      var users = myDataRef.child(authInfo.org).child('users');
+      users.child(authInfo.name).set({
         userDetail: {
           email: authInfo.email
         }
       });
+      var userOrg = myDataRef.child('userOrg');
+      userOrg.child(authInfo.name).set(authInfo.org);
       success(authInfo);
     });
+  };
+
+  //return users list
+  var getUserOrg = function(){
+    return $firebaseObject(myDataRef.child('userOrg'));
   };
 
   //for login
@@ -78,6 +85,7 @@ angular.module('omnibooks.database', ['firebase'])
     getUserBookshelf: getUserBookshelf,
     getUserInfo: getUserInfo,
     createUser: createUser,
-    authWithPassword: authWithPassword
+    authWithPassword: authWithPassword,
+    getUserOrg: getUserOrg
   };
 });

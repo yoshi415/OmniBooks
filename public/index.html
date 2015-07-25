@@ -1,88 +1,76 @@
 <!doctype html>
 <html ng-app="omnibooks">
-  <head>
 
-    <link rel="stylesheet" href="css/reset.css" >
-    <!-- <link rel="stylesheet" href="css/bootstrap.css" > -->
-    <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="lib/modal/default.css" type="text/css">
-    <link rel="stylesheet" href="lib/modal/component.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css">
+<head>
+  <link rel="stylesheet" href="css/reset.css">
+  <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="lib/modal/default.css" type="text/css">
+  <link rel="stylesheet" href="lib/modal/component.css" type="text/css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="lib/angular/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
+  <title>OmniBooks</title>
+</head>
 
-    <script src="lib/angular/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
-    <title>OmniBooks</title>
+<body ng-controller="IndexController">
 
-  </head>
-  <body ng-controller="indexController">
-
-    <header>
-      <ul id="navigation">
-        <li><a ng-click="goHome()" >OmniBooks<span class="border"></span></a></li>
-        <li><a ng-click="goMarket()" >Market<span class="border"></span></a></li>
-        <li><a ng-click="goProfile()" >Profile<span class="border"></span></a></li>
-        <li><a ng-click="goMail()">Mail-test<span class="border"></span></a></li>
-        <div ng-controller="authController">
-          <button id="jointop" ng-click=clickSignup() ng-hide="loggedIn">Signup</button>
-          <button id="logintop" ng-click=clickLogin() >{{loginBtnText}}</button>
-        </div>
-      </ul>
-    </header>
-
-  <div ng-controller="authController">
-  <div class="loginLayer" ng-show="loginShown">
-
-    <a href="#x" class="overlay" id="login_form"></a>
-
-    <div class="box">
-      <h2>LOG IN</h2>
-      <input type="text" class="text-field" placeholder="Username" ng-model=authInfo.name />
-      <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
-      <div id="buttons">
-        <input type="button" value="Login" class="red" ng-click=login() />
-        <a href="#signup_form">
-        <input type="button" value="Sign up" class="blue"/>
-        </a>
+  <header>
+    <ul id="navigation">
+      <li><a ng-click="goHome()">OmniBooks<span class="border"></span></a></li>
+      <li><a ng-click="goMarket()">Market<span class="border"></span></a></li>
+      <li><a ng-click="goProfile()">Profile<span class="border"></span></a></li>
+      <div ng-controller="AuthController">
+        <button id="jointop" ng-click=clickSignup() ng-hide="loggedIn">Signup</button>
+        <button id="logintop" ng-click=clickLogin()>{{loginBtnText}}</button>
       </div>
-      <div class="errortext" ng-show="error">{{errorMessage}}</div>
-      </br>
-      <a class="close" href="#close" ng-click=closeAuthForm()></a>
+    </ul>
+  </header>
 
+  <div ng-controller="AuthController">
+    <div class="loginLayer" ng-show="loginShown">
+      <a href="#x" class="overlay" id="login_form"></a>
+      <div class="box">
+        <h2>LOG IN</h2>
+        <input type="text" class="text-field" placeholder="Username" ng-model=authInfo.name />
+        <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
+        <div id="buttons">
+          <input type="button" value="Login" class="red" ng-click=login() />
+          <a href="#signup_form">
+            <input type="button" value="Sign up" class="blue" />
+          </a>
+        </div>
+        <div class="errortext" ng-show="error">{{errorMessage}}</div>
+        </br>
+        <a class="close" href="#close" ng-click=closeAuthForm()></a>
+      </div>
     </div>
-  </div>
 
-  <div class="signupLayer" ng-show="signupShown">
-
-    <a href="#x" class="overlay" id="signup_form"></a>
-    <div class="box">
-      <h2>SIGN UP</h2>
-      <input type="email" class="text-field" placeholder="email" ng-model=authInfo.email />
-      <input type="text" class="text-field" placeholder="user name" ng-model=authInfo.name />
-      <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
-      <select
-        ng-model="authInfo.org"
-        ng-options="org for org in orgs">
-      </select>
-
-      <input type="button" value="signup" class="blue-round" ng-click=signup() /></br>
-      <p>Already have account? <a href="#login_form">Log In</a></p>
-      <a class="close" href="#" ng-click=closeAuthForm()></a>
-      <div class="errortext" ng-show="error">{{errorMessage}}</div>
+    <div class="signupLayer" ng-show="signupShown">
+      <a href="#x" class="overlay" id="signup_form"></a>
+      <div class="box">
+        <h2>SIGN UP</h2>
+        <input type="email" class="text-field" placeholder="email" ng-model=authInfo.email />
+        <input type="text" class="text-field" placeholder="user name" ng-model=authInfo.name />
+        <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
+        <select ng-model="authInfo.org" ng-options="org for org in orgs">
+        </select>
+        <input type="button" value="signup" class="blue-round" ng-click=signup() />
+        </br>
+        <p>Already have account? <a href="#login_form">Log In</a></p>
+        <a class="close" href="#" ng-click=closeAuthForm()></a>
+        <div class="errortext" ng-show="error">{{errorMessage}}</div>
+      </div>
+      </modal>
     </div>
-    </modal>
-  </div>
 
   </div>
-
 
   <div id='uiview'>
-     <ui-view autoscroll='false'/>
+    <ui-view autoscroll='false' />
   </div>
-
-
 
   <script src="app.js"></script>
   <script src="js/firebase.js"></script>
@@ -92,5 +80,6 @@
   <script src="js/item.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/mail.js"></script>
-  </body>
+</body>
+
 </html>

@@ -2,24 +2,23 @@ var express = require('express');
 var cors = require('cors');
 var http = require('http');
 var app = express();
-var bodyParser  = require('body-parser');
+var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
 var PORT_num = process.env.PORT;
 
-
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
-
-
-app.get('/bookDetail', cors(), function(req, res, next){
-console.log(req.query.book_isbn);
-var options = {
-  host: 'isbndb.com',
-  path: '/api/v2/json/UTUJEB5A/prices/'+req.query.book_isbn
-};
+app.get('/bookDetail', cors(), function(req, res, next) {
+  console.log(req.query.book_isbn);
+  var options = {
+    host: 'isbndb.com',
+    path: '/api/v2/json/UTUJEB5A/prices/' + req.query.book_isbn
+  };
 
   http.get(options, function(book) {
     var bodyChunks = [];
@@ -30,13 +29,11 @@ var options = {
       res.send(body);
     })
   });
-
-
 });
 
 app.post('/sendMail', function(req, res) {
   var data = req.body;
-  
+
   //gather mail options from body
   var mailOptions = {
     from: data.from, // sender address
@@ -46,7 +43,7 @@ app.post('/sendMail', function(req, res) {
     // html: data.html // html body
   };
   console.log(mailOptions)
-  
+
   //create transporter object w/ mailgun credentials
   var transporter = nodemailer.createTransport({
     service: 'Mailgun',
@@ -54,9 +51,8 @@ app.post('/sendMail', function(req, res) {
       user: 'omnibooks@sandboxd3dc8fa818a14352baca775bf44944f7.mailgun.org',
       pass: 'makersquare'
     }
-  })
-  
-  //send mail
+  });
+
   transporter.sendMail(mailOptions, function(error) {
     if (error) {
       console.log(error);
@@ -67,6 +63,5 @@ app.post('/sendMail', function(req, res) {
     }
   });
 });
-
 
 app.listen(PORT_num || 8000);

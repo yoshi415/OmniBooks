@@ -1,7 +1,7 @@
 <button ng-click="toggleModal()" class="btn btn-default padding">Send Offer</button>
 
 <modal show='modalShown' width='750px' height='60%'>
-  <form ng-controller="mailController">
+  <form ng-controller="MailController">
       <div class="form-group">
         <label for="to">To</label>
           <input type="text" id="to" placeholder='To' ng-model='to' />
@@ -11,7 +11,6 @@
           <input type='text' placeholder='Subject' ng-model='subject' />
         <label for="text">Text</label>
           <textarea name="text" placeholder='Text' ng-model='text' cols="40" rows="10"></textarea></br>
-        <!-- <input type='text' placeholder='Text' ng-model='text' /> -->
         <button class="btn btn-default" ng-click="sendMail()">Send Mail</button>
       </div>
   </form>

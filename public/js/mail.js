@@ -1,5 +1,5 @@
 angular.module('omnibooks.mail', [])
-  .controller('mailController', ['$scope', '$http', '$modal', 'fireBase',
+  .controller('MailController', ['$scope', '$http', '$modal', 'fireBase',
     function($scope, $http, $modal, fireBase) {
       $scope.sendMail = function() {
         // collect info from form
@@ -17,7 +17,7 @@ angular.module('omnibooks.mail', [])
         error(function(data, status, headers, config) {
           // console.log("error");
         });
-      }
+      };
 
       $scope.modalShown = false;
       $scope.toggleModal = function() {

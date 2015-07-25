@@ -19,4 +19,26 @@
 
 </div>
 
+<div>
+
+<p>Seller's asking price: {{ something }}</p>
+
+<button ng-click="toggleModal()" class="btn btn-default padding">Send Offer</button>
+
+<modal show='modalShown' width='750px' height='60%'>
+  <form ng-controller="MailController">
+      <div class="form-group">
+        <label for="to">To</label>
+          <input type="text" id="to" placeholder='To' ng-model='to' />
+        <label for="from">From</label>
+          <input type="text" placeholder='From' ng-model='from' />
+        <label for="subject">Subject</label>
+          <input type='text' placeholder='Subject' ng-model='subject' />
+        <label for="text">Text</label>
+          <textarea name="text" placeholder='Text' ng-model='text' cols="40" rows="10"></textarea></br>
+        <button class="btn btn-default" ng-click="sendMail()">Send Mail</button>
+      </div>
+  </form>
+</modal>
+
 

@@ -12,6 +12,11 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
       }
     };
 
+    $scope.deleteBook = function(book) {
+      console.log(book);
+      fireBase.deleteBook($scope.org, $scope.username, book.$id);
+    };
+
     $scope.username = auth.getUser().$id;
     $scope.org = auth.getOrg();
 

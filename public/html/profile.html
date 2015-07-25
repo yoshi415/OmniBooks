@@ -29,13 +29,13 @@
           <input type='text' placeholder='Book Title' ng-model='booktitle'>
           <input type="text" placeholder='Author' ng-model='author'>
           <input type="text" placeholder='ISBN number' ng-model='isbn'>
+          <input type="text" placeholder='Asking Price' ng-model='price'>
         </div>
       </form>
       <div>
         <span class="entryError">{{error}}</span>
       </div>
-      <button class="btn btn-default" id='sellButton' class="md-trigger"
-              ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleUploadModal()">Submit</button>
+      <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="enterBook(booktitle, bookimgurl, author, isbn, price); toggleModal()">Submit</button>
     </modal>
   </div>
 

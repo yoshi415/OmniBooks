@@ -2,10 +2,13 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
 
 .controller('ProfileController', ['$scope', '$stateParams', '$modal', '$state', 'auth', 'fireBase',
   function($scope, $stateParams, $modal, $state, auth, fireBase) {
-    $scope.enterBook = function(title, url, author, isbn) {
+    var currentOrg = auth.getOrg();
+    var currentUser = auth.getUser();
+
+    $scope.enterBook = function(title, url, author, isbn, price) {
       if (title && url && author && isbn) {
         $scope.error = false;
-        fireBase.enterBook($scope.org, $scope.username, title, url, author, isbn);
+        fireBase.enterBook(currentOrg, currentUser.$id, title, url, author, isbn, price);
         console.log('successfully entered');
       } else {
         $scope.error = "*You must fill out all required fields";

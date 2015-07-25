@@ -3,9 +3,11 @@ angular.module('omnibooks.item', [])
     function($scope, $stateParams, $modal, fireBase, bookAPI, auth) {
       var currentOrg = auth.getOrg();
       var currentUser = auth.getUser();
+
       var displayDetail = function(res) {
         $scope.prices = res.data.data;
       };
+      
       $scope.itemId = $stateParams.itemId;
       $scope.book = fireBase.getUserBook(currentOrg, currentUser.$id, $scope.itemId, function(data) {
         bookAPI.getDetail(data.isbn, displayDetail);

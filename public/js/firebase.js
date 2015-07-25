@@ -36,6 +36,7 @@ angular.module('omnibooks.database', ['firebase'])
         callback(dataSnapshot.val());
         ref.off();
       });
+      console.log($firebaseObject(ref))
       return $firebaseObject(ref);
     };
 

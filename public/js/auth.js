@@ -89,7 +89,7 @@ angular.module('omnibooks')
   .controller('AuthController', ['$scope', '$state', 'auth', 'fireBase', '$rootScope', function($scope, $state, auth, fireBase, $rootScope) {
     $scope.orgs = ['Purdue', 'Wellesley', 'Berkeley', 'Stanford'];
     $scope.authInfo = {
-      org: 'Purdue',
+      org: '',
       name: '',
       email: '',
       password: ''
@@ -147,7 +147,7 @@ angular.module('omnibooks')
 
     function resetUserInfo() {
       $scope.authInfo = {
-        org: 'purdue',
+        org: '',
         name: '',
         email: '',
         password: ''

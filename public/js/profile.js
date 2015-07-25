@@ -44,6 +44,7 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
       $scope.editModalShown = !$scope.editModalShown;
     }
   };
+}])
 
 .directive('modal', function() {
   return {

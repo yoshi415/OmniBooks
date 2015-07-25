@@ -14,8 +14,15 @@ angular.module('omnibooks.database', ['firebase'])
       myDataRef.child(org).child('users').child(username).child('bookshelf').push(bookDetails);
     };
 
+    var deleteBook = function(org, user, bookId) {
+      var link = 'https://shutorial.firebaseio.com/' + org + '/users/' + user + '/bookshelf/' + bookId;
+      var ref = new Firebase(link);
+      console.log(link);
+      ref.remove();
+    };
+
     //get all books in same org
-    var getOrgBook = function(org) {
+    var getOrgBook = function(org){
       var ref = myDataRef.child(org).child('books');
       return $firebaseArray(ref);
     };
@@ -78,6 +85,7 @@ angular.module('omnibooks.database', ['firebase'])
 
     return {
       enterBook: enterBook,
+      deleteBook: deleteBook,
       getOrgBook: getOrgBook,
       getUserBook: getUserBook,
       getUserBookshelf: getUserBookshelf,

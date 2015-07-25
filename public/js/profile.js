@@ -12,6 +12,11 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
       }
     };
 
+    $scope.deleteBook = function(book) {
+      console.log(book);
+      fireBase.deleteBook($scope.org, $scope.username, book.$id);
+    };
+
     $scope.username = auth.getUser().$id;
     $scope.org = auth.getOrg();
 
@@ -31,15 +36,20 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
       });
     };
 
-    // modal methods
-    $scope.modalShown = false;
-    $scope.toggleModal = function() {
-      if (!$scope.error) {
-        $scope.modalShown = !$scope.modalShown;
-      }
-    };
-  }
-])
+  // modal methods
+  $scope.animationsEnabled = true;
+  $scope.modalShown = false;
+  $scope.toggleUploadModal = function() {
+    if(!$scope.error) {
+      $scope.uploadModalShown = !$scope.uploadModalShown;
+    }
+  }; 
+  $scope.toggleEditModal = function() {
+    if(!$scope.error) {
+      $scope.editModalShown = !$scope.editModalShown;
+    }
+  };
+}])
 
 .directive('modal', function() {
   return {
@@ -61,4 +71,26 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
       };
     }
   };
-});
+})
+
+.directive('bookEdit', function() {
+  return {
+    templateUrl: "../html/bookUpload.html",
+    restrict: 'E',
+    scope: {
+      show: '='
+    },
+    replace: true, // Replace with the template below
+    transclude: true, // we want to insert custom content inside the directive
+    link: function(scope, element, attrs) {
+      scope.dialogStyle = {};
+      if (attrs.width)
+        scope.dialogStyle.width = attrs.width;
+      if (attrs.height)
+        scope.dialogStyle.height = attrs.height;
+      scope.hideModal = function() {
+        scope.show = false;
+      };
+    }
+  };
+})

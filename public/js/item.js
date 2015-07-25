@@ -1,6 +1,6 @@
 angular.module('omnibooks.item', [])
-  .controller('ItemController', ['$scope', '$stateParams', 'fireBase', 'bookAPI', 'auth',
-    function($scope, $stateParams, fireBase, bookAPI, auth) {
+  .controller('ItemController', ['$scope', '$stateParams', '$modal', 'fireBase', 'bookAPI', 'auth',
+    function($scope, $stateParams, $modal, fireBase, bookAPI, auth) {
       var currentOrg = auth.getOrg();
       var currentUser = auth.getUser();
       var displayDetail = function(res) {
@@ -11,6 +11,12 @@ angular.module('omnibooks.item', [])
         bookAPI.getDetail(data.isbn, displayDetail);
       });
 
+      $scope.modalShown = false;
+      $scope.toggleModal = function() {
+        if (!$scope.error) {
+          $scope.modalShown = !$scope.modalShown;
+        }
+      };
     }
   ])
   .factory('bookAPI', function($http) {

@@ -32,11 +32,6 @@ angular.module('omnibooks', [
         templateUrl: 'html/item.html',
         controller: 'ItemController',
       })
-      .state('mail', {
-        url: '/mail',
-        templateUrl: 'html/mail.html',
-        controller: 'MailController'
-      });
   })
   .controller('IndexController', ['$scope', '$location', '$state', '$firebaseObject', 'fireBase',
     function($scope, $location, $state, $firebaseObject, fireBase) {
@@ -51,9 +46,6 @@ angular.module('omnibooks', [
       };
       $scope.goItem = function() {
         $location.path('/item');
-      };
-      $scope.goMail = function() {
-        $location.path('/mail');
       };
     }
   ]);

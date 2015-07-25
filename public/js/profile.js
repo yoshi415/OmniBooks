@@ -1,24 +1,26 @@
 angular.module('omnibooks.profile', ['ui.bootstrap'])
+.controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal','$rootScope',
+  function($scope, fireBase, $stateParams, $modal ,$rootScope) {
+    $scope.enterBook = function(title, url, author, isbn) {
+      if (title && url && author && isbn) {
+        $scope.error = false;
+        fireBase.enterBook(title, url, author, isbn);
+        console.log('successfully entered');
+      } else {
+        $scope.error = "You must fill out all required fields";
+      }
+    };
+    $scope.userId = $stateParams.userId;
+    $scope.modalShown = false;
+    $scope.books = fireBase.getOrgBook($rootScope.authInfo.org);
+    $scope.user = $rootScope.authInfo.name;
 
-.controller('profileController', ['$scope', 'fireBase', '$stateParams', '$modal', function($scope, fireBase, $stateParams, $modal) {
-  $scope.enterBook = function(title, url, author, isbn) {
-    if (title && url && author && isbn) {
-      $scope.error = false;
-      fireBase.enterBook(title, url, author, isbn);
-      console.log('successfully entered');
-    } else {
-      $scope.error = "You must fill out all required fields";
-    }
-  };
-  $scope.userId = $stateParams.userId;
-  $scope.modalShown = false;
-  $scope.toggleModal = function() {
-    if(!$scope.error) {
-      $scope.modalShown = !$scope.modalShown;
-    }
-  };
-}])
-
+    $scope.toggleModal = function() {
+      if(!$scope.error) {
+        $scope.modalShown = !$scope.modalShown;
+      }
+    };
+  }])
 .directive('modal', function() {
   return {
     templateUrl: "../html/bookUpload.html",

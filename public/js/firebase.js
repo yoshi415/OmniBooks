@@ -1,15 +1,16 @@
 angular.module('omnibooks.database', ['firebase'])
-.factory('fireBase', function($firebaseArray, $firebaseObject) {
+.factory('fireBase', function($firebaseArray, $firebaseObject, $rootScope) {
   var myDataRef = new Firebase('https://shutorial.firebaseio.com/');
   var org = 'purdue';
   var username = 'richie';
 
-  var enterBook = function(title, img, author, isbn) {
+  var enterBook = function(title, img, author, isbn, username) {
     myDataRef.child(org).child('books').push({
       title: title,
       img: img,
       author: author,
-      isbn: isbn
+      isbn: isbn,
+      createBy:username
     });
   };
 

@@ -1,13 +1,13 @@
 angular.module('omnibooks.item', [])
-.controller('itemController',['$scope','$stateParams','fireBase','bookAPI',
-  function ($scope,$stateParams,fireBase,bookAPI) {
-    var org = 'purdue';
-    var user = 'daichuqi'
+.controller('itemController',['$scope','$stateParams','fireBase','bookAPI','$rootScope',
+  function ($scope,$stateParams,fireBase,bookAPI,$rootScope) {
+    var org = $rootScope.authInfo.org;
+    var user = $rootScope.authInfo.name;
     var displayDetail = function(res){
       $scope.prices = res.data.data;
     }
     $scope.itemId = $stateParams.itemId;
-    $scope.book = fireBase.getUserBook(org,user,$scope.itemId,function(data){
+    $scope.book = fireBase.getUserBook($scope.itemId,function(data){
       bookAPI.getDetail(data.isbn,displayDetail);
     });
 

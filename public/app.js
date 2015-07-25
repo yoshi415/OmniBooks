@@ -47,7 +47,6 @@ angular.module('omnibooks', [
     $location.path('/item');
   };
 
-
    $scope.options = [{
           name: 'Purdue',
           value: 'Purdue'

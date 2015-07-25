@@ -1,14 +1,17 @@
 <div class="padding">
   <h1>Welcome, {{profile.name}}!</h1>
   <h2>Your bookshelf</h2>
-  <div ng-repeat="book in books">
+
+    <div id='bookshelf'>
     <ul>
-      <li class='bookitem' ng-repeat="book in books | filter:search">
-        <img src=" {{book.url}} ">
-        <p>  {{ book.title }} </p>
-        <p>  {{ book.author}} </p>
-      </li>
-    </ul>
+    <li class='bookitem' ng-repeat="book in books | filter: user ">
+      <a ng-click="findDetail(book)">
+        <img src=" {{book.img}} ">
+        <p class="booktitle">  {{ book.title }} </p>
+        <p class="bookauthor"> {{ book.author}} </p>
+      </a>
+    </li>
+  </ul>
   </div>
 
   <button ng-click="toggleModal()" class="btn btn-default">Sell</button>

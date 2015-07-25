@@ -78,6 +78,14 @@ angular.module('omnibooks.database', ['firebase'])
     });
   };
 
+  // auto login
+  var autoLogin = function (callback) {
+    var authData = myDataRef.getAuth();
+    if(authData){
+      callback(authData);
+    }
+  };
+
   return {
     enterBook: enterBook,
     getOrgBook: getOrgBook,
@@ -86,6 +94,7 @@ angular.module('omnibooks.database', ['firebase'])
     getUserInfo: getUserInfo,
     createUser: createUser,
     authWithPassword: authWithPassword,
-    getUserOrg: getUserOrg
+    getUserOrg: getUserOrg,
+    autoLogin: autoLogin
   };
 });

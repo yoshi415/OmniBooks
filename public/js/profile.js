@@ -8,6 +8,10 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
     $scope.enterBook = function(title, url, author, isbn, price) {
       if (title && url && author && isbn) {
         $scope.error = false;
+        if (isbn.charAt(3) === '-') {
+          isbn = isbn.slice(0, 3) + isbn.slice(4)
+          console.log(isbn)
+        }
         fireBase.enterBook(currentOrg, currentUser.$id, title, url, author, isbn, price);
         console.log('successfully entered');
       } else {

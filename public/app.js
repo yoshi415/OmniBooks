@@ -15,45 +15,37 @@ angular.module('omnibooks', [
       .state('home', {
         url: '/home',
         templateUrl: 'html/home.html',
-        controller: 'homeController'
+        controller: 'HomeController'
       })
       .state('profile', {
         url: '/profile',
         templateUrl: 'html/profile.html',
-        controller: 'profileController'
+        controller: 'ProfileController'
       })
       .state('market', {
         url: '/market',
         templateUrl: 'html/market.html',
-        controller: 'marketController'
+        controller: 'MarketController'
       })
       .state('books', {
         url: '/item/:itemId',
         templateUrl: 'html/item.html',
-        controller: 'itemController',
+        controller: 'ItemController',
       })
-      .state('mail', {
-        url: '/mail',
-        templateUrl: 'html/mail.html',
-        controller: 'mailController'
-      });
   })
-  .controller('indexController', ['$scope', '$location', '$state', '$firebaseObject', 'fireBase', function($scope, $location, $state, $firebaseObject, fireBase) {
-
-    $scope.goHome = function() {
-      $location.path('/home');
-    };
-    $scope.goProfile = function() {
-      $location.path('/profile');
-    };
-    $scope.goMarket = function() {
-      $location.path('/market');
-    };
-    $scope.goItem = function() {
-      $location.path('/item');
-    };
-    $scope.goMail = function() {
-      $location.path('/mail')
-    };
-
-  }]);
+  .controller('IndexController', ['$scope', '$location', '$state', '$firebaseObject', 'fireBase',
+    function($scope, $location, $state, $firebaseObject, fireBase) {
+      $scope.goHome = function() {
+        $location.path('/home');
+      };
+      $scope.goProfile = function() {
+        $location.path('/profile');
+      };
+      $scope.goMarket = function() {
+        $location.path('/market');
+      };
+      $scope.goItem = function() {
+        $location.path('/item');
+      };
+    }
+  ]);

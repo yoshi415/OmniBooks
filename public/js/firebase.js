@@ -2,12 +2,14 @@ angular.module('omnibooks.database', ['firebase'])
   .factory('fireBase', function($firebaseArray, $firebaseObject) {
     var myDataRef = new Firebase('https://shutorial.firebaseio.com/');
 
-    var enterBook = function(org, username, title, img, author, isbn) {
+    var enterBook = function(org, username, title, img, author, isbn, price) {
       var bookDetails = {
         title: title,
         img: img,
         author: author,
-        isbn: isbn
+        isbn: isbn,
+        createdBy: username,
+        askingPrice: price
       };
       // push book details in org books and user bookshelf nodes
       myDataRef.child(org).child('books').push(bookDetails);

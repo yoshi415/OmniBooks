@@ -5,17 +5,14 @@
     <h2>Your Bookshelf</h2>
   </div>
 
-<!--   <div>
-    <h2 id="bookshelfTitle">Your bookshelf</h2>
-  </div> -->
   <div class="container" id="bookshelf">
     <ul>
       <li class='bookitem' ng-repeat="book in books | filter:search">
-      <a ng-click="">
-        <img src=" {{book.img}} ">
-        <p class="booktitle">  {{ book.title }} </p>
-        <p class="bookauthor">  {{ book.author}} </p>
-      </a>
+        <a ng-click="">
+          <img src=" {{book.img}} ">
+          <p class="booktitle"> {{ book.title }} </p>
+          <p class="bookauthor"> {{ book.author}} </p>
+        </a>
       </li>
     </ul>
   </div>
@@ -25,18 +22,16 @@
       <form role="form">
         <h1 id="bookUpload">Enter book information here!</h1>
         <div class="form-group">
-          <input type="text" placeholder = 'Book Image Url' ng-model= 'bookimgurl'>
-          <input type='text'  placeholder = 'Book Title' ng-model = 'booktitle'>
-          <input type="text" placeholder = 'Author' ng-model= 'author'>
-          <input type="text" placeholder = 'ISBN number' ng-model= 'isbn'>
+          <input type="text" placeholder='Book Image Url' ng-model='bookimgurl'>
+          <input type='text' placeholder='Book Title' ng-model='booktitle'>
+          <input type="text" placeholder='Author' ng-model='author'>
+          <input type="text" placeholder='ISBN number' ng-model='isbn'>
         </div>
       </form>
       <div>
         <span class="entryError">{{error}}</span>
       </div>
-      <button class="btn btn-default" id='sellButton' class="md-trigger"
-              ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleModal()">Submit</button>
+      <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleModal()">Submit</button>
     </modal>
   </div>
-
 </div>

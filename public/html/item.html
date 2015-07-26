@@ -13,17 +13,12 @@
   </div>
 
   <div id= 'itemRight'>
-
-
+    <p>Seller's asking price: {{ book.askingPrice | currency }}</p>
+    <button ng-click="toggleModal()" class="btn btn-default">Send Offer</button>
   </div>
 
-</div>
-
+  </div>
 <div>
-
-<p>Seller's asking price: {{ book.askingPrice | currency }}</p>
-
-<button ng-click="toggleModal()" class="btn btn-default padding">Send Offer</button>
 
 <modal show='modalShown' width='750px' height='60%'>
   <form ng-controller="MailController">

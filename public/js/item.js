@@ -7,7 +7,6 @@ angular.module('omnibooks.item', [])
       var displayDetail = function(res) {
         $scope.prices = res.data.data;
       };
-
       $scope.itemId = $stateParams.itemId;
       $scope.book = fireBase.getUserBook(currentOrg, currentUser.$id, $scope.itemId, function(data) {
         bookAPI.getDetail(data.isbn, displayDetail);

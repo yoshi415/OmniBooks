@@ -12,14 +12,16 @@ angular.module('omnibooks.database', ['firebase'])
         askingPrice: price
       };
       // push book details in org books and user bookshelf nodes
-      myDataRef.child(org).child('books').push(bookDetails);
-      myDataRef.child(org).child('users').child(username).child('bookshelf').push(bookDetails);
+      var newBookRef = myDataRef.child(org).child('books').push(bookDetails);
+      var bookID = newBookRef.key();
+      myDataRef.child(org).child('users').child(username).child('bookshelf').child(bookID).set(bookDetails);
     };
 
     var deleteBook = function(org, user, bookId) {
-      var link = 'https://shutorial.firebaseio.com/' + org + '/users/' + user + '/bookshelf/' + bookId;
-      var ref = new Firebase(link);
-      console.log(link);
+      // var link = 'https://shutorial.firebaseio.com/' + org + '/users/' + user + '/bookshelf/' + bookId;
+      // var ref = new Firebase(link);
+      // console.log(link);
+      var ref = myDataRef.child(org).child('users').child(user).child('bookshelf').child(bookId);
       ref.remove();
     };
 

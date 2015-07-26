@@ -55,8 +55,8 @@
         <input type="email" class="text-field" placeholder="email" ng-model=authInfo.email />
         <input type="text" class="text-field" placeholder="user name" ng-model=authInfo.name />
         <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
-        <select ng-model="authInfo.org" ng-options="org for org in orgs">
-        </select>
+
+        <select ng-model="authInfo.org" ng-options="org for org in orgs"></select>
         <input type="button" value="signup" class="blue-round" ng-click=signup() />
         </br>
         <p>Already have account? <a href="#login_form">Log In</a></p>

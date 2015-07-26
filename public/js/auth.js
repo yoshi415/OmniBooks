@@ -7,7 +7,6 @@ angular.module('omnibooks.auth', [])
   var signup = function(authInfo, success, failed) {
     // check the user-org object to see the username is available
     var userOrg = fireBase.getUserOrg();
-
     userOrg.$loaded().then(function() {
       var org = userOrg[authInfo.name];
       if (org) {

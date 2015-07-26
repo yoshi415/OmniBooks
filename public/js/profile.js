@@ -1,5 +1,4 @@
 angular.module('omnibooks.profile', ['ui.bootstrap'])
-
 .controller('ProfileController', ['$scope', '$stateParams', '$modal', '$state', 'auth', 'fireBase',
   function($scope, $stateParams, $modal, $state, auth, fireBase) {
     var currentOrg = auth.getOrg();
@@ -18,7 +17,7 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
           price = price.slice(1);
           console.log(price)
         }
-        
+
         fireBase.enterBook(currentOrg, currentUser.$id, title, url, author, isbn, price);
         console.log('successfully entered');
       } else {
@@ -62,7 +61,7 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
     if(!$scope.error) {
       $scope.uploadModalShown = !$scope.uploadModalShown;
     }
-  }; 
+  };
   $scope.toggleEditModal = function() {
     if(!$scope.error) {
       $scope.editModalShown = !$scope.editModalShown;
@@ -101,7 +100,7 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
 //     transclude: true,
 //     template: '<div ng-show="showme"> hello </div>',
 //       link: function (scope, element, attrs) { //
-//         scope.showme=true; 
+//         scope.showme=true;
 //       }
 //   }
 // })

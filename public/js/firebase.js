@@ -1,5 +1,5 @@
 angular.module('omnibooks.database', ['firebase'])
-  .factory('fireBase', function($firebaseArray, $firebaseObject) {
+.factory('fireBase', function($firebaseArray, $firebaseObject) {
     var myDataRef = new Firebase('https://shutorial.firebaseio.com/');
 
     var enterBook = function(org, username, title, img, author, isbn, price) {
@@ -16,7 +16,6 @@ angular.module('omnibooks.database', ['firebase'])
       var bookID = newBookRef.key();
       myDataRef.child(org).child('users').child(username).child('bookshelf').child(bookID).set(bookDetails);
     };
-
     var deleteBook = function(org, user, bookId) {
       myDataRef.child(org).child('users').child(user).child('bookshelf').child(bookId).remove();
       myDataRef.child(org).child('books').child(bookId).remove()

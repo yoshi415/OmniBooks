@@ -1,5 +1,5 @@
 angular.module('omnibooks.market', [])
-  .controller('MarketController', ['$state', '$scope', '$stateParams', 'fireBase', 'auth',
+.controller('MarketController', ['$state', '$scope', '$stateParams', 'fireBase', 'auth',
     function($state, $scope, $stateParams, fireBase, auth) {
       $scope.findDetail = function(book) {
         $stateParams.itemId = book.$id;

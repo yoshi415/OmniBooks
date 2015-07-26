@@ -1,7 +1,6 @@
 <div class="padding">
 
-  <button id="sellBtn" ng-click="toggleUploadModal()" class="btn btn-default pull-right">Sell</button>
-  <div>
+  <div id="greeting">
     <h1 id="welcome">Welcome, {{username}}!</h1>
     <h2>Your Bookshelf</h2>
   </div>
@@ -16,6 +15,13 @@
       </a>
       <button class="btn btn-default" id='sellButton' class="md-trigger"
         ng-click="deleteBook(book)">Delete Book</button>
+      </li>
+
+      <li class='bookitem'>
+        <a ng-click="toggleUploadModal()" class="link">
+        <img src="../images/book.jpg ">
+        <p class="booktitle">  Sell A Book </p>
+        </a>
       </li>
     </ul>
   </div>

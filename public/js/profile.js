@@ -18,6 +18,7 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
           price = price.slice(1);
           console.log(price)
         }
+        
         fireBase.enterBook(currentOrg, currentUser.$id, title, url, author, isbn, price);
         console.log('successfully entered');
       } else {

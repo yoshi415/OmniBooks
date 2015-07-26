@@ -51,6 +51,16 @@ angular.module('omnibooks.database', ['firebase'])
       return $firebaseObject(myDataRef.child(org).child('users').child(username));
     };
 
+    //get user detail info, return object
+    var getUserEmail = function(org, username, callback) {
+      var ref = myDataRef.child(org).child('users').child(username).child('userDetail/email');
+      ref.on('value', function(dataSnapshot) {
+        callback(dataSnapshot.val());
+        ref.off();
+      })
+      return $firebaseObject(ref);
+    };
+
     //for signup
     var createUser = function(authInfo, success, failed) {
       myDataRef.createUser(authInfo, function(err, userData) {
@@ -95,6 +105,7 @@ angular.module('omnibooks.database', ['firebase'])
       getUserInfo: getUserInfo,
       createUser: createUser,
       authWithPassword: authWithPassword,
-      getUserOrg: getUserOrg
+      getUserOrg: getUserOrg,
+      getUserEmail: getUserEmail
     };
   });

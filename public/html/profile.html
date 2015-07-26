@@ -8,11 +8,11 @@
   <div class="container" id="bookshelf">
     <ul>
       <li class='bookitem' ng-repeat="book in books | filter:search">
-      <a ng-click="findDetail(book)" class="link">
+      <div><a ng-click="findDetail(book)" class="link">
         <img src=" {{book.img}} ">
         <p class="booktitle">  {{ book.title }} </p>
         <p class="bookauthor">  {{ book.author}} </p>
-      </a>
+      </a></div>
       <button class="btn btn-default" id='sellButton' class="md-trigger"
         ng-click="toggleEditModal()">Edit Book</button>
       <button class="btn btn-default" id='sellButton' class="md-trigger"

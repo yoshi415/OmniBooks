@@ -14,7 +14,7 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
           console.log(isbn)
         }
 
-        if (price.charAt(0) === $) {
+        if (price.charAt(0) === '$') {
           price = price.slice(1);
           console.log(price)
         }

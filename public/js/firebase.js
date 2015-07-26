@@ -18,11 +18,8 @@ angular.module('omnibooks.database', ['firebase'])
     };
 
     var deleteBook = function(org, user, bookId) {
-      // var link = 'https://shutorial.firebaseio.com/' + org + '/users/' + user + '/bookshelf/' + bookId;
-      // var ref = new Firebase(link);
-      // console.log(link);
-      var ref = myDataRef.child(org).child('users').child(user).child('bookshelf').child(bookId);
-      ref.remove();
+      myDataRef.child(org).child('users').child(user).child('bookshelf').child(bookId).remove();
+      myDataRef.child(org).child('books').child(bookId).remove()
     };
 
     //get all books in same org

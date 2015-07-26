@@ -36,13 +36,13 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
 
     $scope.books = fireBase.getUserBookshelf($scope.org, $scope.username);
 
-    // get book id in org node
-    $scope.getBookId = function(book) {
-      return fireBase.getOrgBookId(book);
-    };
+    // // get book id in org node
+    // $scope.getBookId = function(book) {
+    //   return fireBase.getOrgBookId(book);
+    // };
 
     $scope.findDetail = function(book) {
-      var id = $scope.getBookId(book);
+      var id = book.$id;
       console.log(id);
       $stateParams.itemId = id;
       $state.go("books", {

@@ -29,11 +29,9 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
       console.log(book);
       fireBase.deleteBook($scope.org, $scope.username, book.$id);
     };
-
     $scope.username = auth.getUser().$id;
     $scope.org = auth.getOrg();
     $scope.noBooks = false;
-
     $scope.books = fireBase.getUserBookshelf($scope.org, $scope.username);
 
     if($scope.books.length === 0) {

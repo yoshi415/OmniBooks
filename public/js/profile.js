@@ -33,16 +33,21 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
 
     $scope.username = auth.getUser().$id;
     $scope.org = auth.getOrg();
+    $scope.noBooks = false;
 
     $scope.books = fireBase.getUserBookshelf($scope.org, $scope.username);
 
-    // get book id in org node
-    $scope.getBookId = function(book) {
-      return fireBase.getOrgBookId(book);
-    };
+    if($scope.books.length === 0) {
+      noBooks = true;
+    }
+
+    // // get book id in org node
+    // $scope.getBookId = function(book) {
+    //   return fireBase.getOrgBookId(book);
+    // };
 
     $scope.findDetail = function(book) {
-      var id = $scope.getBookId(book);
+      var id = book.$id;
       console.log(id);
       $stateParams.itemId = id;
       $state.go("books", {
@@ -87,24 +92,16 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
   };
 })
 
-.directive('bookEdit', function() {
-  return {
-    templateUrl: "../html/bookUpload.html",
-    restrict: 'E',
-    scope: {
-      show: '='
-    },
-    replace: true, // Replace with the template below
-    transclude: true, // we want to insert custom content inside the directive
-    link: function(scope, element, attrs) {
-      scope.dialogStyle = {};
-      if (attrs.width)
-        scope.dialogStyle.width = attrs.width;
-      if (attrs.height)
-        scope.dialogStyle.height = attrs.height;
-      scope.hideModal = function() {
-        scope.show = false;
-      };
-    }
-  };
-})
+// .directive('noBooksMessage', function() {
+//   return {
+//     restrict: 'E',
+//     scope: {
+//       show: '='
+//     },
+//     transclude: true,
+//     template: '<div ng-show="showme"> hello </div>',
+//       link: function (scope, element, attrs) { //
+//         scope.showme=true; 
+//       }
+//   }
+// })

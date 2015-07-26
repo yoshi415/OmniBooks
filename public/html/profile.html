@@ -1,37 +1,65 @@
 <div class="padding">
-  <h1>Welcome, {{profile.name}}!</h1>
-  <h2>Your bookshelf</h2>
 
-    <div id='bookshelf'>
-    <ul>
-    <li class='bookitem' ng-repeat="book in books | filter: user ">
-      <a ng-click="findDetail(book)">
-        <img src=" {{book.img}} ">
-        <p class="booktitle">  {{ book.title }} </p>
-        <p class="bookauthor"> {{ book.author}} </p>
-      </a>
-    </li>
-  </ul>
+  <button id="sellBtn" ng-click="toggleUploadModal()" class="btn btn-default pull-right">Sell</button>
+  <div>
+    <h1 id="welcome">Welcome, {{username}}!</h1>
+    <h2>Your Bookshelf</h2>
   </div>
 
-  <button ng-click="toggleModal()" class="btn btn-default">Sell</button>
+  <div class="container" id="bookshelf">
+    <ul>
+      <li class='bookitem' ng-repeat="book in books | filter:search">
+      <a ng-click="findDetail(book)" class="link">
+        <img src=" {{book.img}} ">
+        <p class="booktitle">  {{ book.title }} </p>
+        <p class="bookauthor">  {{ book.author}} </p>
+      </a>
+      <button class="btn btn-default" id='sellButton' class="md-trigger"
+        ng-click="toggleEditModal()">Edit Book</button>
+      <button class="btn btn-default" id='sellButton' class="md-trigger"
+        ng-click="deleteBook(book)">Delete Book</button>
+      <!-- <noBooksMessage show="showme">hi</noBooksMessage> -->
+      </li>
+    </ul>
+  </div>
+
   <div modal-show="showDialog" class="modal fade">
-    <modal title="bookUpload" show='modalShown'>
+    <modal title="bookUpload" show='uploadModalShown'>
       <form role="form">
         <h1 id="bookUpload">Enter book information here!</h1>
         <div class="form-group">
-          <input type="text" placeholder = 'Book Image Url' ng-model= 'bookimgurl'>
+          <input type="text" placeholder='Book Image Url' ng-model='bookimgurl'>
+          <input type='text' placeholder='Book Title' ng-model='booktitle'>
+          <input type="text" placeholder='Author' ng-model='author'>
+          <input type="text" placeholder='ISBN number' ng-model='isbn'>
+          <input type="text" placeholder='Asking Price' ng-model='price'>
+        </div>
+      </form>
+      <div>
+        <span class="entryError">{{error}}</span>
+      </div>
+      <button class="btn btn-default" id='sellButton' class="md-trigger" ng-click="enterBook(booktitle, bookimgurl, author, isbn, price); toggleUploadModal()">Submit</button>
+    </modal>
+  </div>
+
+  <div modal-show="showDialog" class="modal fade">
+    <modal title="bookEdit" show='editModalShown'>
+      <form role="form">
+        <h1 id="bookUpload">Edit book information:</h1>
+        <div class="form-group">
+          <input type="text" placeholder = 'Image url' ng-model= 'bookimgurl'>
           <input type='text'  placeholder = 'Book Title' ng-model = 'booktitle'>
           <input type="text" placeholder = 'Author' ng-model= 'author'>
           <input type="text" placeholder = 'ISBN number' ng-model= 'isbn'>
         </div>
       </form>
       <div>
-        <span>{{error}}</span>
+        <span class="entryError">{{error}}</span>
       </div>
       <button class="btn btn-default" id='sellButton' class="md-trigger"
-              ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleModal()">Submit</button>
+              ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleEditModal()">Update Book</button>
     </modal>
   </div>
 
 </div>
+

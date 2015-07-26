@@ -265,6 +265,45 @@ footer a:active  {
   font-weight: bold;
 }
 
+#bookshelfTitle {
+  font-weight: bold;
+  position: absolute;
+}
+
+#welcome {
+  font-weight: bold;
+}
+
+.bookshelfHeader {
+  position: fixed;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.entryError {
+  font-style: italic;
+  color: grey;
+  font-size: 13px;
+}
+
+.link .editNote {
+  position: relative;
+  bottom: 200px;
+  visibility: hidden;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  color: white;
+  transition: background-color .6s, color .2s;
+  background-color: rgba(75, 109, 134, 0.89);
+}
+
+.link:hover .editNote {
+  visibility:visible;
+}
+
+
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */
   position:absolute;

@@ -1,10 +1,32 @@
-angular.module('omnibooks.profile', ['ui.bootstrap'])
-.controller('ProfileController', ['$scope', '$stateParams', '$modal', '$state', 'auth', 'fireBase',
-  function($scope, $stateParams, $modal, $state, auth, fireBase) {
+angular.module('omnibooks.profile', ['ui.bootstrap','ngFileUpload'])
+.controller('ProfileController', ['$scope', '$stateParams', '$modal', '$state', 'auth', 'fireBase','Upload','$http',
+  function($scope, $stateParams, $modal, $state, auth, fireBase, Upload,$http) {
     var currentOrg = auth.getOrg();
     var currentUser = auth.getUser();
 
-    $scope.enterBook = function(title, url, author, isbn, price) {
+    $scope.upload = function (files) {
+      console.log('up load file!!!')
+      console.log(files);
+      var file = files[0];
+      var uploadimage = function(file) {
+      // return $http({
+      //     method: 'POST',
+      //     url: 'https://api.cloudinary.com/v1_1/daichuqi/image/upload',
+      //     file:file,
+      //     timestamp:'1315060510',
+      //     api_key:'737382686617526',
+      //     signature:'OG5SxPsH5MJiv1ZJUIm6xhxk1BU'
+      //   })
+      //   .then(function(res) {
+      //     console.log(res)
+      //   });
+    };
+    // uploadimage(file);
+
+    };
+
+    $scope.enterBook = function(title, url, author, isbn, price, files) {
+      $scope.upload(files);
       if (title && url && author && isbn) {
         $scope.error = false;
 
@@ -66,7 +88,6 @@ angular.module('omnibooks.profile', ['ui.bootstrap'])
     }
   };
 }])
-
 .directive('modal', function() {
   return {
     templateUrl: "../html/bookUpload.html",

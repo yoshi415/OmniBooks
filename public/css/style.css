@@ -29,13 +29,16 @@ header{
   height: 60px;
   width: 100%;
   background-color: white;
-  box-shadow:0 5px 10px rgba(0,0,0,0,3);
+  /*box-shadow:0 5px 10px rgba(0,0,0,0,3);*/
+  -webkit-box-shadow: 0 4px 5px -5px black;
+     -moz-box-shadow: 0 4px 5px -5px black;
+          box-shadow: 0 4px 5px -5px black;
   z-index: 500;
 }
 
 header button{
   float: right;
-  margin: 10px 10px 10px 10px;
+  margin: 15px 15px 15px 15px;
   top: 0;
 }
 
@@ -143,6 +146,7 @@ footer a{
 /*========  Market =======*/
 
 #marketimg{
+  margin-left: 20px;
   min-width: 200px;
   width: 20%;
 }

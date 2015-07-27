@@ -58,7 +58,14 @@ angular.module('omnibooks.profile', ['ui.bootstrap', 'xeditable'])
   };
 
   $scope.updateBook = function() {
-
+    var update = {
+      title: $scope.bookEdit.title,
+      author: $scope.bookEdit.author,
+      img: $scope.bookEdit.img,
+      isbn: $scope.bookEdit.isbn,
+      askingPrice: $scope.bookEdit.askingPrice
+    }
+    fireBase.updateBook($scope.org, $scope.username, $scope.bookEdit.$id, update);
   }
 }])
 

@@ -32,7 +32,7 @@ angular.module('omnibooks.auth', [])
       var org = userOrg[authInfo.name];
       if (!org) {
         console.log('User not exists');
-        failed('incorrect user name.');
+        failed('Incorrect username.');
         return;
       }
 
@@ -104,10 +104,11 @@ angular.module('omnibooks')
       password: ''
     };
     $scope.authInfo.org = $scope.orgs[0];
-    $rootScope.loginBtnText = "Log in";
+    $rootScope.loginBtnText = "Login";
     $rootScope.loggedIn = false;
 
     $scope.clickSignup = function() {
+      $scope.closeAuthForm();
       $rootScope.signupShown = true;
     };
     $scope.clickLogin = function() {
@@ -115,6 +116,7 @@ angular.module('omnibooks')
         logOut();
         return;
       }
+      $scope.closeAuthForm();
       $rootScope.loginShown = true;
     };
     $scope.login = function() {
@@ -132,14 +134,14 @@ angular.module('omnibooks')
 
     function moveToMarket() {
       $scope.closeAuthForm();
-      $rootScope.loginBtnText = "Log out";
+      $rootScope.loginBtnText = "Logout";
       $rootScope.loggedIn = true;
       $state.go("market");
     }
 
     function logOut() {
       auth.logOut();
-      $rootScope.loginBtnText = "Log in";
+      $rootScope.loginBtnText = "Login";
       $rootScope.loggedIn = false;
       $state.go("home");
     }

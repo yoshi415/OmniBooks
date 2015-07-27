@@ -5,11 +5,16 @@
   <div id='bookshelf'>
     <ul>
       <li class='bookitem' ng-repeat="book in books | filter:search">
+      <div class="bookbg">
         <a ng-click="findDetail(book)">
           <img src=" {{book.img}} ">
-          <p class="booktitle"> {{ book.title }} </p>
-          <p class="bookauthor"> {{ book.author}} </p>
+          <div class="booktext">
+            <p class="booktitle"> {{ book.title }} </p>
+            <p class="bookauthor"> {{ book.author}} </p>
+          </div>
         </a>
+      </div>
+
       </li>
     </ul>
   </div>

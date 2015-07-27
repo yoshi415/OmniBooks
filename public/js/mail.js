@@ -12,7 +12,6 @@ angular.module('omnibooks.mail', [])
         var currentUserEmail = fireBase.getUserEmail(currentOrg, currentUser, function(data) {
           emailFrom = data;
         });
-        console.log("email from: ", emailFrom)
 
         // get book details
         var bookOwner;
@@ -24,6 +23,14 @@ angular.module('omnibooks.mail', [])
           bookAskingPrice = data.askingPrice;
         });
 
+        // addl user message
+        var userMsg = "";
+        if ($scope.userMsg) {
+          if ($scope.userMsg.length !== 0) {
+            userMsg = "\nHere's a message from the potential buyer: \n\n" + $scope.userMsg
+          }
+        }
+
         // get seller's email
         var emailTo;
         var sellerUserEmail = fireBase.getUserEmail(currentOrg, bookOwner, function(data) {
@@ -33,16 +40,20 @@ angular.module('omnibooks.mail', [])
             to: emailTo,
             from: emailFrom,
             subject: "Hey, " + bookOwner + " - You have received an offer on " + bookTitle + "!",
+            // html: "content",
             text: "You have received an offer on " + bookTitle + " for $" + offerAmt + "!\n" +
               "You posted this book for $" + bookAskingPrice + "\n" +
-              "You can respond to this offer, by emailing the buyer at " + emailFrom + ".\n" +
-              "Thanks for using OmniBooks!"
+              "You can respond to this offer, by emailing the buyer at " + emailFrom + ".\n"
+              + userMsg + 
+              "\n\nThanks for using OmniBooks!"
           });
 
           // post request to express routing
           $http.post('/sendMail', msg).
           success(function(data, status, headers, config) {
             console.log("message posted");
+            $scope.offer = "";
+            $scope.userMsg = "";
           }).
           error(function(data, status, headers, config) {
             console.log("error", data);
@@ -50,10 +61,10 @@ angular.module('omnibooks.mail', [])
         })
       };
 
-      $scope.modalShown = false;
-      $scope.toggleModal = function() {
+      $scope.modalMsgShown = false;
+      $scope.toggleMsgModal = function() {
         if (!$scope.error) {
-          $scope.modalShown = !$scope.modalShown;
+          $scope.modalMsgShown = !$scope.modalMsgShown;
         }
       };
     }

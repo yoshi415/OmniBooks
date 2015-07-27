@@ -19,14 +19,16 @@
   "dependencies": {
     "angular": "^1.4.3",
     "body-parser": "^1.13.2",
+    "cors": "^2.7.1",
     "express": "^4.13.1",
-    "nodemailer": "^1.4.0"
+    "express-handlebars": "^2.0.1",
+    "nodemailer": "^1.4.0",
+    "nodemailer-express-handlebars": "^1.0.0"
   },
   "engines": {
     "node": ">= 0.10.0"
   },
   "devDependencies": {
-    "cors": "^2.7.1",
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "~0.4.0",
     "grunt-contrib-jshint": "~0.10.0",

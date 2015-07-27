@@ -22,8 +22,10 @@
       <div class="form-group">
         <label for="offer">How much would you like to offer for this book?</label>
           <input type="text" id="offer" placeholder="Offer price?" ng-model="offer" />
-        <!-- <label for="text">Text</label>
-          <textarea name="text" placeholder='Text' ng-model='text' cols="40" rows="10"></textarea></br> -->
+        <label for="text">
+          The seller will be forwarded your information & offer. Would you like to send an additional message.
+        </label>
+          <textarea name="text" id="userMsg" placeholder='Optional message' ng-model='userMsg' cols="100" rows="5"></textarea></br>
         <button class="btn btn-default" ng-click="sendMail()">Send Mail</button>
       </div>
   </form>

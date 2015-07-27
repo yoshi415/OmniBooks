@@ -35,6 +35,7 @@ app.get('/bookDetail', cors(), function(req, res, next) {
   });
 });
 
+
 app.post('/sendMail', function(req, res) {
   var data = req.body;
 

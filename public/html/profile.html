@@ -31,6 +31,15 @@
       <form role="form">
         <h1 id="bookUpload">Enter book information here!</h1>
         <div class="form-group">
+
+           <div id='uploadUI'>
+            <button class="uploadButton" ngf-select ng-model="files">Upload</button>
+              <img ngf-drop ng-model="files" class="drop-box"
+                ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+                ngf-accept="'image/*,application/pdf'"
+                ngf-src="files[0]" ngf-default-src="../images/booktemplate.jpg" ngf-accept="'image/*'">
+               <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+            </div>
           <input type="text" placeholder='Book Image Url' ng-model='bookimgurl'>
           <input type='text' placeholder='Book Title' ng-model='booktitle'>
           <input type="text" placeholder='Author' ng-model='author'>
@@ -66,4 +75,3 @@
   </div>
 
 </div>
-

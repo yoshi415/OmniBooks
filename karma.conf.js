@@ -15,9 +15,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-ui-router/release/angular-ui-router.min.js',
-      'bower_components/angular-mocks/angular-mocks.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js',
+      'https://code.angularjs.org/1.4.3/angular-mocks.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js',
+      'https://cdn.firebase.com/js/client/2.2.4/firebase.js',
+      'https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js',
       'public/app.js',
       'public/js/*.js',
       'test/**/*.js'

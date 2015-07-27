@@ -39,10 +39,8 @@
         <input type="text" class="text-field" placeholder="Username" ng-model=authInfo.name />
         <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
         <div id="buttons">
-          <input type="button" value="Login" ng-click=login() />
-          <a href="#signup_form">
-            <input type="button" value="Sign up" />
-          </a>
+          <input type="button" value="Login" ng-click='login()' />
+          <input type="button" value="Signup" ng-click='clickSignup()'/>
         </div>
         <div class="errortext" ng-show="error">{{errorMessage}}</div>
         </br>
@@ -61,7 +59,7 @@
         <select ng-model="authInfo.org" class='selectOrg' ng-options="org for org in orgs"></select>
         <input type="button" value="signup" ng-click=signup() />
         </br>
-        <p>Already have account? <a href="#login_form">Login</a></p>
+        <p>Already have account? <a href="#login_form" ng-click=clickLogin()>Login</a></p>
         <a class="close" href="#" ng-click=closeAuthForm()></a>
         <div class="errortext" ng-show="error">{{errorMessage}}</div>
       </div>

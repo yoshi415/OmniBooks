@@ -108,6 +108,7 @@ angular.module('omnibooks')
     $rootScope.loggedIn = false;
 
     $scope.clickSignup = function() {
+      $scope.closeAuthForm();
       $rootScope.signupShown = true;
     };
     $scope.clickLogin = function() {
@@ -115,6 +116,7 @@ angular.module('omnibooks')
         logOut();
         return;
       }
+      $scope.closeAuthForm();
       $rootScope.loginShown = true;
     };
     $scope.login = function() {

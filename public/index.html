@@ -40,7 +40,7 @@
         <div id="buttons">
           <input type="button" value="Login" class="red" ng-click=login() />
           <a href="#signup_form">
-            <input type="button" value="Sign up" class="blue" />
+            <input type="button" value="Sign up" class="blue" ng-click=clickSignup() />
           </a>
         </div>
         <div class="errortext" ng-show="error">{{errorMessage}}</div>
@@ -60,7 +60,7 @@
         <select ng-model="authInfo.org" ng-options="org for org in orgs"></select>
         <input type="button" value="signup" class="blue-round" ng-click=signup() />
         </br>
-        <p>Already have account? <a href="#login_form">Log In</a></p>
+        <p>Already have account? <a href="#login_form" ng-click=clickLogin() >Log In</a></p>
         <a class="close" href="#" ng-click=closeAuthForm()></a>
         <div class="errortext" ng-show="error">{{errorMessage}}</div>
       </div>

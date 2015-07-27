@@ -18,6 +18,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-xeditable": "~0.1.9"
+    "angular-xeditable": "~0.1.9",
+    "ngFx": "~1.1.0"
   }
 }

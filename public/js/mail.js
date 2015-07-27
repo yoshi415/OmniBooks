@@ -31,7 +31,7 @@ angular.module('omnibooks.mail', [])
           // aggregate info for email
           var msg = ({
             to: emailTo,
-            from: emailFrom,
+            from: 'OmniBooks@OmniBooks.com',
             subject: "Hey, " + bookOwner + " - You have received an offer on " + bookTitle + "!",
             text: "You have received an offer on " + bookTitle + " for $" + offerAmt + "!\n" +
               "You posted this book for $" + bookAskingPrice + "\n" +

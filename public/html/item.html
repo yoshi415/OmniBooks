@@ -20,13 +20,11 @@
   </div>
 <div>
 
-<modal show='modalShown' width='750px' height='60%'>
+<modal show='modalShown' width='450px' height='30%'>
   <form ng-controller="MailController">
-      <div class="form-group">
+      <div class="offerModal">
         <label for="offer">How much would you like to offer for this book?</label>
           <input type="text" id="offer" placeholder="Offer price?" ng-model="offer" />
-        <!-- <label for="text">Text</label>
-          <textarea name="text" placeholder='Text' ng-model='text' cols="40" rows="10"></textarea></br> -->
         <button class="btn btn-default" ng-click="sendMail()">Send Mail</button>
       </div>
   </form>

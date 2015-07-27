@@ -1,0 +1,23 @@
+{
+  "name": "OmniBooks",
+  "version": "0.0.0",
+  "homepage": "https://github.com/szwang/OmniBooks",
+  "authors": [
+    "Suzanne Wang <suzanneswang@gmail.com>"
+  ],
+  "description": "marketplace for textbooks",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-xeditable": "~0.1.9"
+  }
+}

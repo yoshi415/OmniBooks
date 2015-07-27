@@ -76,7 +76,7 @@ input{
   display: block;
   color:black;
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 5px;
   width: 60%;
 }
 
@@ -304,6 +304,15 @@ footer a:active  {
   z-index: 99999;
 }
 
+.edittext{
+  height: 50px;
+}
+
+#editModalTitle{
+  font-weight: bold;
+  font-size: 20px;
+}
+
 
 .uploadButton {
     -moz-appearance: button;
@@ -422,7 +431,7 @@ footer a:active  {
   box-shadow: 4px 4px 80px #000;
 }
 .ng-modal-dialog-content {
-  padding:10px;
+  padding:30px;
   text-align: left;
 }
 .ng-modal-close {

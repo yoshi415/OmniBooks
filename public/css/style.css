@@ -88,6 +88,7 @@ header a,
 footer a{
   transition: color .4s;
   color: #000;
+  cursor:pointer;
 }
 
 
@@ -162,6 +163,7 @@ footer a{
   margin-right: auto;
   padding-left: 50px;
   padding-right: 50px;
+  cursor:pointer;
 }
 
 #bookshelf img{

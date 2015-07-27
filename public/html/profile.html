@@ -14,7 +14,7 @@
         <p class="bookauthor">  {{ book.author}} </p>
       </a>
       <button class="btn btn-default" id='sellButton' class="md-trigger"
-        ng-click="deleteBook(book)">Delete Book</button>
+        ng-click="toggleDeleteModal(book)">Delete Book</button>
       </li>
 
       <li class='bookitem'>
@@ -80,6 +80,13 @@
       <button class="btn btn-default" id='sellButton' class="md-trigger"
               ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleEditModal()">Update Book</button>
     </modal>
+  </div>
+
+  <div modal-show='showDialog' class='modal fade'>
+    <modal title='deleteConfirm' show='deleteModalShown'>
+    <h1>Are you sure you want to delete?</h1>
+    <button ng-click='deleteBook(bookDelete); toggleDeleteModal()'>Yes</button>
+    <button ng-click='toggleDeleteModal()'>No</button>
   </div>
 
 </div>

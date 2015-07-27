@@ -76,6 +76,12 @@ angular.module('omnibooks.profile', ['ui.bootstrap','ngFileUpload','xeditable'])
       $scope.bookEdit = book;
     }
   };
+  $scope.toggleDeleteModal = function(book) {
+    if(!$scope.error) {
+      $scope.deleteModalShown = !$scope.deleteModalShown;
+      $scope.bookDelete = book;
+    }
+  };
 
   $scope.updateBook = function() {
     var update = {

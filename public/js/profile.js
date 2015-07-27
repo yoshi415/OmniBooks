@@ -6,14 +6,12 @@ angular.module('omnibooks.profile', ['ui.bootstrap','ngFileUpload','xeditable'])
   function($scope, $stateParams, $modal, $state, auth, fireBase, Upload,$http) {
     var currentOrg = auth.getOrg();
     var currentUser = auth.getUser();
-
-    $scope.upload = function (files) {
-      if(files){
-        console.log('up load file!!!')
-      console.log(files);
-      var file = files[0];
-    }
-
+      $scope.upload = function (files) {
+        if(files){
+          console.log('up load file!!!')
+        console.log(files);
+        var file = files[0];
+      }
     };
 
     $scope.enterBook = function(title, url, author, isbn, price, files) {
@@ -98,16 +96,3 @@ angular.module('omnibooks.profile', ['ui.bootstrap','ngFileUpload','xeditable'])
   };
 })
 
-// .directive('noBooksMessage', function() {
-//   return {
-//     restrict: 'E',
-//     scope: {
-//       show: '='
-//     },
-//     transclude: true,
-//     template: '<div ng-show="showme"> hello </div>',
-//       link: function (scope, element, attrs) { //
-//         scope.showme=true;
-//       }
-//   }
-// })

@@ -4,6 +4,8 @@ var http = require('http');
 var app = express();
 var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
+var hbs = require('nodemailer-express-handlebars');
+var exphbs  = require('express-handlebars');
 // var PORT_num = process.env.PORT;
 app.set('port', (process.env.PORT || 8000));
 

@@ -40,6 +40,7 @@ angular.module('omnibooks.mail', [])
             to: emailTo,
             from: emailFrom,
             subject: "Hey, " + bookOwner + " - You have received an offer on " + bookTitle + "!",
+            // html: "content",
             text: "You have received an offer on " + bookTitle + " for $" + offerAmt + "!\n" +
               "You posted this book for $" + bookAskingPrice + "\n" +
               "You can respond to this offer, by emailing the buyer at " + emailFrom + ".\n"
@@ -60,10 +61,10 @@ angular.module('omnibooks.mail', [])
         })
       };
 
-      $scope.modalShown = false;
-      $scope.toggleModal = function() {
+      $scope.modalMsgShown = false;
+      $scope.toggleMsgModal = function() {
         if (!$scope.error) {
-          $scope.modalShown = !$scope.modalShown;
+          $scope.modalMsgShown = !$scope.modalMsgShown;
         }
       };
     }

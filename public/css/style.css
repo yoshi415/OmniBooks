@@ -11,6 +11,9 @@
   display: block;
 }
 
+
+
+
 html {
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -25,7 +28,7 @@ header{
   position:fixed;
   height: 60px;
   width: 100%;
-  background-color: rgba(63, 39, 15, 1);
+  background-color: rgb(45, 26, 8);
   box-shadow:0 5px 10px rgba(0,0,0,0,3);
   z-index: 500;
 }
@@ -167,7 +170,7 @@ footer a{
 }
 
 #bookshelf img{
-  width: 195px;
+  width: 196px;
   height: 240px;
 }
 
@@ -278,6 +281,23 @@ footer a:active  {
 
 /*========  Profile =======*/
 
+#sellBtn{
+  display: inline;
+  z-index: 99999;
+}
+
+
+#greeting{
+  padding: 10px 10px 10px 10px;
+  width: 100%;
+  color: white;
+  background-color: rgb(193, 127, 127);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+
+}
 
 #bookUpload {
   font-weight: bold;
@@ -290,6 +310,7 @@ footer a:active  {
 
 #welcome {
   font-weight: bold;
+  text-transform:uppercase;
 }
 
 .bookshelfHeader {

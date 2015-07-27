@@ -8,23 +8,11 @@ angular.module('omnibooks.profile', ['ui.bootstrap','ngFileUpload','xeditable'])
     var currentUser = auth.getUser();
 
     $scope.upload = function (files) {
-      console.log('up load file!!!')
+      if(files){
+        console.log('up load file!!!')
       console.log(files);
       var file = files[0];
-      var uploadimage = function(file) {
-      // return $http({
-      //     method: 'POST',
-      //     url: 'https://api.cloudinary.com/v1_1/daichuqi/image/upload',
-      //     file:file,
-      //     timestamp:'1315060510',
-      //     api_key:'737382686617526',
-      //     signature:'OG5SxPsH5MJiv1ZJUIm6xhxk1BU'
-      //   })
-      //   .then(function(res) {
-      //     console.log(res)
-      //   });
-    };
-    // uploadimage(file);
+    }
 
     };
 
@@ -74,12 +62,6 @@ angular.module('omnibooks.profile', ['ui.bootstrap','ngFileUpload','xeditable'])
     if(!$scope.error) {
       $scope.editModalShown = !$scope.editModalShown;
       $scope.bookEdit = book;
-    }
-  };
-  $scope.toggleDeleteModal = function(book) {
-    if(!$scope.error) {
-      $scope.deleteModalShown = !$scope.deleteModalShown;
-      $scope.bookDelete = book;
     }
   };
 

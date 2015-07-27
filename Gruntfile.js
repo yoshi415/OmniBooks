@@ -72,6 +72,21 @@ module.exports = function(grunt) {
         files: '<%= jshint.lib_test.src %>',
         tasks: ['jshint:lib_test', 'qunit']
       }
+    },
+
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['test/**/*.js']
+      }
+    },
+
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js'
+      }
     }
   });
 
@@ -81,8 +96,13 @@ module.exports = function(grunt) {
   // grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
   // Default task.
+  grunt.registerTask('test', [
+    'mochaTest'
+  ]);
   grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 
 };

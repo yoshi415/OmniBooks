@@ -47,20 +47,14 @@
 
   <div modal-show="showDialog" class="modal fade">
     <modal title="bookEdit" show='editModalShown'>
-      <form role="form">
-        <h1 id="bookUpload">Edit book information:</h1>
-        <div class="form-group">
-          <input type="text" placeholder = 'Image url' ng-model= 'bookimgurl'>
-          <input type='text'  placeholder = 'Book Title' ng-model = 'booktitle'>
-          <input type="text" placeholder = 'Author' ng-model= 'author'>
-          <input type="text" placeholder = 'ISBN number' ng-model= 'isbn'>
-        </div>
-      </form>
-      <div>
-        <span class="entryError">{{error}}</span>
-      </div>
+    <h1 id="editModalTitle">Click to edit:</h1>
+    <div>Title: <a href="#" editable-text="bookEdit.title">{{bookEdit.title}}</a></div>
+    <div>Author: <a href="#" editable-text="bookEdit.author">{{bookEdit.author}}</a></div>
+    <div>Image URL: <a href="#" editable-text="bookEdit.img">URL</a></div>
+    <div>ISBN: <a href="#" editable-text="bookEdit.isbn">{{bookEdit.isbn}}</a></div>
+    <div>Asking Price: <a href="#" editable-text="bookEdit.askingPrice">${{ bookEdit.askingPrice}}</a></div>
       <button class="btn btn-default" id='sellButton' class="md-trigger"
-              ng-click="enterBook(booktitle, bookimgurl, author, isbn); toggleEditModal()">Update Book</button>
+              ng-click="updateBook(); toggleEditModal()">Update Book</button>
     </modal>
   </div>
 

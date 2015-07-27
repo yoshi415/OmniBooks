@@ -16,10 +16,16 @@ angular.module('omnibooks.database', ['firebase'])
       var bookID = newBookRef.key();
       myDataRef.child(org).child('users').child(username).child('bookshelf').child(bookID).set(bookDetails);
     };
+
     var deleteBook = function(org, user, bookId) {
       myDataRef.child(org).child('users').child(user).child('bookshelf').child(bookId).remove();
       myDataRef.child(org).child('books').child(bookId).remove()
     };
+
+    var updateBook = function(org, user, id, bookNode) {
+      myDataRef.child(org).child('users').child(user).child('bookshelf').child(id).update(bookNode);
+      myDataRef.child(org).child('books').child(id).update(bookNode);
+    }
 
     //get all books in same org
     var getOrgBook = function(org){
@@ -140,6 +146,7 @@ angular.module('omnibooks.database', ['firebase'])
     return {
       enterBook: enterBook,
       deleteBook: deleteBook,
+      updateBook: updateBook,
       getOrgBook: getOrgBook,
       getUserBook: getUserBook,
       getUserBookshelf: getUserBookshelf,

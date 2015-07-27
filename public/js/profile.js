@@ -1,17 +1,23 @@
-angular.module('omnibooks.profile', ['ui.bootstrap', 'xeditable'])
+angular.module('omnibooks.profile', ['ui.bootstrap','ngFileUpload','xeditable'])
 .run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 })
-.controller('ProfileController', ['$scope', '$stateParams', '$modal', '$state', 'auth', 'fireBase',
-  function($scope, $stateParams, $modal, $state, auth, fireBase) {
+.controller('ProfileController', ['$scope', '$stateParams', '$modal', '$state', 'auth', 'fireBase','Upload','$http',
+  function($scope, $stateParams, $modal, $state, auth, fireBase, Upload,$http) {
+    var currentOrg = auth.getOrg();
+    var currentUser = auth.getUser();
+      $scope.upload = function (files) {
+        if(files){
+          console.log('up load file!!!')
+        console.log(files);
+        var file = files[0];
+      }
+    };
 
-  var currentOrg = auth.getOrg();
-  var currentUser = auth.getUser();
-
-  $scope.enterBook = function(title, url, author, isbn, price) {
-    if (title && url && author && isbn && price) {
-      $scope.error = false;
-
+    $scope.enterBook = function(title, url, author, isbn, price, files) {
+      $scope.upload(files);
+      if (title && url && author && isbn) {
+        $scope.error = false;
       if (isbn.charAt(3) === '-') {
         isbn = isbn.slice(0, 3) + isbn.slice(4)
         console.log(isbn)
@@ -56,12 +62,6 @@ angular.module('omnibooks.profile', ['ui.bootstrap', 'xeditable'])
       $scope.bookEdit = book;
     }
   };
-  $scope.toggleDeleteModal = function(book) {
-    if(!$scope.error) {
-      $scope.deleteModalShown = !$scope.deleteModalShown;
-      $scope.bookDelete = book;
-    }
-  };
 
   $scope.updateBook = function() {
     var update = {
@@ -74,7 +74,6 @@ angular.module('omnibooks.profile', ['ui.bootstrap', 'xeditable'])
     fireBase.updateBook($scope.org, $scope.username, $scope.bookEdit.$id, update);
   }
 }])
-
 .directive('modal', function() {
   return {
     templateUrl: "../html/bookUpload.html",
@@ -97,16 +96,3 @@ angular.module('omnibooks.profile', ['ui.bootstrap', 'xeditable'])
   };
 })
 
-// .directive('noBooksMessage', function() {
-//   return {
-//     restrict: 'E',
-//     scope: {
-//       show: '='
-//     },
-//     transclude: true,
-//     template: '<div ng-show="showme"> hello </div>',
-//       link: function (scope, element, attrs) { //
-//         scope.showme=true;
-//       }
-//   }
-// })

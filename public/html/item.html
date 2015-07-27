@@ -10,17 +10,14 @@
       <span class="bookstore">{{price.store_id}}</span>
       <span class="bookprice">${{price.price}}</span>
     </div>
-  </div>
-
-  <div id= 'itemRight'>
-    <p>Seller's asking price: {{ book.askingPrice | currency }}</p>
+     <p>Seller's asking price: {{ book.askingPrice | currency }}</p>
     <button ng-click="toggleModal()" class="btn btn-default">Send Offer</button>
   </div>
 
   </div>
 <div>
 
-<modal show='modalShown' width='750px' height='60%'>
+<modal show='modalShown' width='750px'>
   <form ng-controller="MailController">
       <div class="form-group">
         <label for="offer">How much would you like to offer for this book?</label>

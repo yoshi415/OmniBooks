@@ -28,7 +28,7 @@ header{
   position:fixed;
   height: 60px;
   width: 100%;
-  background-color: rgb(45, 26, 8);
+  background-color: white;
   box-shadow:0 5px 10px rgba(0,0,0,0,3);
   z-index: 500;
 }
@@ -51,7 +51,7 @@ header button{
 #navigation li a {
   display:block;
   margin: 20px;
-  color:#fff;
+  color:#CA8484;
   text-transform:uppercase;
   font-size:20px;
 }
@@ -104,10 +104,8 @@ footer a{
   width: 600px;
 }
 #itemRight{
-  float: right;
-  margin-left: 20px;
-  margin-right: 50px;
-  width: 150px;
+  float: left;
+  width: 300px;
 }
 
 #itemLeft img{
@@ -124,7 +122,7 @@ footer a{
   margin-top: 30px;
   margin-left: 10px;
   margin-right: 40px;
-  width: 400px;
+  width: 350px;
 }
 
 .bookstore{
@@ -145,8 +143,8 @@ footer a{
 /*========  Market =======*/
 
 #marketimg{
-  min-width: 300px;
-  width: 30%;
+  min-width: 200px;
+  width: 20%;
 }
 
 #marketsearch{

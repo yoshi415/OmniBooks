@@ -52,27 +52,11 @@ angular.module('omnibooks.auth', [])
 
   // check if the user is loggedin and automatically set the loggedin info
   var autoLogin = function (callback) {
-    fireBase.autoLogin(function (authData) {
-      console.log(authData);
-      var userOrg = fireBase.getUserOrg();
-      userOrg.$loaded.then(function () {
-        var name = getNameByEmail(email)
-        var authInfo = {
-          email: authData.password.email,
-          name: name,
-          org: userOrg[name]
-        }
-        setLoggedInInfo(authInfo);
-        callback();
-      });
+    fireBase.autoLogin(function (authInfo) {
+      setLoggedInInfo(authInfo);
+      callback();
     });
   };
-
-  function getNameByEmail(email) {
-    var name = '';
-    // get username from firebase
-    return name;
-  }
 
   var setLoggedInInfo = function(authInfo) {
     loggedInUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
@@ -80,6 +64,7 @@ angular.module('omnibooks.auth', [])
   };
 
   var logOut = function() {
+    fireBase.logOut();
     loggedInUser = null;
   };
 

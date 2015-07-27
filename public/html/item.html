@@ -10,32 +10,20 @@
       <span class="bookstore">{{price.store_id}}</span>
       <span class="bookprice">${{price.price}}</span>
     </div>
+     <p>Seller's asking price: {{ book.askingPrice | currency }}</p>
+    <button ng-click="toggleModal()" class="btn btn-default">Send Offer</button>
   </div>
 
-  <div id= 'itemRight'>
-
-
   </div>
-
-</div>
-
 <div>
 
-<p>Seller's asking price: {{ something }}</p>
-
-<button ng-click="toggleModal()" class="btn btn-default padding">Send Offer</button>
-
-<modal show='modalShown' width='750px' height='60%'>
+<modal show='modalShown' width='750px'>
   <form ng-controller="MailController">
       <div class="form-group">
-        <label for="to">To</label>
-          <input type="text" id="to" placeholder='To' ng-model='to' />
-        <label for="from">From</label>
-          <input type="text" placeholder='From' ng-model='from' />
-        <label for="subject">Subject</label>
-          <input type='text' placeholder='Subject' ng-model='subject' />
-        <label for="text">Text</label>
-          <textarea name="text" placeholder='Text' ng-model='text' cols="40" rows="10"></textarea></br>
+        <label for="offer">How much would you like to offer for this book?</label>
+          <input type="text" id="offer" placeholder="Offer price?" ng-model="offer" />
+        <!-- <label for="text">Text</label>
+          <textarea name="text" placeholder='Text' ng-model='text' cols="40" rows="10"></textarea></br> -->
         <button class="btn btn-default" ng-click="sendMail()">Send Mail</button>
       </div>
   </form>

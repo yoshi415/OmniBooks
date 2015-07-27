@@ -3,11 +3,13 @@
 
 <head>
   <link rel="stylesheet" href="css/reset.css">
-  <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
-  <link rel="stylesheet" href="lib/modal/default.css" type="text/css">
-  <link rel="stylesheet" href="lib/modal/component.css" type="text/css">
+  <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="css/modal/default.css" type="text/css">
+  <link rel="stylesheet" href="css/modal/component.css" type="text/css">
   <link rel="stylesheet" href="css/style.css">
-  <script src="lib/angular/angular.js"></script>
+  <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
@@ -33,14 +35,12 @@
     <div class="loginLayer" ng-show="loginShown">
       <a href="#x" class="overlay" id="login_form"></a>
       <div class="box">
-        <h2>LOG IN</h2>
+        <h2>LOGIN</h2>
         <input type="text" class="text-field" placeholder="Username" ng-model=authInfo.name />
         <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
         <div id="buttons">
-          <input type="button" value="Login" class="red" ng-click=login() />
-          <a href="#signup_form">
-            <input type="button" value="Sign up" class="blue" />
-          </a>
+          <input type="button" value="Login" ng-click='login()' />
+          <input type="button" value="Signup" ng-click='clickSignup()'/>
         </div>
         <div class="errortext" ng-show="error">{{errorMessage}}</div>
         </br>
@@ -51,15 +51,15 @@
     <div class="signupLayer" ng-show="signupShown">
       <a href="#x" class="overlay" id="signup_form"></a>
       <div class="box">
-        <h2>SIGN UP</h2>
-        <input type="email" class="text-field" placeholder="email" ng-model=authInfo.email />
-        <input type="text" class="text-field" placeholder="user name" ng-model=authInfo.name />
+        <h2>SIGNUP</h2>
+        <input type="email" class="text-field" placeholder="Email" ng-model=authInfo.email />
+        <input type="text" class="text-field" placeholder="Username" ng-model=authInfo.name />
         <input type="password" class="text-field" placeholder="Password" ng-model=authInfo.password />
-        <select ng-model="authInfo.org" ng-options="org for org in orgs">
-        </select>
-        <input type="button" value="signup" class="blue-round" ng-click=signup() />
+
+        <select ng-model="authInfo.org" class='selectOrg' ng-options="org for org in orgs"></select>
+        <input type="button" value="signup" ng-click=signup() />
         </br>
-        <p>Already have account? <a href="#login_form">Log In</a></p>
+        <p>Already have account? <a href="#login_form" ng-click=clickLogin()>Login</a></p>
         <a class="close" href="#" ng-click=closeAuthForm()></a>
         <div class="errortext" ng-show="error">{{errorMessage}}</div>
       </div>

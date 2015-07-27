@@ -11,6 +11,9 @@
   display: block;
 }
 
+
+
+
 html {
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -21,17 +24,21 @@ html {
 /*========  Header =======*/
 
 header{
+  display: block;
   position:fixed;
   height: 60px;
   width: 100%;
-  background-color: rgba(63, 39, 15, 1);
-  box-shadow:0 5px 10px rgba(0,0,0,0,3);
+  background-color: white;
+  /*box-shadow:0 5px 10px rgba(0,0,0,0,3);*/
+  -webkit-box-shadow: 0 4px 5px -5px black;
+     -moz-box-shadow: 0 4px 5px -5px black;
+          box-shadow: 0 4px 5px -5px black;
   z-index: 500;
 }
 
 header button{
   float: right;
-  margin: 10px 10px 10px 10px;
+  margin: 15px 15px 15px 15px;
   top: 0;
 }
 
@@ -47,13 +54,13 @@ header button{
 #navigation li a {
   display:block;
   margin: 20px;
-  color:#fff;
+  color:rgb(107, 180, 220);
   text-transform:uppercase;
   font-size:20px;
 }
 
 #navigation li a:hover{
-  color: red;
+  color: #5A78A2;
 }
 
 
@@ -68,11 +75,11 @@ div#title {
 
 input{
   height: 25px;
-  font-size: 18px;
+  font-size: 14px;
   margin: auto;
   display: block;
   color:black;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 10px;
   width: 60%;
 }
@@ -81,6 +88,7 @@ header a,
 footer a{
   transition: color .4s;
   color: #000;
+  cursor:pointer;
 }
 
 
@@ -100,9 +108,8 @@ footer a{
   width: 600px;
 }
 #itemRight{
-  float: right;
-  margin-left: 20px;
-  width: 100px;
+  float: left;
+  width: 300px;
 }
 
 #itemLeft img{
@@ -119,7 +126,7 @@ footer a{
   margin-top: 30px;
   margin-left: 10px;
   margin-right: 40px;
-  width: 400px;
+  width: 350px;
 }
 
 .bookstore{
@@ -139,6 +146,16 @@ footer a{
 
 /*========  Market =======*/
 
+#marketimg{
+  margin-left: 20px;
+  min-width: 200px;
+  width: 20%;
+}
+
+#marketsearch{
+  width: 90%;
+}
+
 #bookshelf{
   width: 100%;
   display: block;
@@ -146,10 +163,11 @@ footer a{
   margin-right: auto;
   padding-left: 50px;
   padding-right: 50px;
+  cursor:pointer;
 }
 
 #bookshelf img{
-  width: 195px;
+  width: 196px;
   height: 240px;
 }
 
@@ -228,12 +246,33 @@ ul {
   position: relative;
   margin-top: 50px;
   display: block;
-  background-color: white;
   height: 600px;
   z-index: 7;
+  background-color: rgba(191, 212, 218, 0.8);
 }
 
+.content img{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 500px;
+  padding-top: 50px;
+}
 
+.selectOrg{
+  background-color: #fff;
+  border-radius:5px;
+  width: 178px;
+  margin: 5px;
+}
+
+input[type="button"] {
+    color: white;
+    background-color: lightblue;
+}
+input[type="button"]:hover{
+    background-color: #78B5CA;
+}
 
 
 /*========  Footer =======*/
@@ -255,11 +294,28 @@ footer a:link,
 footer a:visited { color: #265C83; }
 footer a:hover   { color: #7FDBFF; }
 footer a:active  {
-  color: #007BE6;
+  color: rgb(127, 168, 193);
 }
 
 /*========  Profile =======*/
 
+#sellBtn{
+  display: inline;
+  z-index: 99999;
+}
+
+
+#greeting{
+  padding: 10px 10px 10px 10px;
+  width: 100%;
+  color: white;
+  background-color: rgba(162, 208, 212, 0.59);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+
+}
 
 #bookUpload {
   font-weight: bold;
@@ -272,6 +328,7 @@ footer a:active  {
 
 #welcome {
   font-weight: bold;
+  text-transform:uppercase;
 }
 
 .bookshelfHeader {
@@ -286,6 +343,23 @@ footer a:active  {
   color: grey;
   font-size: 13px;
 }
+
+.link .editNote {
+  position: relative;
+  bottom: 200px;
+  visibility: hidden;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  color: white;
+  transition: background-color .6s, color .2s;
+  background-color: rgba(75, 109, 134, 0.89);
+}
+
+.link:hover .editNote {
+  visibility:visible;
+}
+
 
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */

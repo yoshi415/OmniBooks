@@ -7,7 +7,6 @@ angular.module('omnibooks.auth', [])
   var signup = function(authInfo, success, failed) {
     // check the user-org object to see the username is available
     var userOrg = fireBase.getUserOrg();
-
     userOrg.$loaded().then(function() {
       var org = userOrg[authInfo.name];
       if (org) {
@@ -33,7 +32,7 @@ angular.module('omnibooks.auth', [])
       var org = userOrg[authInfo.name];
       if (!org) {
         console.log('User not exists');
-        failed('incorrect user name.');
+        failed('Incorrect username.');
         return;
       }
 
@@ -51,12 +50,21 @@ angular.module('omnibooks.auth', [])
     });
   };
 
+  // check if the user is loggedin and automatically set the loggedin info
+  var autoLogin = function (callback) {
+    fireBase.autoLogin(function (authInfo) {
+      setLoggedInInfo(authInfo);
+      callback();
+    });
+  };
+
   var setLoggedInInfo = function(authInfo) {
     loggedInUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
     loggedInOrg = authInfo.org;
   };
 
   var logOut = function() {
+    fireBase.logOut();
     loggedInUser = null;
   };
 
@@ -80,7 +88,8 @@ angular.module('omnibooks.auth', [])
     isLoggedIn: isLoggedIn,
     logOut: logOut,
     getUser: getUser,
-    getOrg: getOrg
+    getOrg: getOrg,
+    autoLogin: autoLogin
   };
 });
 
@@ -95,10 +104,11 @@ angular.module('omnibooks')
       password: ''
     };
     $scope.authInfo.org = $scope.orgs[0];
-    $rootScope.loginBtnText = "Log in";
+    $rootScope.loginBtnText = "Login";
     $rootScope.loggedIn = false;
 
     $scope.clickSignup = function() {
+      $scope.closeAuthForm();
       $rootScope.signupShown = true;
     };
     $scope.clickLogin = function() {
@@ -106,6 +116,7 @@ angular.module('omnibooks')
         logOut();
         return;
       }
+      $scope.closeAuthForm();
       $rootScope.loginShown = true;
     };
     $scope.login = function() {
@@ -123,14 +134,14 @@ angular.module('omnibooks')
 
     function moveToMarket() {
       $scope.closeAuthForm();
-      $rootScope.loginBtnText = "Log out";
+      $rootScope.loginBtnText = "Logout";
       $rootScope.loggedIn = true;
       $state.go("market");
     }
 
     function logOut() {
       auth.logOut();
-      $rootScope.loginBtnText = "Log in";
+      $rootScope.loginBtnText = "Login";
       $rootScope.loggedIn = false;
       $state.go("home");
     }
@@ -154,6 +165,11 @@ angular.module('omnibooks')
       };
     }
     $scope.closeAuthForm();
+    auth.autoLogin(function () {
+      $rootScope.loginBtnText = "Log out";
+      $rootScope.loggedIn = true;
+      $state.go("market");
+    });
 
   }])
   .run(['$rootScope', '$state', 'auth', function($rootScope, $state, auth) {

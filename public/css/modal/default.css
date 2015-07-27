@@ -21,7 +21,7 @@ body, html { font-size: 100%; padding: 0; margin: 0; }
 .clearfix:after { clear: both; }
 
 html {
-  font-family: 'Lato', Calibri, Arial, sans-serif;
+  /*font-family: 'Lato', Calibri, Arial, sans-serif;*/
 }
 
 
@@ -49,10 +49,10 @@ html {
 button {
   border: none;
   padding: 0.6em 1.2em;
-  background: #c0392b;
+  background: #8DCDE2;
   color: #fff;
   font-family: 'Lato', Calibri, Arial, sans-serif;
-  font-size: 1em;
+  font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
@@ -62,7 +62,7 @@ button {
 }
 
 button:hover {
-  background: #A5281B;
+  background: #28596D;
 }
 
 @media screen and (max-width: 46.0625em) {

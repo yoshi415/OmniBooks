@@ -120,13 +120,6 @@ input[type=button].red {
   background: -ms-linear-gradient(top, #e35940 0%,#cb4229 100%); /* IE10+ */
   background: linear-gradient(to bottom, #e35940 0%,#cb4229 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e35940', endColorstr='#cb4229',GradientType=0 ); /* IE6-9 */
-
-  -webkit-border-top-left-radius: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-bottomleft: 5px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
 }
 
 input[type=button].red:hover {
@@ -137,7 +130,6 @@ input[type=button].red:hover {
   background: -o-linear-gradient(top, #e35940 0%,#c9371e 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, #e35940 0%,#c9371e 100%); /* IE10+ */
   background: linear-gradient(to bottom, #e35940 0%,#c9371e 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e35940', endColorstr='#c9371e',GradientType=0 ); /* IE6-9 */
 }
 input[type=button].red:active {
   background: #e35940;
@@ -161,14 +153,6 @@ input[type=button].blue {
   background: -o-linear-gradient(top, #9ae0e9 0%,#82c8d1 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, #9ae0e9 0%,#82c8d1 100%); /* IE10+ */
   background: linear-gradient(to bottom, #9ae0e9 0%,#82c8d1 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ae0e9', endColorstr='#82c8d1',GradientType=0 ); /* IE6-9 */
-
-  -webkit-border-top-right-radius: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  -moz-border-radius-topright: 5px;
-  -moz-border-radius-bottomright: 5px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
 }
 
 
@@ -230,16 +214,15 @@ background: #9ae0e9;
 .text-field  {
   display: block;
   margin: 0 auto;
+  margin-top: 10px;
   width: 180px;
   height:10px;
-  border: 1px solid #c0c2c7;
+  border: 1px solid rgba(13, 125, 144, 0.44);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   color: #8c8f90;
-
   padding: 10px;
-  font-style: italic;
   font-size: 11px;
   margin-bottom: 10px;
 
@@ -275,9 +258,6 @@ background: #9ae0e9;
 }
 
 
-
-
-
 .box p
 {
   display: inline;
@@ -299,13 +279,6 @@ background: #9ae0e9;
   margin-left:95px;
 }
 
-
-#buttons, .connectwith
-{
-  display:block;
-  padding-bottom:15px;
-}
-
 .title, #jointop, #logintop
 {
   display: inline-block;
@@ -313,5 +286,5 @@ background: #9ae0e9;
 
 #jointop, #logintop
 {
-  width: 150px;
+  width: 90px;
 }

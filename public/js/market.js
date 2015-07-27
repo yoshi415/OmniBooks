@@ -1,4 +1,4 @@
-angular.module('omnibooks.market', [])
+angular.module('omnibooks.market', ['ngFx','ngAnimate'])
 .controller('MarketController', ['$state', '$scope', '$stateParams', 'fireBase', 'auth',
     function($state, $scope, $stateParams, fireBase, auth) {
     var currentOrg = auth.getOrg();

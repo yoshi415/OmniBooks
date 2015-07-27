@@ -56,12 +56,12 @@
 
   <div modal-show="showDialog" class="modal fade">
     <modal title="bookEdit" show='editModalShown'>
-    <h1 id="editModalTitle">Click to edit:</h1>
-    <div>Title: <a href="#" editable-text="bookEdit.title">{{bookEdit.title}}</a></div>
-    <div>Author: <a href="#" editable-text="bookEdit.author">{{bookEdit.author}}</a></div>
-    <div>Image URL: <a href="#" editable-text="bookEdit.img">URL</a></div>
-    <div>ISBN: <a href="#" editable-text="bookEdit.isbn">{{bookEdit.isbn}}</a></div>
-    <div>Asking Price: <a href="#" editable-text="bookEdit.askingPrice">${{ bookEdit.askingPrice}}</a></div>
+    <div class="edittext" id="editModalTitle">Click to edit:</div>
+    <div class="edittext">Title: <a href="#" editable-text="bookEdit.title">{{bookEdit.title}}</a></div>
+    <div class="edittext">Author: <a href="#" editable-text="bookEdit.author">{{bookEdit.author}}</a></div>
+    <div class="edittext">Image URL: <a href="#" editable-text="bookEdit.img">URL</a></div>
+    <div class="edittext">ISBN: <a href="#" editable-text="bookEdit.isbn">{{bookEdit.isbn}}</a></div>
+    <div class="edittext">Asking Price: <a href="#" editable-text="bookEdit.askingPrice">${{ bookEdit.askingPrice}}</a></div>
       <button class="btn btn-default" id='sellButton' class="md-trigger"
               ng-click="updateBook(); toggleEditModal()">Update Book</button>
     </modal>

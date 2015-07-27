@@ -4,7 +4,7 @@
   <input id='marketsearch' type="text" ng-model="search" placeholder="Search by title/author/isbn">
   <div id='bookshelf'>
     <ul>
-      <li class='bookitem' ng-repeat="book in books | filter:search">
+      <li class='bookitem fx-fade-down fx-easing-bounce fx-speed-1000' ng-repeat="book in books | filter:search">
       <div class="bookbg">
         <a ng-click="findDetail(book)">
           <img src=" {{book.img}} ">

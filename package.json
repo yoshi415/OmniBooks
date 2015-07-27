@@ -48,6 +48,6 @@
     "phantomjs": "^1.9.17"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "bower install"
   }
 }

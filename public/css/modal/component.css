@@ -214,16 +214,15 @@ background: #9ae0e9;
 .text-field  {
   display: block;
   margin: 0 auto;
+  margin-top: 10px;
   width: 180px;
   height:10px;
-  border: 1px solid #c0c2c7;
+  border: 1px solid rgba(13, 125, 144, 0.44);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   color: #8c8f90;
-
   padding: 10px;
-  font-style: italic;
   font-size: 11px;
   margin-bottom: 10px;
 
@@ -259,9 +258,6 @@ background: #9ae0e9;
 }
 
 
-
-
-
 .box p
 {
   display: inline;
@@ -281,13 +277,6 @@ background: #9ae0e9;
 {
   color: #7e7e7e;
   margin-left:95px;
-}
-
-
-#buttons, .connectwith
-{
-  display:block;
-  padding-bottom:15px;
 }
 
 .title, #jointop, #logintop

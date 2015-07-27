@@ -49,7 +49,7 @@ html {
 button {
   border: none;
   padding: 0.6em 1.2em;
-  background: #c0392b;
+  background: #8DCDE2;
   color: #fff;
   font-family: 'Lato', Calibri, Arial, sans-serif;
   font-size: 12px;
@@ -62,7 +62,7 @@ button {
 }
 
 button:hover {
-  background: #A5281B;
+  background: #28596D;
 }
 
 @media screen and (max-width: 46.0625em) {

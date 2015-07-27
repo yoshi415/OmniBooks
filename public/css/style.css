@@ -54,13 +54,13 @@ header button{
 #navigation li a {
   display:block;
   margin: 20px;
-  color:#CA8484;
+  color:rgb(107, 180, 220);
   text-transform:uppercase;
   font-size:20px;
 }
 
 #navigation li a:hover{
-  color: red;
+  color: #5A78A2;
 }
 
 
@@ -75,7 +75,7 @@ div#title {
 
 input{
   height: 25px;
-  font-size: 18px;
+  font-size: 14px;
   margin: auto;
   display: block;
   color:black;
@@ -249,7 +249,20 @@ ul {
   z-index: 7;
 }
 
+.selectOrg{
+  background-color: #fff;
+  border-radius:5px;
+  width: 178px;
+  margin: 5px;
+}
 
+input[type="button"] {
+    color: white;
+    background-color: lightblue;
+}
+input[type="button"]:hover{
+    background-color: #78B5CA;
+}
 
 
 /*========  Footer =======*/
@@ -271,7 +284,7 @@ footer a:link,
 footer a:visited { color: #265C83; }
 footer a:hover   { color: #7FDBFF; }
 footer a:active  {
-  color: #007BE6;
+  color: rgb(127, 168, 193);
 }
 
 /*========  Profile =======*/
@@ -286,7 +299,7 @@ footer a:active  {
   padding: 10px 10px 10px 10px;
   width: 100%;
   color: white;
-  background-color: rgb(193, 127, 127);
+  background-color: rgba(162, 208, 212, 0.59);
   text-align: center;
   margin-left: auto;
   margin-right: auto;

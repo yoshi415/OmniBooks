@@ -11,6 +11,9 @@
   display: block;
 }
 
+
+
+
 html {
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -21,10 +24,11 @@ html {
 /*========  Header =======*/
 
 header{
+  display: block;
   position:fixed;
   height: 60px;
   width: 100%;
-  background-color: rgba(63, 39, 15, 1);
+  background-color: white;
   box-shadow:0 5px 10px rgba(0,0,0,0,3);
   z-index: 500;
 }
@@ -47,7 +51,7 @@ header button{
 #navigation li a {
   display:block;
   margin: 20px;
-  color:#fff;
+  color:#CA8484;
   text-transform:uppercase;
   font-size:20px;
 }
@@ -72,7 +76,7 @@ input{
   margin: auto;
   display: block;
   color:black;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 10px;
   width: 60%;
 }
@@ -100,9 +104,8 @@ footer a{
   width: 600px;
 }
 #itemRight{
-  float: right;
-  margin-left: 20px;
-  width: 100px;
+  float: left;
+  width: 300px;
 }
 
 #itemLeft img{
@@ -119,7 +122,7 @@ footer a{
   margin-top: 30px;
   margin-left: 10px;
   margin-right: 40px;
-  width: 400px;
+  width: 350px;
 }
 
 .bookstore{
@@ -139,6 +142,15 @@ footer a{
 
 /*========  Market =======*/
 
+#marketimg{
+  min-width: 200px;
+  width: 20%;
+}
+
+#marketsearch{
+  width: 90%;
+}
+
 #bookshelf{
   width: 100%;
   display: block;
@@ -149,7 +161,7 @@ footer a{
 }
 
 #bookshelf img{
-  width: 195px;
+  width: 196px;
   height: 240px;
 }
 
@@ -260,6 +272,23 @@ footer a:active  {
 
 /*========  Profile =======*/
 
+#sellBtn{
+  display: inline;
+  z-index: 99999;
+}
+
+
+#greeting{
+  padding: 10px 10px 10px 10px;
+  width: 100%;
+  color: white;
+  background-color: rgb(193, 127, 127);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+
+}
 
 #bookUpload {
   font-weight: bold;
@@ -272,6 +301,7 @@ footer a:active  {
 
 #welcome {
   font-weight: bold;
+  text-transform:uppercase;
 }
 
 .bookshelfHeader {
@@ -286,6 +316,23 @@ footer a:active  {
   color: grey;
   font-size: 13px;
 }
+
+.link .editNote {
+  position: relative;
+  bottom: 200px;
+  visibility: hidden;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  color: white;
+  transition: background-color .6s, color .2s;
+  background-color: rgba(75, 109, 134, 0.89);
+}
+
+.link:hover .editNote {
+  visibility:visible;
+}
+
 
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */

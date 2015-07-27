@@ -80,8 +80,15 @@ angular.module('omnibooks.database', ['firebase'])
           name: authInfo.name,
           org: authInfo.org
         });
-        // invoke the callback
-        success(authInfo);
+        //log in
+        myDataRef.authWithPassword(authInfo, function (err) {
+          if (err) {
+            failed('incorrect password.');
+            return;
+          }
+          // invoke the callback
+          success(authInfo);
+        });
       });
     };
 

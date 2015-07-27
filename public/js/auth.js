@@ -50,12 +50,21 @@ angular.module('omnibooks.auth', [])
     });
   };
 
+  // check if the user is loggedin and automatically set the loggedin info
+  var autoLogin = function (callback) {
+    fireBase.autoLogin(function (authInfo) {
+      setLoggedInInfo(authInfo);
+      callback();
+    });
+  };
+
   var setLoggedInInfo = function(authInfo) {
     loggedInUser = fireBase.getUserInfo(authInfo.org, authInfo.name);
     loggedInOrg = authInfo.org;
   };
 
   var logOut = function() {
+    fireBase.logOut();
     loggedInUser = null;
   };
 
@@ -79,7 +88,8 @@ angular.module('omnibooks.auth', [])
     isLoggedIn: isLoggedIn,
     logOut: logOut,
     getUser: getUser,
-    getOrg: getOrg
+    getOrg: getOrg,
+    autoLogin: autoLogin
   };
 });
 
@@ -153,6 +163,11 @@ angular.module('omnibooks')
       };
     }
     $scope.closeAuthForm();
+    auth.autoLogin(function () {
+      $rootScope.loginBtnText = "Log out";
+      $rootScope.loggedIn = true;
+      $state.go("market");
+    });
 
   }])
   .run(['$rootScope', '$state', 'auth', function($rootScope, $state, auth) {

@@ -1,34 +1,32 @@
-<div class = 'padding'>
-  <div id = 'itemLeft'>
-     <img src= {{book.img}} >
+<div class='padding'>
+  <div id='itemLeft'>
+    <img src={ {book.img}}>
   </div>
-
-  <div id = 'itemMiddle'>
+  <div id='itemMiddle'>
     <div class="b-title"> {{book.title}} </div>
     <div class="m-title">by {{book.author}} (Author)</div>
     <div class="s-title" ng-repeat="price in prices">
       <span class="bookstore">{{price.store_id}}</span>
       <span class="bookprice">${{price.price}}</span>
     </div>
-     <p>Seller's asking price: {{ book.askingPrice | currency }}</p>
-    <button ng-click="toggleModal()" class="btn btn-default">Send Offer</button>
+    <p>Seller's asking price: {{ book.askingPrice | currency }}</p>
   </div>
-
-  </div>
+</div>
 <div>
-
-<modal show='modalShown' width='750px'>
-  <form ng-controller="MailController">
-      <div class="form-group">
-        <label for="offer">How much would you like to offer for this book?</label>
+  <div ng-controller="MailController">
+    <button ng-click="toggleMsgModal()" class="btn btn-default">Send Offer</button>
+    <modal show='modalMsgShown' width='750px'>
+      <form>
+        <div class="form-group">
+          <label for="offer">How much would you like to offer for this book?</label>
           <input type="text" id="offer" placeholder="Offer price?" ng-model="offer" />
-        <label for="text">
-          The seller will be forwarded your information & offer. Would you like to send an additional message.
-        </label>
-          <textarea name="text" id="userMsg" placeholder='Optional message' ng-model='userMsg' cols="100" rows="5"></textarea></br>
-        <button class="btn btn-default" ng-click="sendMail()">Send Mail</button>
-      </div>
-  </form>
-</modal>
-
-
+          <label for="text">
+            The seller will be forwarded your information & offer. Would you like to send an additional message.
+          </label>
+          <textarea name="text" id="userMsg" placeholder='Optional message' ng-model='userMsg' cols="100" rows="5"></textarea>
+          </br>
+          <button class="btn btn-default" ng-click="sendMail(); toggleMsgModal()">Send Mail</button>
+        </div>
+      </form>
+    </modal>
+  </div>

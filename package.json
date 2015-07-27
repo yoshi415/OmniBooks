@@ -19,10 +19,12 @@
   "dependencies": {
     "angular": "^1.4.3",
     "body-parser": "^1.13.2",
+    "cors": "^2.7.1",
     "express": "^4.13.1",
     "ng-file-upload": "^5.0.9",
+    "express-handlebars": "^2.0.1",
     "nodemailer": "^1.4.0",
-    "cors": "^2.7.1"
+    "nodemailer-express-handlebars": "^1.0.0"
   },
   "engines": {
     "node": ">= 0.10.0"

@@ -71,9 +71,24 @@ angular.module('omnibooks.database', ['firebase'])
             email: authInfo.email
           }
         });
+        // save to the userOrg
         var userOrg = myDataRef.child('userOrg');
         userOrg.child(authInfo.name).set(authInfo.org);
-        success(authInfo);
+        // save to the allUsers
+        var allUsers = myDataRef.child('allUsers');
+        allUsers.child(userData.uid).set({
+          name: authInfo.name,
+          org: authInfo.org
+        });
+        //log in
+        myDataRef.authWithPassword(authInfo, function (err) {
+          if (err) {
+            failed('incorrect password.');
+            return;
+          }
+          // invoke the callback
+          success(authInfo);
+        });
       });
     };
 
@@ -93,6 +108,35 @@ angular.module('omnibooks.database', ['firebase'])
       });
     };
 
+    // auto login
+    var autoLogin = function (callback) {
+      var authData = myDataRef.getAuth();
+      if(!authData){
+        return;
+      }
+      // if the user is logged in, set the user data in auth service using callback
+      var uid = authData.uid;
+      var email = authData.password.email;
+      var allUsers = $firebaseObject(myDataRef.child('allUsers'));
+      allUsers.$loaded().then(function () {
+        var user = allUsers[uid];
+        if(!user){
+          return;
+        }
+        var authInfo = {
+          name: user.name,
+          email: email,
+          org: user.org
+        };
+        callback(authInfo);
+      });
+    };
+
+    // log out
+    var logOut = function () {
+      myDataRef.unauth();
+    };
+
     return {
       enterBook: enterBook,
       deleteBook: deleteBook,
@@ -103,6 +147,8 @@ angular.module('omnibooks.database', ['firebase'])
       createUser: createUser,
       authWithPassword: authWithPassword,
       getUserOrg: getUserOrg,
-      getUserEmail: getUserEmail
+      getUserEmail: getUserEmail,
+      autoLogin: autoLogin,
+      logOut: logOut
     };
   });

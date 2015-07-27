@@ -21,14 +21,13 @@
     "body-parser": "^1.13.2",
     "express": "^4.13.1",
     "ng-file-upload": "^5.0.9",
-    "nodemailer": "^1.4.0"
+    "nodemailer": "^1.4.0",
+    "cors": "^2.7.1"
   },
   "engines": {
     "node": ">= 0.10.0"
   },
   "devDependencies": {
-    "cloudinary": "^1.2.2",
-    "cors": "^2.7.1",
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "~0.4.0",
     "grunt-contrib-jshint": "~0.10.0",

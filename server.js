@@ -4,9 +4,8 @@ var http = require('http');
 var app = express();
 var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
-var PORT_num = process.env.PORT;
-
-// app.set('port', (process.env.PORT || 8000));
+// var PORT_num = process.env.PORT;
+app.set('port', (process.env.PORT || 8000));
 
 app.use(cors());
 app.use(bodyParser.urlencoded({
@@ -66,8 +65,8 @@ app.post('/sendMail', function(req, res) {
   });
 });
 
-// app.listen(app.get('port'), function() {
-//   console.log('OmniBooks is running on port', app.get('port'));
-// });
+app.listen(app.get('port'), function() {
+  console.log('OmniBooks is running on port', app.get('port'));
+});
 
-app.listen(PORT_num || 8000);
+// app.listen(PORT_num || 8000);

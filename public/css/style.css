@@ -10,9 +10,6 @@
   display: block;
 }
 
-
-
-
 html {
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -341,6 +338,7 @@ footer a:active  {
 #greeting{
   padding: 10px 10px 10px 10px;
   width: 100%;
+  height: 90px;
   color: white;
   background-color: rgba(162, 208, 212, 0.59);
   text-align: center;
@@ -360,6 +358,8 @@ footer a:active  {
 }
 
 #welcome {
+  padding: 10px 10px 10px 10px;
+  font-size: 30px;
   font-weight: bold;
   text-transform:uppercase;
 }

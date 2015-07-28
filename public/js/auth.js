@@ -166,7 +166,7 @@ angular.module('omnibooks')
     }
     $scope.closeAuthForm();
     auth.autoLogin(function () {
-      $rootScope.loginBtnText = "Log out";
+      $rootScope.loginBtnText = "Logout";
       $rootScope.loggedIn = true;
       $state.go("market");
     });

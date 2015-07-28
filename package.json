@@ -19,10 +19,11 @@
   "dependencies": {
     "angular": "^1.4.3",
     "body-parser": "^1.13.2",
+    "bower": "^1.4.1",
     "cors": "^2.7.1",
     "express": "^4.13.1",
-    "ng-file-upload": "^5.0.9",
     "express-handlebars": "^2.0.1",
+    "ng-file-upload": "^5.0.9",
     "nodemailer": "^1.4.0",
     "nodemailer-express-handlebars": "^1.0.0"
   },
@@ -45,5 +46,8 @@
     "karma-phantomjs-launcher": "^0.2.0",
     "mocha": "^2.2.5",
     "phantomjs": "^1.9.17"
+  },
+  "scripts": {
+    "postinstall": "bower install"
   }
 }

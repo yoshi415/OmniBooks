@@ -17,7 +17,7 @@
     <button ng-click="toggleMsgModal()" class="btn btn-default">Send Offer</button>
     <modal show='modalMsgShown' width='750px'>
       <form>
-        <div class="form-group">
+        <div ng-controller="MailController" class="form-group">
           <label for="offer">How much would you like to offer for this book?</label>
           <input type="text" id="offer" placeholder="Offer price?" ng-model="offer" />
           <label for="text">

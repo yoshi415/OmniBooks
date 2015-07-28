@@ -7,6 +7,7 @@ angular.module('omnibooks.mail', [])
         var currentUser = auth.getUser().$id;
         var offerAmt = $scope.offer
 
+
         // get current user's email
         var emailFrom;
         var currentUserEmail = fireBase.getUserEmail(currentOrg, currentUser, function(data) {
